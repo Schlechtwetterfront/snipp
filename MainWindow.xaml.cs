@@ -14,15 +14,32 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace clipman
-{
+{ 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        ViewModels.ClipListViewModel clipViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            clipViewModel = new ViewModels.ClipListViewModel();
+            clipList.DataContext = clipViewModel;
+        }
+
+        private void btnPaste_Click(object sender, RoutedEventArgs e)
+        {
+            var clip = Models.Clip.Capture();
+            clipViewModel.AddClip(clip);
+        }
+
+        private void btnFilter_Click(object sender, RoutedEventArgs e)
+        {
+            clipViewModel.FilterString = searchBox.Text;
+            clipViewModel.ClipView.Refresh();
         }
     }
 }

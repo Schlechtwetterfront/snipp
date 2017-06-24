@@ -4,14 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:clipman"
+        xmlns:views="clr-namespace:clipman.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="ClipMan" Height="600" Width="500">
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
-                <ScrollViewer x:Name="PART_ContentHost"/>
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                <ScrollViewer x:Name="PART_ContentHost" Margin="8"/>
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
@@ -27,8 +28,16 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Window.Resources>
-    <Grid VerticalAlignment="Top">
-        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="textBox" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="2" Margin="5"/>
+        <views:ClipList x:Name="clipList" Grid.Row="1"></views:ClipList>
+        <Button x:Name="btnPaste" Content="Paste" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" BorderThickness="1" Click="btnPaste_Click"/>
+        <Button x:Name="btnFilter" Content="Filter" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" BorderThickness="1" Click="btnFilter_Click" Margin="39,0,0,0"/>
 
     </Grid>
 </Window>
