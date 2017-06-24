@@ -49,9 +49,9 @@ namespace clipman.ViewModels
         public bool Filter(object item)
         {
             Models.Clip clip = item as Models.Clip;
-            if (clip != null && !string.IsNullOrWhiteSpace(FilterString))
+            if (clip != null)
             {
-                return clip.Content.ToLower().Contains(FilterString);
+                return clip.Matches(FilterString);
             }
             return true;
         }

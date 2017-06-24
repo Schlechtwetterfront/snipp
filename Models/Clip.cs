@@ -42,6 +42,26 @@ namespace clipman.Models
             return new Clip(Clipboard.GetText());
         }
 
+        public bool Matches(String searchString)
+        {
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                return true;
+            }
+
+            if (Content.Contains(searchString))
+            {
+                return true;
+            }
+
+            if (Created.ToShortDateString().Contains(searchString))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(string property)

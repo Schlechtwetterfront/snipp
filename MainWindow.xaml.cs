@@ -36,7 +36,7 @@ namespace clipman
             clipViewModel.AddClip(clip);
         }
 
-        private void btnFilter_Click(object sender, RoutedEventArgs e)
+        private void Search(object sender, TextChangedEventArgs e)
         {
             clipViewModel.FilterString = searchBox.Text;
             clipViewModel.ClipView.Refresh();
