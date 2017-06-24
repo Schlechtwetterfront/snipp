@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace clipman
     public partial class MainWindow : Window
     {
         ViewModels.ClipListViewModel clipViewModel;
+        ClipboardMonitor.ClipboardMonitor clipboardMonitor;
 
         DispatcherTimer searchTimer;
         int searchDelay = 450;
@@ -32,6 +34,9 @@ namespace clipman
 
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
+
+            clipboardMonitor = new ClipboardMonitor.ClipboardMonitor();
+            clipboardMonitor.ClipboardChanged += ClipboardChanged;
         }
 
         void Search(object sender, EventArgs e)
@@ -45,6 +50,12 @@ namespace clipman
 
             clipViewModel.FilterString = searchBox.Text;
             timer.Stop();
+        }
+
+        private void ClipboardChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("Clipboard changed");
+            clipViewModel.AddClip(Models.Clip.Capture());
         }
 
         private void btnPaste_Click(object sender, RoutedEventArgs e)

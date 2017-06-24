@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClipboardMonitor\ClipboardMonitor.cs" />
     <Compile Include="ViewModels\ClipListViewModel.cs" />
     <Compile Include="Views\ClipList.xaml.cs">
       <DependentUpon>ClipList.xaml</DependentUpon>
