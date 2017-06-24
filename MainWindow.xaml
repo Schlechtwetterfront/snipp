@@ -34,9 +34,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="2" Margin="5" TextChanged="Search"/>
+        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="2" Margin="5" Text="{Binding ClipFilterString, Mode=OneWayToSource, Delay=300}" TextChanged="searchBox_Changed"/>
         <views:ClipList x:Name="clipList" Grid.Row="1"></views:ClipList>
         <Button x:Name="btnPaste" Content="Paste" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" BorderThickness="1" Click="btnPaste_Click"/>
+        <Button x:Name="test" Content="Test" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" BorderThickness="1" Click="test_Click" Margin="51,0,0,0"/>
 
     </Grid>
 </Window>

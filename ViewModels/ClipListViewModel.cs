@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace clipman.ViewModels
 {
-    class ClipListViewModel
+    public class ClipListViewModel
     {
         public ObservableCollection<Models.Clip> Clips
         {
