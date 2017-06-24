@@ -39,7 +39,14 @@ namespace clipman.Models
 
         public static Clip Capture()
         {
-            return new Clip(Clipboard.GetText());
+            try
+            {
+                return new Clip(Clipboard.GetText());
+            } catch (System.Runtime.InteropServices.ExternalException e)
+            {
+                Console.WriteLine("Failed to read clipboard");
+                return null;
+            }
         }
 
         public bool Matches(String searchString)

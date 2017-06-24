@@ -55,7 +55,11 @@ namespace clipman
         private void ClipboardChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Clipboard changed");
-            clipViewModel.AddClip(Models.Clip.Capture());
+            var clip = Models.Clip.Capture();
+            if (clip != null)
+            {
+                clipViewModel.AddClip(clip);
+            }
         }
 
         private void btnPaste_Click(object sender, RoutedEventArgs e)
