@@ -24,7 +24,14 @@ namespace clipman.Models
 
         public String Title
         {
-            get { return Content.Trim(); }
+            get;
+            private set;
+        }
+
+        public String SearchContent
+        {
+            get;
+            private set;
         }
 
         public Clip()
@@ -56,7 +63,7 @@ namespace clipman.Models
                 return true;
             }
 
-            if (Content.Contains(searchString))
+            if (SearchContent.Contains(searchString))
             {
                 return true;
             }

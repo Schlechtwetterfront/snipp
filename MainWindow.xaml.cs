@@ -26,7 +26,7 @@ namespace clipman
         ClipboardMonitor.ClipboardMonitor clipboardMonitor;
 
         DispatcherTimer searchTimer;
-        int searchDelay = 450;
+        int searchDelay = 333;
 
         public MainWindow()
         {
