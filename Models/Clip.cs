@@ -5,15 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace clipman.Models
 {
+
+
     public class Clip : INotifyPropertyChanged
     {
+        static int TitleCharCount = 128;
+
+        String content;
         public String Content
         {
-            get;
-            set;
+            get { return content; }
+            set
+            {
+                content = value;
+                var builder = new StringBuilder();
+                foreach (var c in value.Trim().Take(Clip.TitleCharCount))
+                {
+                    builder.Append(c);
+                }
+                Title = Regex.Replace(builder.ToString(), @"[\s|\r\n?|\n]+", " ");
+                SearchContent = value.Trim().ToLower();
+            }
         }
 
         public DateTime Created
@@ -49,10 +65,25 @@ namespace clipman.Models
             try
             {
                 return new Clip(Clipboard.GetText());
-            } catch (System.Runtime.InteropServices.ExternalException e)
+            }
+            catch (System.Runtime.InteropServices.ExternalException e)
             {
-                Console.WriteLine("Failed to read clipboard");
+                Console.WriteLine("Failed to read clipboard: " + e.Message);
                 return null;
+            }
+        }
+
+        public bool Copy()
+        {
+            try
+            {
+                Clipboard.SetText(Content);
+                return true;
+            }
+            catch (System.Runtime.InteropServices.ExternalException e)
+            {
+                Console.WriteLine("Failed to set clipboard: " + e.Message);
+                return false;
             }
         }
 

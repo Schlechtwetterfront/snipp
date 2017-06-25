@@ -25,6 +25,22 @@ namespace clipman
         ViewModels.ClipListViewModel clipViewModel;
         ClipboardMonitor.ClipboardMonitor clipboardMonitor;
 
+        /// <summary>
+        /// This is set when this application modifies the clipboard.
+        /// </summary>
+        public bool HasJustCopied
+        {
+            get;
+            set;
+        }
+
+        public DateTime LastPasteTime
+        {
+            get;
+            set;
+        }
+        int pasteDelay = 333;
+
         DispatcherTimer searchTimer;
         int searchDelay = 333;
 
@@ -56,11 +72,18 @@ namespace clipman
         private void ClipboardChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Clipboard changed");
+
             var clip = Models.Clip.Capture();
-            if (clip != null)
+
+            var ts = DateTime.Now - LastPasteTime;
+
+            if (clip != null && !HasJustCopied && ts.Milliseconds > pasteDelay)
             {
+                LastPasteTime = DateTime.Now;
                 clipViewModel.AddClip(clip);
             }
+            // Reset to enable capturing for next time something is copied.
+            HasJustCopied = false;
         }
 
         private void btnPaste_Click(object sender, RoutedEventArgs e)
