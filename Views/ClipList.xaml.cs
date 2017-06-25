@@ -24,5 +24,19 @@ namespace clipman.Views
         {
             InitializeComponent();
         }
+
+        private void Copy(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Trying to copy");
+            var clip = (Models.Clip)(sender as ListBoxItem).DataContext;
+
+            var parentWindow = Window.GetWindow(this) as MainWindow;
+            if (parentWindow != null)
+            {
+                parentWindow.HasJustCopied = true;
+            }
+
+            clip.Copy();
+        }
     }
 }
