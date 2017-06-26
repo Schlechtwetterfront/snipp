@@ -33,10 +33,8 @@ namespace clipman.Views
             var parentWindow = Window.GetWindow(this) as MainWindow;
             if (parentWindow != null)
             {
-                parentWindow.HasJustCopied = true;
+                parentWindow.CopyClip(clip);
             }
-
-            clip.Copy();
         }
     }
 }
