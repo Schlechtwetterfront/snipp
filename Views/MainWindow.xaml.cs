@@ -76,6 +76,14 @@ namespace clipman
         {
         }
 
+        public void CopyClip(Models.Clip clip)
+        {
+            HasJustCopied = clip != null;
+            clip?.Copy();
+        }
+
+        #region Callbacks
+
         void Search(object sender, EventArgs e)
         {
             Console.WriteLine("Searching...");
@@ -120,12 +128,14 @@ namespace clipman
             searchTimer.Start();
         }
 
+        #endregion
+
         #region Commands
 
         private void Copy(int index=0)
         {
             Console.WriteLine("Copy with " + index);
-            clipViewModel.ClipView.NthInView<Models.Clip>(index)?.Copy();
+            CopyClip(clipViewModel.ClipView.NthInView<Models.Clip>(index));
         }
 
         #endregion

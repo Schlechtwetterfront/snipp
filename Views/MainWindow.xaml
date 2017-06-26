@@ -29,7 +29,16 @@
         </ControlTemplate>
     </Window.Resources>
     <Window.InputBindings>
-        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="0" Key="F3"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="0" Gesture="Ctrl+1"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="1" Gesture="Ctrl+2"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="2" Gesture="Ctrl+3"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="3" Gesture="Ctrl+4"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="4" Gesture="Ctrl+5"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="5" Gesture="Ctrl+6"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="6" Gesture="Ctrl+7"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="7" Gesture="Ctrl+8"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="8" Gesture="Ctrl+9"/>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="9" Gesture="Ctrl+0"/>
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
