@@ -57,7 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="ClipboardMonitor\ClipboardMonitor.cs" />
     <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\Commands.cs" />
+    <Compile Include="Models\ClipboardManager.cs" />
     <Compile Include="Utility\Extensions.cs" />
     <Compile Include="ViewModels\ClipListViewModel.cs" />
     <Compile Include="Views\ClipList.xaml.cs">
