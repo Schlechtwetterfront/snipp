@@ -35,7 +35,7 @@ namespace clipman
             {
                 return copyCommand ?? (copyCommand = new Commands.Command(param =>
                 {
-                    Utility.Logging.Log(String.Format("Copy shortcut (Ctrl+{})", param.ToString()));
+                    Utility.Logging.Log(String.Format("Copy shortcut (Ctrl+{0})", param.ToString()));
                     Copy(Int32.Parse(param.ToString()));
                 }));
             }
@@ -104,7 +104,15 @@ namespace clipman
 
         private void ClipboardChanged(object sender, EventArgs e)
         {
-            Utility.Logging.Log("Clipboard changed");
+            Utility.Logging.Log(
+                String.Format(
+                    "Clipboard changed, HasJustCopied = {0}, Content = {1}",
+                    HasJustCopied,
+                    Clipboard.GetText()
+                )
+            );
+
+            // TODO Wait some time (500ms) until we capture.
 
             var clip = Models.Clip.Capture();
 

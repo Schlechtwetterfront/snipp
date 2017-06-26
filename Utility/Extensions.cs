@@ -28,7 +28,13 @@ namespace clipman.Utility
     {
         public static void Log(String message)
         {
-            Console.WriteLine(DateTime.Now + message);
+            Console.WriteLine(
+                String.Format(
+                    "{0} :: {1}",
+                    DateTime.Now,
+                    message
+                )
+            );
         }
     }
 }

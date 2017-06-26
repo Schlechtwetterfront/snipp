@@ -82,7 +82,7 @@ namespace clipman.Models
             }
             catch (System.Runtime.InteropServices.ExternalException e)
             {
-                Console.WriteLine("Failed to read clipboard: " + e.Message);
+                Utility.Logging.Log("Failed to read clipboard: " + e.Message);
                 return null;
             }
         }
@@ -96,7 +96,7 @@ namespace clipman.Models
             }
             catch (System.Runtime.InteropServices.ExternalException e)
             {
-                Console.WriteLine("Failed to set clipboard: " + e.Message);
+                Utility.Logging.Log("Failed to set clipboard: " + e.Message);
                 return false;
             }
         }
