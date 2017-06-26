@@ -38,6 +38,20 @@ namespace clipman.Models
             set;
         }
 
+        public String CreatedString
+        {
+            get
+            {
+                if (Created.Date == DateTime.Today)
+                {
+                    return Created.ToShortTimeString();
+                } else
+                {
+                    return Created.ToString("d");
+                }
+            }
+        }
+
         public String Title
         {
             get;

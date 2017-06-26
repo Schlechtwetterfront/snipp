@@ -19,7 +19,7 @@
                 <StackPanel>
                     <Label Grid.ColumnSpan="4" FontWeight="Bold" FontSize="16" Content="{Binding Title}"/>
                     <StackPanel Orientation="Horizontal">
-                        <Label x:Name="created" Grid.Row="1" Grid.Column="1" Content="{Binding Created, StringFormat=d}"/>
+                        <Label x:Name="created" Grid.Row="1" Grid.Column="1" Content="{Binding CreatedString}"/>
                         <Label x:Name="source" Grid.Row="1" Grid.Column="3">...</Label>
                     </StackPanel>
                 </StackPanel>
