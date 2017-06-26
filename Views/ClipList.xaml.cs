@@ -20,6 +20,19 @@ namespace clipman.Views
     /// </summary>
     public partial class ClipList : UserControl
     {
+        private ICommand copyClipCommand;
+        public ICommand CopyClipCommand
+        {
+            get
+            {
+                return copyClipCommand ?? (copyClipCommand = new Commands.Command(param =>
+                {
+                    Utility.Logging.Log("Enter copy command");
+                    CopyClip(param as Models.Clip);
+                }));
+            }
+        }
+
         public ClipList()
         {
             InitializeComponent();
@@ -27,9 +40,14 @@ namespace clipman.Views
 
         private void Copy(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("Trying to copy");
+            Utility.Logging.Log("Copy callback (double-click)");
             var clip = (Models.Clip)(sender as ListBoxItem).DataContext;
 
+            CopyClip(clip);
+        }
+
+        private void CopyClip(Models.Clip clip)
+        {
             var parentWindow = Window.GetWindow(this) as MainWindow;
             if (parentWindow != null)
             {
