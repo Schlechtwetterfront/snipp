@@ -1,4 +1,5 @@
-﻿using System;
+﻿using clipman.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -25,6 +26,18 @@ namespace clipman
         ViewModels.ClipListViewModel clipViewModel;
         ClipboardMonitor.ClipboardMonitor clipboardMonitor;
 
+        private ICommand copyCommand;
+        public ICommand CopyCommand
+        {
+            get
+            {
+                return copyCommand ?? (copyCommand = new Commands.Command(param =>
+                {
+                    Copy(Int32.Parse(param.ToString()));
+                }));
+            }
+        }
+
         /// <summary>
         /// This is set when this application modifies the clipboard.
         /// </summary>
@@ -48,11 +61,19 @@ namespace clipman
         {
             InitializeComponent();
 
+            DataContext = this;
+
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
 
             clipboardMonitor = new ClipboardMonitor.ClipboardMonitor();
             clipboardMonitor.ClipboardChanged += ClipboardChanged;
+
+            InitializeKeybindings();
+        }
+
+        void InitializeKeybindings()
+        {
         }
 
         void Search(object sender, EventArgs e)
@@ -86,18 +107,6 @@ namespace clipman
             HasJustCopied = false;
         }
 
-        private void btnPaste_Click(object sender, RoutedEventArgs e)
-        {
-            var clip = Models.Clip.Capture();
-            clipViewModel.AddClip(clip);
-            Console.WriteLine(clipViewModel.FilterString);
-        }
-
-        private void test_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void searchBox_Changed(object sender, TextChangedEventArgs e)
         {
             Console.WriteLine("Text changed to " + searchBox.Text);
@@ -110,5 +119,15 @@ namespace clipman
             searchTimer.Stop();
             searchTimer.Start();
         }
+
+        #region Commands
+
+        private void Copy(int index=0)
+        {
+            Console.WriteLine("Copy with " + index);
+            clipViewModel.ClipView.NthInView<Models.Clip>(index)?.Copy();
+        }
+
+        #endregion
     }
 }

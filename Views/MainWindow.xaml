@@ -28,6 +28,9 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding CopyCommand}" CommandParameter="0" Key="F3"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -36,8 +39,5 @@
         </Grid.RowDefinitions>
         <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="2" Margin="5" TextChanged="searchBox_Changed" FontSize="16" FontWeight="Bold"/>
         <views:ClipList x:Name="clipList" Grid.Row="1" Margin="5"></views:ClipList>
-        <Button x:Name="btnPaste" Content="Paste" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" BorderThickness="1" Click="btnPaste_Click"/>
-        <Button x:Name="test" Content="Test" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" BorderThickness="1" Click="test_Click" Margin="51,0,0,0"/>
-
     </Grid>
 </Window>
