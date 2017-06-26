@@ -55,10 +55,10 @@ namespace clipman
             get;
             set;
         }
-        int pasteDelay = 333;
+        int pasteDelay = 500;
 
         DispatcherTimer searchTimer;
-        int searchDelay = 333;
+        int searchDelay = 260;
 
         public MainWindow()
         {
@@ -117,6 +117,12 @@ namespace clipman
             var clip = Models.Clip.Capture();
 
             var ts = DateTime.Now - LastPasteTime;
+
+            Utility.Logging.Log(String.Format(
+                "Trying to insert clip, Clip = {0}, Delay = {1}",
+                clip,
+                ts.Milliseconds
+            ));
 
             if (clip != null && !HasJustCopied && ts.Milliseconds > pasteDelay)
             {
