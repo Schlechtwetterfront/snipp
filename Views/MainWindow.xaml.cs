@@ -35,6 +35,7 @@ namespace clipman
             {
                 return copyCommand ?? (copyCommand = new Commands.Command(param =>
                 {
+                    Utility.Logging.Log(String.Format("Copy shortcut (Ctrl+{})", param.ToString()));
                     Copy(Int32.Parse(param.ToString()));
                 }));
             }
@@ -90,7 +91,6 @@ namespace clipman
 
         void Search(object sender, EventArgs e)
         {
-            Console.WriteLine("Searching...");
             var timer = sender as DispatcherTimer;
             if (timer == null)
             {
@@ -104,7 +104,7 @@ namespace clipman
 
         private void ClipboardChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("Clipboard changed");
+            Utility.Logging.Log("Clipboard changed");
 
             var clip = Models.Clip.Capture();
 
@@ -121,7 +121,6 @@ namespace clipman
 
         private void searchBox_Changed(object sender, TextChangedEventArgs e)
         {
-            Console.WriteLine("Text changed to " + searchBox.Text);
             if (searchTimer == null)
             {
                 searchTimer = new DispatcherTimer();
@@ -138,7 +137,6 @@ namespace clipman
 
         private void Copy(int index=0)
         {
-            Console.WriteLine("Copy with " + index);
             CopyClip(clipViewModel.ClipView.NthInView<Models.Clip>(index));
         }
 

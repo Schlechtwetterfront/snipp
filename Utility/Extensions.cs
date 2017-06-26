@@ -23,4 +23,12 @@ namespace clipman.Utility
             return (T)enumerator.Current;
         }
     }
+
+    public static class Logging
+    {
+        public static void Log(String message)
+        {
+            Console.WriteLine(DateTime.Now + message);
+        }
+    }
 }
