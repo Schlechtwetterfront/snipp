@@ -28,7 +28,7 @@ namespace clipman.Views
                 return copyClipCommand ?? (copyClipCommand = new Commands.Command(param =>
                 {
                     Utility.Logging.Log("Enter copy command");
-                    CopyClip(param as Models.Clip);
+                    CopyClip(param as Clipboard.Clip);
                 }));
             }
         }
@@ -41,12 +41,12 @@ namespace clipman.Views
         private void Copy(object sender, MouseButtonEventArgs e)
         {
             Utility.Logging.Log("Copy callback (double-click)");
-            var clip = (Models.Clip)(sender as ListBoxItem).DataContext;
+            var clip = (Clipboard.Clip)(sender as ListBoxItem).DataContext;
 
             CopyClip(clip);
         }
 
-        private void CopyClip(Models.Clip clip)
+        private void CopyClip(Clipboard.Clip clip)
         {
             var parentWindow = Window.GetWindow(this) as MainWindow;
             if (parentWindow != null)

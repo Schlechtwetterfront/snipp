@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace clipman.Models
+namespace clipman.Clipboard
 {
     class ClipboardManager
     {
@@ -18,7 +18,7 @@ namespace clipman.Models
             }
         }
 
-        ClipboardMonitor.ClipboardMonitor clipboardMonitor;
+        ClipboardMonitor clipboardMonitor;
 
         DispatcherTimer clipboardEventTimer;
         int clipboardEventDelay = 500;
@@ -31,7 +31,7 @@ namespace clipman.Models
 
         public ClipboardManager()
         {
-            clipboardMonitor = new ClipboardMonitor.ClipboardMonitor();
+            clipboardMonitor = new ClipboardMonitor();
             clipboardMonitor.ClipboardChanged += OnClipboardChanged;
 
             clipboardEventTimer = new DispatcherTimer();

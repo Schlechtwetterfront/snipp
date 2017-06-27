@@ -12,7 +12,7 @@ namespace clipman.ViewModels
 {
     public class ClipListViewModel
     {
-        public ObservableCollection<Models.Clip> Clips
+        public ObservableCollection<ClipViewModel> Clips
         {
             get;
             set;
@@ -36,19 +36,19 @@ namespace clipman.ViewModels
 
         public ClipListViewModel()
         {
-            Clips = new ObservableCollection<Models.Clip>();
+            Clips = new ObservableCollection<ClipViewModel>();
             ClipView = CollectionViewSource.GetDefaultView(Clips);
             ClipView.Filter = Filter;
         }
 
-        public void AddClip(Models.Clip clip)
+        public void AddClip(Clipboard.Clip clip)
         {
-            Clips.Add(clip);
+            Clips.Add(new ClipViewModel(clip));
         }
 
         public bool Filter(object item)
         {
-            Models.Clip clip = item as Models.Clip;
+            Clipboard.Clip clip = (item as ClipViewModel).Clip;
             if (clip != null)
             {
                 return clip.Matches(FilterString);

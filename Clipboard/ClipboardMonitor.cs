@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 
-namespace clipman.ClipboardMonitor
+namespace clipman.Clipboard
 {
     public sealed class ClipboardMonitor : IDisposable
     {

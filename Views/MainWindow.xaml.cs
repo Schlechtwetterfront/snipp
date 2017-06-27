@@ -26,7 +26,7 @@ namespace clipman
     public partial class MainWindow : Window
     {
         ViewModels.ClipListViewModel clipViewModel;
-        ClipboardMonitor.ClipboardMonitor clipboardMonitor;
+        Clipboard.ClipboardMonitor clipboardMonitor;
 
         private ICommand copyCommand;
         public ICommand CopyCommand
@@ -69,7 +69,7 @@ namespace clipman
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
 
-            clipboardMonitor = new ClipboardMonitor.ClipboardMonitor();
+            clipboardMonitor = new Clipboard.ClipboardMonitor();
             clipboardMonitor.ClipboardChanged += ClipboardChanged;
 
             InitializeKeybindings();
@@ -81,7 +81,7 @@ namespace clipman
         {
         }
 
-        public void CopyClip(Models.Clip clip)
+        public void CopyClip(Clipboard.Clip clip)
         {
             HasJustCopied = clip != null;
             clip?.Copy();
@@ -108,13 +108,13 @@ namespace clipman
                 String.Format(
                     "Clipboard changed, HasJustCopied = {0}, Content = {1}",
                     HasJustCopied,
-                    Clipboard.GetText()
+                    System.Windows.Clipboard.GetText()
                 )
             );
 
             // TODO Wait some time (500ms) until we capture.
 
-            var clip = Models.Clip.Capture();
+            var clip = Clipboard.Clip.Capture();
 
             var ts = DateTime.Now - LastPasteTime;
 
@@ -151,7 +151,7 @@ namespace clipman
 
         private void Copy(int index=0)
         {
-            CopyClip(clipViewModel.ClipView.NthInView<Models.Clip>(index));
+            CopyClip(clipViewModel.ClipView.NthInView<ViewModels.ClipViewModel>(index)?.Clip);
         }
 
         #endregion

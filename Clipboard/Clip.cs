@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Text.RegularExpressions;
 
-namespace clipman.Models
+namespace clipman.Clipboard
 {
 
 
@@ -38,30 +38,22 @@ namespace clipman.Models
             set;
         }
 
-        public String CreatedString
-        {
-            get
-            {
-                if (Created.Date == DateTime.Today)
-                {
-                    return Created.ToShortTimeString();
-                } else
-                {
-                    return Created.ToString("d");
-                }
-            }
-        }
-
+        /// <summary>
+        /// Shortened content without line breaks.
+        /// </summary>
         public String Title
         {
             get;
-            private set;
+            protected set;
         }
 
+        /// <summary>
+        /// Lower-case content where all whitespace is replaced with a single space.
+        /// </summary>
         public String SearchContent
         {
             get;
-            private set;
+            protected set;
         }
 
         public Clip()
@@ -78,7 +70,7 @@ namespace clipman.Models
         {
             try
             {
-                return new Clip(Clipboard.GetText());
+                return new Clip(System.Windows.Clipboard.GetText());
             }
             catch (System.Runtime.InteropServices.ExternalException e)
             {
@@ -91,7 +83,7 @@ namespace clipman.Models
         {
             try
             {
-                Clipboard.SetText(Content);
+                System.Windows.Clipboard.SetText(Content);
                 return true;
             }
             catch (System.Runtime.InteropServices.ExternalException e)
