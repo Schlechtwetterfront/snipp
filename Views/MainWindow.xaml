@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="ClipMan" Height="600" Width="500">
     <Window.Resources>
+        <SolidColorBrush x:Key="Item.Mousover.Background" Color="LightGray"/>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
@@ -46,7 +47,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="0,0,0,2" Margin="5" TextChanged="searchBox_Changed" FontSize="20" BorderBrush="Black" Background="#FFF8F8F8"/>
-        <views:ClipList x:Name="clipList" Grid.Row="1" Margin="5"></views:ClipList>
+        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="0,0,0,2" Margin="15,10" TextChanged="searchBox_Changed" FontSize="20" BorderBrush="Black" Background="#FFF8F8F8"/>
+        <views:ClipList x:Name="clipList" Grid.Row="1"/>
     </Grid>
 </Window>
