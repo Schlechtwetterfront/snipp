@@ -8,6 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
+        <SolidColorBrush x:Key="TitleText" Color="Black"/>
+        <SolidColorBrush x:Key="Text" Color="#FF666666"/>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -26,7 +28,7 @@
         <Style x:Key="ListBoxItemStyle1" TargetType="{x:Type ListBoxItem}">
             <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
             <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="Padding" Value="10,1"/>
             <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
             <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -91,13 +93,13 @@
             <DataTemplate>
                 <StackPanel>
                     <Label Grid.ColumnSpan="4"
-                           FontWeight="Bold"
                            FontSize="16"
-                           Content="{Binding Clip.Title}"/>
+                           Content="{Binding Clip.Title}"
+                           Foreground="{DynamicResource TitleText}"/>
                     <StackPanel Orientation="Horizontal">
                         <Label x:Name="created"
                                Grid.Row="1" Grid.Column="1"
-                               Content="{Binding CreatedString}"/>
+                               Content="{Binding CreatedString}" Foreground="{DynamicResource Text}"/>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>

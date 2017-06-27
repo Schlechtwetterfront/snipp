@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:clipman"
         xmlns:views="clr-namespace:clipman.Views"
         mc:Ignorable="d"
-        Title="ClipMan" Height="600" Width="500">
+        Title="ClipMan" Height="600" Width="500"
+        FocusManager.FocusedElement="{Binding ElementName=searchBox}">
     <Window.Resources>
-        <SolidColorBrush x:Key="Item.Mousover.Background" Color="LightGray"/>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
@@ -47,7 +47,18 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Top" BorderThickness="0,0,0,2" Margin="15,10" TextChanged="searchBox_Changed" FontSize="20" BorderBrush="Black" Background="#FFF8F8F8"/>
+        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}"
+                 x:Name="searchBox"
+                 FontSize="20"
+                 FontFamily="Segoe UI Semilight"
+                 Background="#FFF8F8F8"
+                 BorderThickness="0,0,0,1"
+                 BorderBrush="Black"
+                 Margin="15,10"
+                 VerticalAlignment="Top"
+                 TextChanged="searchBox_Changed"
+                 KeyDown="searchBox_KeyDown"
+                 />
         <views:ClipList x:Name="clipList" Grid.Row="1"/>
     </Grid>
 </Window>
