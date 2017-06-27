@@ -95,11 +95,12 @@
                     <Label Grid.ColumnSpan="4"
                            FontSize="16"
                            Content="{Binding Clip.Title}"
-                           Foreground="{DynamicResource TitleText}"/>
+                           Foreground="{StaticResource TitleText}"/>
                     <StackPanel Orientation="Horizontal">
                         <Label x:Name="created"
                                Grid.Row="1" Grid.Column="1"
-                               Content="{Binding CreatedString}" Foreground="{DynamicResource Text}"/>
+                               Content="{Binding CreatedString}"
+                               Foreground="{StaticResource Text}"/>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>

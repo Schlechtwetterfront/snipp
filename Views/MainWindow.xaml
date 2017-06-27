@@ -9,6 +9,8 @@
         Title="ClipMan" Height="600" Width="500"
         FocusManager.FocusedElement="{Binding ElementName=searchBox}">
     <Window.Resources>
+        <SolidColorBrush x:Key="TitleText" Color="Black"/>
+        <SolidColorBrush x:Key="Text" Color="#FF666666"/>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"

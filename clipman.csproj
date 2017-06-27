@@ -58,6 +58,7 @@
     <Compile Include="Clipboard\ClipboardMonitor.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Clipboard\ClipboardManager.cs" />
+    <Compile Include="Settings\Keyboard.cs" />
     <Compile Include="Utility\Extensions.cs" />
     <Compile Include="ViewModels\ClipListViewModel.cs" />
     <Compile Include="ViewModels\ClipViewModel.cs" />
