@@ -26,7 +26,7 @@ namespace clipman
     public partial class MainWindow : Window
     {
         ViewModels.ClipListViewModel clipViewModel;
-        Clipboard.ClipboardMonitor clipboardMonitor;
+        Clipboard.ClipboardManager clipboardManager;
 
         private ICommand copyCommand;
         public ICommand CopyCommand
@@ -41,22 +41,6 @@ namespace clipman
             }
         }
 
-        /// <summary>
-        /// This is set when this application modifies the clipboard.
-        /// </summary>
-        public bool HasJustCopied
-        {
-            get;
-            set;
-        }
-
-        public DateTime LastPasteTime
-        {
-            get;
-            set;
-        }
-        int pasteDelay = 500;
-
         DispatcherTimer searchTimer;
         int searchDelay = 260;
 
@@ -69,22 +53,16 @@ namespace clipman
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
 
-            clipboardMonitor = new Clipboard.ClipboardMonitor();
-            clipboardMonitor.ClipboardChanged += ClipboardChanged;
+            clipboardManager = new Clipboard.ClipboardManager();
+            clipboardManager.ClipCaptured += OnClipCaptured;
 
             InitializeKeybindings();
 
-            this.Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
+            Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
         }
 
         void InitializeKeybindings()
         {
-        }
-
-        public void CopyClip(Clipboard.Clip clip)
-        {
-            HasJustCopied = clip != null;
-            clip?.Copy();
         }
 
         #region Callbacks
@@ -102,35 +80,21 @@ namespace clipman
             timer.Stop();
         }
 
-        private void ClipboardChanged(object sender, EventArgs e)
+        private void OnClipCaptured(object sender, Clipboard.ClipboardManager.ClipEventArgs e)
         {
             Utility.Logging.Log(
                 String.Format(
-                    "Clipboard changed, HasJustCopied = {0}, Content = {1}",
-                    HasJustCopied,
+                    "OnClipCaptured, Content = {0}",
                     System.Windows.Clipboard.GetText()
                 )
             );
 
-            // TODO Wait some time (500ms) until we capture.
+            var clip = e.Clip;
 
-            var clip = Clipboard.Clip.Capture();
-
-            var ts = DateTime.Now - LastPasteTime;
-
-            Utility.Logging.Log(String.Format(
-                "Trying to insert clip, Clip = {0}, Delay = {1}",
-                clip,
-                ts.Milliseconds
-            ));
-
-            if (clip != null && !HasJustCopied && ts.Milliseconds > pasteDelay)
+            if (clip != null)
             {
-                LastPasteTime = DateTime.Now;
                 clipViewModel.AddClip(clip);
             }
-            // Reset to enable capturing for next time something is copied.
-            HasJustCopied = false;
         }
 
         private void searchBox_Changed(object sender, TextChangedEventArgs e)
@@ -151,7 +115,7 @@ namespace clipman
 
         private void Copy(int index=0)
         {
-            CopyClip(clipViewModel.ClipView.NthInView<ViewModels.ClipViewModel>(index)?.Clip);
+            clipViewModel.ClipView.NthInView<ViewModels.ClipViewModel>(index)?.Clip?.Copy();
         }
 
         #endregion

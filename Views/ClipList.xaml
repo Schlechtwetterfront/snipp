@@ -16,7 +16,7 @@
              >
         <ListBox.InputBindings>
             <KeyBinding Key="Return"
-                        Command="{Binding CopyClipCommand, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ClipList}}}"
+                        Command="{Binding CopyClipCommand}"
                         CommandParameter="{Binding SelectedItem, ElementName=clipList}"
                         />
         </ListBox.InputBindings>
@@ -31,15 +31,13 @@
                         <Label x:Name="created"
                                Grid.Row="1" Grid.Column="1"
                                Content="{Binding CreatedString}"/>
-                        <Label x:Name="source"
-                               Grid.Row="1" Grid.Column="3" Content="src"/>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>
         </ListBox.ItemTemplate>
         <ListBox.ItemContainerStyle>
             <Style TargetType="ListBoxItem">
-                   <EventSetter Event="MouseDoubleClick" Handler="Copy"></EventSetter>
+                <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
             </Style>
         </ListBox.ItemContainerStyle>
     </ListBox>

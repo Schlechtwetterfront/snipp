@@ -83,6 +83,11 @@ namespace clipman.Clipboard
         {
             try
             {
+                var args = new ClipboardManager.ClipEventArgs();
+                args.Clip = this;
+
+                Copied?.Invoke(this, args);
+
                 System.Windows.Clipboard.SetText(Content);
                 return true;
             }
@@ -119,5 +124,7 @@ namespace clipman.Clipboard
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+
+        public event EventHandler<ClipboardManager.ClipEventArgs> Copied;
     }
 }

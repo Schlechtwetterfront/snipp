@@ -7,7 +7,7 @@ using System.Windows.Threading;
 
 namespace clipman.Clipboard
 {
-    class ClipboardManager
+    public class ClipboardManager
     {
         public class ClipEventArgs : EventArgs
         {
@@ -21,7 +21,10 @@ namespace clipman.Clipboard
         ClipboardMonitor clipboardMonitor;
 
         DispatcherTimer clipboardEventTimer;
-        int clipboardEventDelay = 500;
+        const int clipboardEventDelay = 333;
+
+        DateTime lastClipboardCopy = DateTime.Now;
+        const int afterCopyDelay = 333;
 
         public bool JustCopied
         {
@@ -41,16 +44,36 @@ namespace clipman.Clipboard
 
         void OnClipboardChanged(object sender, EventArgs e)
         {
-            clipboardEventTimer.Stop();
-            clipboardEventTimer.Start();
+            var span = DateTime.Now - lastClipboardCopy;
+
+            // Ignore any immediate events after we copied a clip to the clipboard.
+            if (span > TimeSpan.FromMilliseconds(afterCopyDelay))
+            {
+                clipboardEventTimer.Stop();
+                clipboardEventTimer.Start();
+            }
+            else
+            {
+                Utility.Logging.Log("Ignored ClipboardChange");
+            }
         }
 
         void OnClipboardDelayFinished(object sender, EventArgs e)
         {
             var clip = CaptureClipboard();
+            clip.Copied += OnCopyClip;
+
             var args = new ClipEventArgs();
             args.Clip = clip;
+
             ClipCaptured?.Invoke(this, args);
+
+            clipboardEventTimer.Stop();
+        }
+
+        void OnCopyClip(object sender, ClipEventArgs e)
+        {
+            lastClipboardCopy = DateTime.Now;
         }
 
         public Clip CaptureClipboard()
@@ -58,12 +81,6 @@ namespace clipman.Clipboard
             return Clip.Capture();
         }
 
-        public void CopyToClipboard(Clip clip)
-        {
-            // TODO Set JustCopied?
-            clip.Copy();
-        }
-
-        public event EventHandler ClipCaptured;
+        public event EventHandler<ClipEventArgs> ClipCaptured;
     }
 }

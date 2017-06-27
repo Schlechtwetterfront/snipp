@@ -55,9 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ClipboardMonitor\ClipboardMonitor.cs" />
+    <Compile Include="Clipboard\ClipboardMonitor.cs" />
     <Compile Include="Commands\Command.cs" />
-    <Compile Include="Models\ClipboardManager.cs" />
+    <Compile Include="Clipboard\ClipboardManager.cs" />
     <Compile Include="Utility\Extensions.cs" />
     <Compile Include="ViewModels\ClipListViewModel.cs" />
     <Compile Include="ViewModels\ClipViewModel.cs" />
@@ -72,7 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Clip.cs" />
+    <Compile Include="Clipboard\Clip.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

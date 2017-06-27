@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace clipman.ViewModels
 {
@@ -31,6 +32,19 @@ namespace clipman.ViewModels
             set
             {
                 filterString = value.Trim().ToLower();
+            }
+        }
+
+        private ICommand copyClipCommand;
+        public ICommand CopyClipCommand
+        {
+            get
+            {
+                return copyClipCommand ?? (copyClipCommand = new Commands.Command(param =>
+                {
+                    Utility.Logging.Log("Enter copy command");
+                    (param as ClipViewModel)?.Clip.Copy();
+                }));
             }
         }
 

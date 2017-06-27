@@ -20,39 +20,17 @@ namespace clipman.Views
     /// </summary>
     public partial class ClipList : UserControl
     {
-        private ICommand copyClipCommand;
-        public ICommand CopyClipCommand
-        {
-            get
-            {
-                return copyClipCommand ?? (copyClipCommand = new Commands.Command(param =>
-                {
-                    Utility.Logging.Log("Enter copy command");
-                    CopyClip(param as Clipboard.Clip);
-                }));
-            }
-        }
-
         public ClipList()
         {
             InitializeComponent();
         }
 
-        private void Copy(object sender, MouseButtonEventArgs e)
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Utility.Logging.Log("Copy callback (double-click)");
-            var clip = (Clipboard.Clip)(sender as ListBoxItem).DataContext;
+            Utility.Logging.Log("Double-click copy");
 
-            CopyClip(clip);
-        }
-
-        private void CopyClip(Clipboard.Clip clip)
-        {
-            var parentWindow = Window.GetWindow(this) as MainWindow;
-            if (parentWindow != null)
-            {
-                parentWindow.CopyClip(clip);
-            }
+            var viewModel = (ViewModels.ClipViewModel)(sender as ListBoxItem).DataContext;
+            viewModel.Clip.Copy();
         }
     }
 }
