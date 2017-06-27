@@ -61,6 +61,7 @@
     <Compile Include="Utility\Extensions.cs" />
     <Compile Include="ViewModels\ClipListViewModel.cs" />
     <Compile Include="ViewModels\ClipViewModel.cs" />
+    <Compile Include="ViewModels\MockClipList.cs" />
     <Compile Include="Views\ClipList.xaml.cs">
       <DependentUpon>ClipList.xaml</DependentUpon>
     </Compile>
