@@ -109,6 +109,14 @@ namespace clipman
             searchTimer.Start();
         }
 
+        private void searchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Settings.Keyboard.ClearTextboxKey)
+            {
+                searchBox.Clear();
+            }
+        }
+
         #endregion
 
         #region Commands
