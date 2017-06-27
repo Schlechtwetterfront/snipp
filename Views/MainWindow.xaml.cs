@@ -76,7 +76,6 @@ namespace clipman
             }
 
             clipViewModel.FilterString = searchBox.Text;
-            clipViewModel.ClipView.Refresh();
             timer.Stop();
         }
 

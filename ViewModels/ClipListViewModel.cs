@@ -32,6 +32,7 @@ namespace clipman.ViewModels
             set
             {
                 filterString = value.Trim().ToLower();
+                ClipView.Refresh();
             }
         }
 

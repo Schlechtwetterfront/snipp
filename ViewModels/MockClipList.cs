@@ -10,7 +10,7 @@ namespace clipman.ViewModels
     {
         public MockClipList()
         {
-            AddClip(new Clipboard.Clip("Clip 1"));
+            AddClip(new Clipboard.Clip("Clip <bold>Test</bold> 1"));
             AddClip(new Clipboard.Clip("Clip 2"));
             AddClip(new Clipboard.Clip("Clip 3"));
         }
