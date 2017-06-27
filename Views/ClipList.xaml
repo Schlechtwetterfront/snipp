@@ -26,7 +26,7 @@
                     <Label Grid.ColumnSpan="4"
                            FontWeight="Bold"
                            FontSize="16"
-                           Content="{Binding Title}"/>
+                           Content="{Binding Clip.Title}"/>
                     <StackPanel Orientation="Horizontal">
                         <Label x:Name="created"
                                Grid.Row="1" Grid.Column="1"
