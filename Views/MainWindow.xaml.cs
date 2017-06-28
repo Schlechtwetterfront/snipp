@@ -26,6 +26,7 @@ namespace clipman
     public partial class MainWindow : Window
     {
         ViewModels.ClipListViewModel clipViewModel;
+        ViewModels.StatusBarViewModel statusBarViewModel;
         Clipboard.ClipboardManager clipboardManager;
 
         /// <summary>
@@ -90,6 +91,9 @@ namespace clipman
 
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
+
+            statusBarViewModel = new ViewModels.StatusBarViewModel();
+            statusBar.DataContext = statusBarViewModel;
 
             clipboardManager = new Clipboard.ClipboardManager();
             clipboardManager.ClipCaptured += OnClipCaptured;

@@ -63,5 +63,6 @@
                  TextChanged="searchBox_Changed"
                  />
         <views:ClipList x:Name="clipList" Grid.Row="1"/>
+        <views:StatusBar x:Name="statusBar" Grid.Row="2"/>
     </Grid>
 </Window>
