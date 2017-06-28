@@ -74,6 +74,8 @@ namespace clipman.Clipboard
         void OnCopyClip(object sender, ClipEventArgs e)
         {
             lastClipboardCopy = DateTime.Now;
+
+            ClipCopied?.Invoke(this, e);
         }
 
         public Clip CaptureClipboard()
@@ -82,5 +84,7 @@ namespace clipman.Clipboard
         }
 
         public event EventHandler<ClipEventArgs> ClipCaptured;
+
+        public event EventHandler<ClipEventArgs> ClipCopied;
     }
 }
