@@ -88,6 +88,10 @@
                         Command="{Binding CopyClipCommand}"
                         CommandParameter="{Binding SelectedItem, ElementName=clipList}"
                         />
+            <KeyBinding Key="Delete"
+                        Command="{Binding DeleteClipCommand}"
+                        CommandParameter="{Binding SelectedItem, ElementName=clipList}"
+                        />
         </ListBox.InputBindings>
         <ListBox.ItemTemplate>
             <DataTemplate>

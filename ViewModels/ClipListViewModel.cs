@@ -49,6 +49,19 @@ namespace clipman.ViewModels
             }
         }
 
+        private ICommand deleteClipCommand;
+        public ICommand DeleteClipCommand
+        {
+            get
+            {
+                return deleteClipCommand ?? (deleteClipCommand = new Commands.Command(param =>
+                {
+                    Utility.Logging.Log("Delete clip command");
+                    Clips.Remove(param as ClipViewModel);
+                }));
+            }
+        }
+
         public ClipListViewModel()
         {
             Clips = new ObservableCollection<ClipViewModel>();
