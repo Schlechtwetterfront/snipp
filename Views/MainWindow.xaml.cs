@@ -28,6 +28,9 @@ namespace clipman
         ViewModels.ClipListViewModel clipViewModel;
         Clipboard.ClipboardManager clipboardManager;
 
+        /// <summary>
+        /// Copy nth clip by pressing Ctrl+N.
+        /// </summary>
         private ICommand copyCommand;
         public ICommand CopyCommand
         {
@@ -41,6 +44,41 @@ namespace clipman
             }
         }
 
+        /// <summary>
+        /// Clear and focus search box.
+        /// </summary>
+        private ICommand clearCommand;
+        public ICommand ClearCommand
+        {
+            get
+            {
+                return clearCommand ?? (clearCommand = new Commands.Command(param =>
+                {
+                    searchBox.Clear();
+                    searchBox.Focus();
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Focus text box.
+        /// </summary>
+        private ICommand focusSearchCommand;
+        public ICommand FocusSearchCommand
+        {
+            get
+            {
+                return focusSearchCommand ?? (focusSearchCommand = new Commands.Command(param =>
+                {
+                    searchBox.Focus();
+                    searchBox.SelectAll();
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Delay after last input until search is started.
+        /// </summary>
         DispatcherTimer searchTimer;
         int searchDelay = 260;
 
@@ -106,14 +144,6 @@ namespace clipman
             }
             searchTimer.Stop();
             searchTimer.Start();
-        }
-
-        private void searchBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Settings.Keyboard.ClearTextboxKey)
-            {
-                searchBox.Clear();
-            }
         }
 
         #endregion

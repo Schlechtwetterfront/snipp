@@ -32,6 +32,8 @@
         </ControlTemplate>
     </Window.Resources>
     <Window.InputBindings>
+        <KeyBinding Command="{Binding FocusSearchCommand}" Gesture="Ctrl+F"/>
+        <KeyBinding Command="{Binding ClearCommand}" Gesture="Escape"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="0" Gesture="Ctrl+1"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="1" Gesture="Ctrl+2"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="2" Gesture="Ctrl+3"/>
@@ -59,7 +61,6 @@
                  Margin="15,10"
                  VerticalAlignment="Top"
                  TextChanged="searchBox_Changed"
-                 KeyDown="searchBox_KeyDown"
                  />
         <views:ClipList x:Name="clipList" Grid.Row="1"/>
     </Grid>
