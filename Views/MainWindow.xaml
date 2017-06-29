@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:clipman"
         xmlns:views="clr-namespace:clipman.Views"
+        xmlns:viewmodels="clr-namespace:clipman.ViewModels"
         mc:Ignorable="d"
         Title="ClipMan" Height="600" Width="420"
-        FocusManager.FocusedElement="{Binding ElementName=searchBox}">
+        FocusManager.FocusedElement="{Binding ElementName=searchBox}"
+        >
     <Window.Resources>
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
@@ -62,9 +64,15 @@
                  TextChanged="searchBox_Changed"
                  Foreground="{DynamicResource Text}"
                  >
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                </Style>
+            </TextBox.Style>
 
         </TextBox>
-        <views:ClipList x:Name="clipList" Grid.Row="1"/>
+        <views:ClipList x:Name="clipList" Grid.Row="1"
+                        d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}"/>
         <views:StatusBar x:Name="statusBar" Grid.Row="2"/>
     </Grid>
 </Window>
