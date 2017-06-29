@@ -12,6 +12,7 @@
         FocusManager.FocusedElement="{Binding ElementName=searchBox}"
         >
     <Window.Resources>
+        <BitmapImage x:Key="SearchIcon" UriSource="/clipman;component/Resources/search-128.png" />
         <KeyTime x:Key="AnimationTime">0:0:0.1</KeyTime>
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
@@ -20,9 +21,12 @@
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
                 <Border.Effect>
-                    <DropShadowEffect x:Name="Shadow" Direction="290" ShadowDepth="2" BlurRadius="4" Opacity="0.5"/>
+                    <DropShadowEffect x:Name="Shadow" Direction="290" ShadowDepth="2" BlurRadius="4" Opacity="0.35"/>
                 </Border.Effect>
-                <ScrollViewer x:Name="PART_ContentHost" Margin="12,8"/>
+                <DockPanel>
+                    <ScrollViewer x:Name="PART_ContentHost" Margin="12,8"/>
+                    <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="/clipman;component/Resources/search-128.png" Stretch="Uniform" Width="26" Height="26" Margin="0,0,6,0"/>
+                </DockPanel>
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsFocused" Value="True">
@@ -32,7 +36,7 @@
                                 <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
                                                                Storyboard.TargetProperty="(Effect).Opacity"
                                                                Storyboard.TargetName="Bd">
-                                    <SplineDoubleKeyFrame KeyTime="{StaticResource AnimationTime}" Value="0.5"/>
+                                    <SplineDoubleKeyFrame KeyTime="{StaticResource AnimationTime}" Value="0.35"/>
                                 </DoubleAnimationUsingKeyFrames>
                                 <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
                                                                Storyboard.TargetProperty="(Effect).ShadowDepth"
@@ -98,7 +102,7 @@
                  FontFamily="Segoe UI Semilight"
                  BorderThickness="1"
                  BorderBrush="DarkGray"
-                 Margin="30,10"
+                 Margin="20,10"
                  VerticalAlignment="Top"
                  TextChanged="searchBox_Changed"
                  Foreground="{DynamicResource Text}"
