@@ -6,20 +6,59 @@
         xmlns:local="clr-namespace:clipman"
         xmlns:views="clr-namespace:clipman.Views"
         xmlns:viewmodels="clr-namespace:clipman.ViewModels"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="ClipMan" Height="600" Width="420"
         FocusManager.FocusedElement="{Binding ElementName=searchBox}"
         >
     <Window.Resources>
+        <KeyTime x:Key="AnimationTime">0:0:0.1</KeyTime>
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
         <ControlTemplate x:Key="SearchBoxStyle" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
-                <ScrollViewer x:Name="PART_ContentHost" Margin="16,12"/>
+                <Border.Effect>
+                    <DropShadowEffect x:Name="Shadow" Direction="290" ShadowDepth="2" BlurRadius="4" Opacity="0.5"/>
+                </Border.Effect>
+                <ScrollViewer x:Name="PART_ContentHost" Margin="12,8"/>
             </Border>
             <ControlTemplate.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
+                                                               Storyboard.TargetProperty="(Effect).Opacity"
+                                                               Storyboard.TargetName="Bd">
+                                    <SplineDoubleKeyFrame KeyTime="{StaticResource AnimationTime}" Value="0.5"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
+                                                               Storyboard.TargetProperty="(Effect).ShadowDepth"
+                                                               Storyboard.TargetName="Bd">
+                                    <SplineDoubleKeyFrame KeyTime="{StaticResource AnimationTime}" Value="2"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
+                                                               Storyboard.TargetProperty="(Effect).Opacity"
+                                                               Storyboard.TargetName="Bd">
+                                    <SplineDoubleKeyFrame KeyTime="{StaticResource AnimationTime}" Value="0" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
+                                                               Storyboard.TargetProperty="(Effect).ShadowDepth"
+                                                               Storyboard.TargetName="Bd">
+                                    <SplineDoubleKeyFrame KeyTime="{StaticResource AnimationTime}" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -69,7 +108,6 @@
                     <Setter Property="SnapsToDevicePixels" Value="True"/>
                 </Style>
             </TextBox.Style>
-
         </TextBox>
         <views:ClipList x:Name="clipList" Grid.Row="1"
                         d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}"/>
