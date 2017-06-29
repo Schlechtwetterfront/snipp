@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:clipman.Views"
              xmlns:viewmodels="clr-namespace:clipman.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
@@ -19,21 +20,21 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#0C000000"/>
+        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#05000000"/>
         <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#19000000"/>
-        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
-        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#19000000"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#0C000000"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FF26A0DA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#0C000000"/>
         <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
         <Style x:Key="FlatListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
             <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
             <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Padding" Value="6,6,10,6"/>
             <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
             <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="4,0,0,0"/>
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -74,120 +75,157 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <ListBox x:Name="clipList"
-             Grid.Row="1"
-             BorderThickness="0"
-             AlternationCount="{Binding Items.Count, RelativeSource={RelativeSource Self}}"
-             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-             ItemsSource="{Binding Path=ClipView}"
-             d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}"
-             ItemContainerStyle="{StaticResource FlatListBoxItemStyle}" HorizontalContentAlignment="Stretch"
-             >
-        <ListBox.InputBindings>
-            <KeyBinding Key="Return"
-                        Command="{Binding CopyClipCommand}"
-                        CommandParameter="{Binding SelectedItem, ElementName=clipList}"
-                        />
-            <KeyBinding Key="Delete"
-                        Command="{Binding DeleteClipCommand}"
-                        CommandParameter="{Binding SelectedItem, ElementName=clipList}"
-                        />
-        </ListBox.InputBindings>
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <DockPanel>
-                    <TextBlock Grid.ColumnSpan="4"
-                           FontSize="16"
-                           Foreground="{StaticResource TitleText}" Margin="0,0,0,6" DockPanel.Dock="Top">
-                        <Run Text="{Binding Clip.TitlePrefix}" />
-                        <Run Text="{Binding Clip.TitleMain}" FontFamily="Segoe UI Semibold" />
-                        <Run Text="{Binding Clip.TitleSuffix}" />
-                    </TextBlock>
-                    <DockPanel Margin="2,0">
-                        <TextBlock x:Name="created"
-                               Text="{Binding CreatedString, Mode=OneWay}"
-                               Foreground="{StaticResource Text}"
-                                   HorizontalAlignment="Left"
-                                   />
-                        <TextBlock x:Name="shortcut" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <DockPanel x:Name="listHeader" Margin="0,0,0,6">
+            <TextBlock Margin="0,0,12,0"
+                       DockPanel.Dock="Right"
+                       TextAlignment="Right"
+                       HorizontalAlignment="Right"
+                       Text="{Binding ClipView.Count}"
+                       Foreground="{DynamicResource Text}"
+                       FontSize="16"
+                       FontFamily="Segoe UI Light"
+                       />
+            <TextBlock Margin="0,0,4,0"
+                       DockPanel.Dock="Right"
+                       TextAlignment="Right"
+                       HorizontalAlignment="Right"
+                       Text="#"
+                       Foreground="{DynamicResource Text}"
+                       FontSize="16"
+                       FontFamily="Segoe UI Light"
+                       />
+            <DockPanel.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ClipView.Count}"
+                                     Value="0">
+                            <Setter Property="Control.Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
+        </DockPanel>
+        
+        <ListBox x:Name="clipList"
+                 Grid.Row="1"
+                 BorderThickness="0"
+                 AlternationCount="{Binding Items.Count, RelativeSource={RelativeSource Self}}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemsSource="{Binding Path=ClipView}"
+                 ItemContainerStyle="{StaticResource FlatListBoxItemStyle}" HorizontalContentAlignment="Stretch"
+                 >
+            <ListBox.InputBindings>
+                <KeyBinding Key="Return"
+                            Command="{Binding CopyClipCommand}"
+                            CommandParameter="{Binding SelectedItem, ElementName=clipList}"
+                            />
+                <KeyBinding Key="Delete"
+                            Command="{Binding DeleteClipCommand}"
+                            CommandParameter="{Binding SelectedItem, ElementName=clipList}"
+                            />
+            </ListBox.InputBindings>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock Grid.ColumnSpan="4"
+                               FontSize="16"
+                               Foreground="{StaticResource TitleText}" Margin="0,0,0,6" DockPanel.Dock="Top">
+                            <Run Text="{Binding Clip.TitlePrefix}" />
+                            <Run Text="{Binding Clip.TitleMain}" FontFamily="Segoe UI Semibold" />
+                            <Run Text="{Binding Clip.TitleSuffix}" />
+                        </TextBlock>
+                        <DockPanel Margin="2,0">
+                            <TextBlock x:Name="created"
+                                   Text="{Binding CreatedString, Mode=OneWay}"
                                    Foreground="{StaticResource Text}"
-                                   HorizontalAlignment="Right"
-                                   />
+                                       HorizontalAlignment="Left"
+                                       />
+                            <TextBlock x:Name="shortcut" 
+                                       Foreground="{StaticResource Text}"
+                                       HorizontalAlignment="Right"
+                                       />
+                        </DockPanel>
                     </DockPanel>
-                </DockPanel>
-                <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="0">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+1"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="1">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+2"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="2">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+3"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="3">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+4"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="4">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+5"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="5">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+6"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="6">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+7"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="7">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+8"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="8">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+9"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                           RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                 Value="10">
-                        <Setter TargetName="shortcut"
-                                Property="Text"
-                                Value="Ctrl+0"/>
-                    </DataTrigger>
-                </DataTemplate.Triggers>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="0">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+1"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="1">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+2"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="2">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+3"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="3">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+4"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="4">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+5"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="5">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+6"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="6">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+7"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="7">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+8"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="8">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+9"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
+                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="9">
+                            <Setter TargetName="shortcut"
+                                    Property="Text"
+                                    Value="Ctrl+0"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </UserControl>
