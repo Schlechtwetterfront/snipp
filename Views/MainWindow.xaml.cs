@@ -28,6 +28,7 @@ namespace clipman
     {
         ViewModels.ClipListViewModel clipViewModel;
         ViewModels.StatusBarViewModel statusBarViewModel;
+        ViewModels.SettingsPanelViewModel settingsPanelViewModel;
         Clipboard.ClipboardManager clipboardManager;
 
         /// <summary>
@@ -98,6 +99,11 @@ namespace clipman
             statusBarViewModel = new ViewModels.StatusBarViewModel();
             statusBar.DataContext = statusBarViewModel;
 
+            settingsPanelViewModel = new ViewModels.SettingsPanelViewModel();
+            settingsPanel.DataContext = settingsPanelViewModel;
+
+            settingsPanelViewModel.ClearRequested += OnClearRequested;
+
             clipboardManager = new Clipboard.ClipboardManager();
             clipboardManager.ClipCaptured += OnClipCaptured;
 
@@ -158,6 +164,11 @@ namespace clipman
             }
             searchTimer.Stop();
             searchTimer.Start();
+        }
+
+        private void OnClearRequested(object sender, EventArgs e)
+        {
+            clipViewModel.Clips.Clear();
         }
 
         #endregion

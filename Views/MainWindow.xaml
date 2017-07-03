@@ -187,5 +187,6 @@
         <StackPanel x:Name="settingsPanel" Grid.RowSpan="3" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" >
             <TextBlock>ABC</TextBlock>
         </StackPanel>
+        <views:SettingsPanel x:Name="settingsPanel" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Grid.Row="1" Margin="200,0,0,0"/>
     </Grid>
 </Window>
