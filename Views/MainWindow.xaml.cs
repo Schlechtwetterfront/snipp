@@ -26,6 +26,8 @@ namespace clipman
     /// </summary>
     public partial class MainWindow : Window
     {
+        const int settingsPanelOffset = 200;
+
         ViewModels.ClipListViewModel clipViewModel;
         ViewModels.StatusBarViewModel statusBarViewModel;
         ViewModels.SettingsPanelViewModel settingsPanelViewModel;
@@ -91,6 +93,8 @@ namespace clipman
         {
             InitializeComponent();
 
+            TextOptions.SetTextFormattingMode(this, TextFormattingMode.Display);
+
             DataContext = this;
 
             clipViewModel = new ViewModels.ClipListViewModel();
@@ -110,9 +114,6 @@ namespace clipman
             InitializeKeybindings();
 
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
-
-            Utility.Logging.Log("Width: " + mainGrid.ActualWidth + ", " + mainGrid.Width);
-            settingsPanel.Margin = new Thickness { Left = mainGrid.ActualWidth };
 
 #if DEBUG
             Left = -1400;
@@ -184,7 +185,6 @@ namespace clipman
 
         private void OnSettingsPanelLoad(object sender, RoutedEventArgs e)
         {
-            Utility.Logging.Log("Width: " + mainGrid.ActualWidth + ", " + mainGrid.Width);
             settingsPanel.Margin = new Thickness { Left = mainGrid.ActualWidth };
         }
 
@@ -196,11 +196,11 @@ namespace clipman
                 Thickness margin;
                 if (settingsPanelOpen)
                 {
-                    margin = new Thickness();
+                    margin = new Thickness { Left = mainGrid.ActualWidth };
                 }
                 else
                 {
-                    margin = new Thickness { Left = mainGrid.ActualWidth };
+                    margin = new Thickness { Left = mainGrid.ActualWidth - settingsPanelOffset };
                 }
                 anim.To = margin;
             }

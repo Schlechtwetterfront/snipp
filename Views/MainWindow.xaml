@@ -15,6 +15,7 @@
         <BitmapImage x:Key="SearchIcon" UriSource="/clipman;component/Resources/search-128.png" />
         <KeyTime x:Key="AnimationTime">0:0:0.1</KeyTime>
         <Duration x:Key="AnimationDuration">0:0:0.1</Duration>
+        <Duration x:Key="SettingsPanelAnimDuration">0:0:0.1666</Duration>
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
         <SolidColorBrush x:Key="TriButton.Background" Color="Gray"/>
@@ -62,13 +63,13 @@
         <Storyboard x:Key="SettingsSlide">
             <ThicknessAnimation Storyboard.TargetName="settingsPanel"
                                 Storyboard.TargetProperty="Margin"
-                                Duration="{StaticResource AnimationDuration}"
+                                Duration="{StaticResource SettingsPanelAnimDuration}"
                                 />
         </Storyboard>
         <Storyboard x:Key="SettingsButtonRotate">
-            <DoubleAnimation Storyboard.TargetName="Tri"
+            <DoubleAnimation Storyboard.TargetName="settingsPanelToggleButton"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
-                             Duration="{StaticResource AnimationDuration}"
+                             Duration="{StaticResource SettingsPanelAnimDuration}"
                              />
         </Storyboard>
         <ControlTemplate x:Key="SearchBoxStyle" TargetType="{x:Type TextBoxBase}">
@@ -180,13 +181,14 @@
                 Margin="5,0,10,0"
                 Cursor="Hand"
                 Panel.ZIndex="2"
-                Click="OnSettingsToggle" />
+                Click="OnSettingsToggle" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <RotateTransform />
+            </Button.RenderTransform>
+        </Button>
         <views:ClipList x:Name="clipList" Grid.Row="1"
                         d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}" Grid.ColumnSpan="2"/>
         <views:StatusBar x:Name="statusBar" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <StackPanel x:Name="settingsPanel" Grid.RowSpan="3" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" >
-            <TextBlock>ABC</TextBlock>
-        </StackPanel>
         <views:SettingsPanel x:Name="settingsPanel" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Grid.Row="1" Margin="200,0,0,0"/>
     </Grid>
 </Window>
