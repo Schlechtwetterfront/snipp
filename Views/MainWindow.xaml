@@ -14,8 +14,63 @@
     <Window.Resources>
         <BitmapImage x:Key="SearchIcon" UriSource="/clipman;component/Resources/search-128.png" />
         <KeyTime x:Key="AnimationTime">0:0:0.1</KeyTime>
+        <Duration x:Key="AnimationDuration">0:0:0.1</Duration>
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
+        <SolidColorBrush x:Key="TriButton.Background" Color="Gray"/>
+        <Color x:Key="TriButton.BackgroundColor" R="128" G="128" B="128" A="255"/>
+        <Color x:Key="TriButton.Hover.BackgroundColor" R="60" G="60" B="60" A="255"/>
+        <SolidColorBrush x:Key="TriButton.Hover.Background" Color="Gray"/>
+        <ControlTemplate x:Key="TriangleButton" TargetType="{x:Type Button}">
+            <Border>
+                <Polygon x:Name="Tri"
+                         Points="0,14 22,28 22,0"
+                         Fill="{StaticResource TriButton.Background}"
+                         Margin="4"
+                         />
+            </Border>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="Tri"
+                                                Storyboard.TargetProperty="Fill.Color"
+                                                To="{StaticResource TriButton.Hover.BackgroundColor}"
+                                                Duration="{StaticResource AnimationDuration}"
+                                                />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiTrigger.EnterActions>
+                    <MultiTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="Tri"
+                                                Storyboard.TargetProperty="Fill.Color"
+                                                To="{StaticResource TriButton.BackgroundColor}"
+                                                Duration="{StaticResource AnimationDuration}"
+                                                />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiTrigger.ExitActions>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Storyboard x:Key="SettingsSlide">
+            <ThicknessAnimation Storyboard.TargetName="settingsPanel"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="{StaticResource AnimationDuration}"
+                                />
+        </Storyboard>
+        <Storyboard x:Key="SettingsButtonRotate">
+            <DoubleAnimation Storyboard.TargetName="Tri"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                             Duration="{StaticResource AnimationDuration}"
+                             />
+        </Storyboard>
         <ControlTemplate x:Key="SearchBoxStyle" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
@@ -90,19 +145,23 @@
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="8" Gesture="Ctrl+9"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="9" Gesture="Ctrl+0"/>
     </Window.InputBindings>
-    <Grid>
+    <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <TextBox Template="{StaticResource SearchBoxStyle}"
                  x:Name="searchBox"
                  FontSize="16"
                  FontFamily="Segoe UI Semilight"
                  BorderThickness="1"
                  BorderBrush="DarkGray"
-                 Margin="20,10"
+                 Margin="10,10,5,10"
                  VerticalAlignment="Top"
                  TextChanged="searchBox_Changed"
                  Foreground="{DynamicResource Text}" Cursor="IBeam"
@@ -113,8 +172,20 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
+        <Button Template="{StaticResource TriangleButton}"
+                x:Name="settingsPanelToggleButton"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Margin="5,0,10,0"
+                Cursor="Hand"
+                Panel.ZIndex="2"
+                Click="OnSettingsToggle" />
         <views:ClipList x:Name="clipList" Grid.Row="1"
-                        d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}"/>
-        <views:StatusBar x:Name="statusBar" Grid.Row="2"/>
+                        d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}" Grid.ColumnSpan="2"/>
+        <views:StatusBar x:Name="statusBar" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <StackPanel x:Name="settingsPanel" Grid.RowSpan="3" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" >
+            <TextBlock>ABC</TextBlock>
+        </StackPanel>
     </Grid>
 </Window>

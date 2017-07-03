@@ -13,13 +13,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace clipman
-{ 
+{
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -83,6 +84,8 @@ namespace clipman
         DispatcherTimer searchTimer;
         int searchDelay = 260;
 
+        bool settingsPanelOpen = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -101,6 +104,13 @@ namespace clipman
             InitializeKeybindings();
 
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
+
+            Utility.Logging.Log("Width: " + mainGrid.ActualWidth + ", " + mainGrid.Width);
+            settingsPanel.Margin = new Thickness { Left = mainGrid.ActualWidth };
+
+#if DEBUG
+            Left = -1400;
+#endif
         }
 
         void InitializeKeybindings()
@@ -154,11 +164,45 @@ namespace clipman
 
         #region Commands
 
-        private void Copy(int index=0)
+        private void Copy(int index = 0)
         {
             clipViewModel.ClipView.NthInView<ViewModels.ClipViewModel>(index)?.Clip?.Copy();
         }
 
         #endregion
+
+        private void OnSettingsPanelLoad(object sender, RoutedEventArgs e)
+        {
+            Utility.Logging.Log("Width: " + mainGrid.ActualWidth + ", " + mainGrid.Width);
+            settingsPanel.Margin = new Thickness { Left = mainGrid.ActualWidth };
+        }
+
+        private void OnSettingsToggle(object sender, RoutedEventArgs e)
+        {
+            var slideStoryboard = FindResource("SettingsSlide") as Storyboard;
+            foreach (ThicknessAnimation anim in slideStoryboard.Children)
+            {
+                Thickness margin;
+                if (settingsPanelOpen)
+                {
+                    margin = new Thickness();
+                }
+                else
+                {
+                    margin = new Thickness { Left = mainGrid.ActualWidth };
+                }
+                anim.To = margin;
+            }
+            settingsPanel.BeginStoryboard(slideStoryboard);
+
+            var rotateStoryboard = FindResource("SettingsButtonRotate") as Storyboard;
+            foreach (DoubleAnimation anim in rotateStoryboard.Children)
+            {
+                anim.To = settingsPanelOpen ? 0 : 180;
+            }
+            settingsPanelToggleButton.BeginStoryboard(rotateStoryboard);
+
+            settingsPanelOpen = !settingsPanelOpen;
+        }
     }
 }
