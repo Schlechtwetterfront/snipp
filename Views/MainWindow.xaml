@@ -27,7 +27,7 @@
                 <Polygon x:Name="Tri"
                          Points="0,14 22,28 22,0"
                          Fill="{StaticResource TriButton.Background}"
-                         Margin="4"
+                         Margin="4" Stroke="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
                          />
             </Border>
             <ControlTemplate.Triggers>
