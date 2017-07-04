@@ -185,26 +185,23 @@ namespace clipman
 
         private void OnSettingsPanelLoad(object sender, RoutedEventArgs e)
         {
-            settingsPanel.Margin = new Thickness { Left = mainGrid.ActualWidth };
         }
 
         private void OnSettingsToggle(object sender, RoutedEventArgs e)
         {
-            var slideStoryboard = FindResource("SettingsSlide") as Storyboard;
-            foreach (ThicknessAnimation anim in slideStoryboard.Children)
+            var bubbleStoryboard = FindResource("SettingsBubble") as Storyboard;
+            foreach (DoubleAnimation anim in bubbleStoryboard.Children)
             {
-                Thickness margin;
                 if (settingsPanelOpen)
                 {
-                    margin = new Thickness { Left = mainGrid.ActualWidth };
+                    anim.To = 0;
                 }
                 else
                 {
-                    margin = new Thickness { Left = mainGrid.ActualWidth - settingsPanelOffset };
+                    anim.To = 1;
                 }
-                anim.To = margin;
             }
-            settingsPanel.BeginStoryboard(slideStoryboard);
+            settingsPanel.BeginStoryboard(bubbleStoryboard);
 
             var rotateStoryboard = FindResource("SettingsButtonRotate") as Storyboard;
             foreach (DoubleAnimation anim in rotateStoryboard.Children)

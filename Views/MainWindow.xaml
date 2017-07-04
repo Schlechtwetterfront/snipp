@@ -78,6 +78,16 @@
                                 Duration="{StaticResource SettingsPanelAnimDuration}"
                                 />
         </Storyboard>
+        <Storyboard x:Key="SettingsBubble">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                             Storyboard.TargetName="settingsPanel"
+                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             />
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                             Storyboard.TargetName="settingsPanel"
+                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             />
+        </Storyboard>
         <Storyboard x:Key="SettingsButtonRotate">
             <DoubleAnimation Storyboard.TargetName="settingsPanelToggleButton"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
@@ -203,6 +213,10 @@
         <views:ClipList x:Name="clipList" Grid.Row="1"
                         d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}" Grid.ColumnSpan="2"/>
         <views:StatusBar x:Name="statusBar" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <views:SettingsPanel x:Name="settingsPanel" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Grid.Row="1" Margin="200,0,0,0"/>
+        <views:SettingsPanel x:Name="settingsPanel" Grid.ColumnSpan="3" Loaded="OnSettingsPanelLoad" Grid.RowSpan="3" RenderTransformOrigin="1,0" Margin="100,15,5,20">
+            <views:SettingsPanel.RenderTransform>
+                <ScaleTransform ScaleX="0" ScaleY="0"/>
+            </views:SettingsPanel.RenderTransform>
+        </views:SettingsPanel>
     </Grid>
 </Window>

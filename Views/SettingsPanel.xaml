@@ -11,7 +11,7 @@
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
     </UserControl.Resources>
-    <Border Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1,1,0,1" BorderBrush="DarkGray">
+    <Border Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
         <Border.Effect>
             <DropShadowEffect Direction="290" ShadowDepth="2" Opacity="0.35" BlurRadius="6"/>
         </Border.Effect>
@@ -22,7 +22,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock FontFamily="Segoe UI Light" FontSize="36" Margin="0,0,0,20">ClipMan</TextBlock>
+            <TextBlock FontFamily="Segoe UI Light" FontSize="24" Margin="0,0,0,10">ClipMan</TextBlock>
             <Button VerticalAlignment="Top" Content="Clear All Clips" Padding="10" Click="OnClearButtonClick" Grid.Row="1"/>
             <TextBlock Grid.Row="2" Margin="0,10,0,0">
                 <Run FontFamily="Consolas" FontWeight="Bold">Esc</Run><LineBreak/>
