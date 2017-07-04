@@ -23,7 +23,7 @@ namespace clipman.Clipboard
             set
             {
                 content = value;
-                processedContent = Regex.Replace(value, @"[\s|\r\n?|\n]+", " ").Trim();
+                processedContent = Regex.Replace(value, @"[\s]+", " ").Trim();
                 SearchContent = processedContent.ToLower();
 
                 var builder = new StringBuilder();
