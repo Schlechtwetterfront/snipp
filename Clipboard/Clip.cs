@@ -23,16 +23,12 @@ namespace clipman.Clipboard
             set
             {
                 content = value;
+
                 processedContent = Regex.Replace(value, @"[\s]+", " ").Trim();
+
                 SearchContent = processedContent.ToLower();
 
-                var builder = new StringBuilder();
-                foreach (var c in processedContent.Trim().Take(Clip.TitleCharCount))
-                {
-                    builder.Append(c);
-                };
-
-                defaultTitle = builder.ToString();
+                defaultTitle = processedContent.Substring(0, Clip.TitleCharCount);
                 Title = defaultTitle;
             }
         }
