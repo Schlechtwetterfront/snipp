@@ -28,7 +28,10 @@ namespace clipman.Clipboard
 
                 SearchContent = processedContent.ToLower();
 
-                defaultTitle = processedContent.Substring(0, Clip.TitleCharCount);
+                defaultTitle = processedContent.Substring(
+                    0,
+                    Math.Min(Clip.TitleCharCount, processedContent.Length)
+                );
                 Title = defaultTitle;
             }
         }
