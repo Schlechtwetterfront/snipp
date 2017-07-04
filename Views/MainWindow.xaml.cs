@@ -209,7 +209,7 @@ namespace clipman
             var rotateStoryboard = FindResource("SettingsButtonRotate") as Storyboard;
             foreach (DoubleAnimation anim in rotateStoryboard.Children)
             {
-                anim.To = settingsPanelOpen ? 0 : 180;
+                anim.To = settingsPanelOpen ? 0 : 90;
             }
             settingsPanelToggleButton.BeginStoryboard(rotateStoryboard);
 

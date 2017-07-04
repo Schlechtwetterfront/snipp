@@ -23,12 +23,24 @@
         <Color x:Key="TriButton.Hover.BackgroundColor" R="60" G="60" B="60" A="255"/>
         <SolidColorBrush x:Key="TriButton.Hover.Background" Color="Gray"/>
         <ControlTemplate x:Key="TriangleButton" TargetType="{x:Type Button}">
-            <Border>
-                <Polygon x:Name="Tri"
-                         Points="0,14 22,28 22,0"
-                         Fill="{StaticResource TriButton.Background}"
-                         Margin="4" Stroke="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
-                         />
+            <Border Background="Transparent">
+                <DockPanel Width="33">
+                    <Ellipse Height="5" Width="5"
+                             DockPanel.Dock="Top"
+                             Fill="{TemplateBinding Background}"
+                             Margin="3"
+                             />
+                    <Ellipse Height="5" Width="5"
+                             DockPanel.Dock="Top"
+                             Fill="{TemplateBinding Background}"
+                             Margin="3"
+                             />
+                    <Ellipse Height="5" Width="5"
+                             DockPanel.Dock="Bottom"
+                             Fill="{TemplateBinding Background}"
+                             Margin="3"
+                             />
+                </DockPanel>
             </Border>
             <ControlTemplate.Triggers>
                 <MultiTrigger>
@@ -38,8 +50,8 @@
                     <MultiTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="Tri"
-                                                Storyboard.TargetProperty="Fill.Color"
+                                <ColorAnimation 
+                                                Storyboard.TargetProperty="(Background).Color"
                                                 To="{StaticResource TriButton.Hover.BackgroundColor}"
                                                 Duration="{StaticResource AnimationDuration}"
                                                 />
@@ -49,8 +61,8 @@
                     <MultiTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="Tri"
-                                                Storyboard.TargetProperty="Fill.Color"
+                                <ColorAnimation 
+                                                Storyboard.TargetProperty="(Background).Color"
                                                 To="{StaticResource TriButton.BackgroundColor}"
                                                 Duration="{StaticResource AnimationDuration}"
                                                 />
@@ -181,7 +193,9 @@
                 Margin="5,0,10,0"
                 Cursor="Hand"
                 Panel.ZIndex="2"
-                Click="OnSettingsToggle" RenderTransformOrigin="0.5,0.5">
+                Click="OnSettingsToggle"
+                Background="{StaticResource TriButton.Background}"
+                RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <RotateTransform />
             </Button.RenderTransform>
