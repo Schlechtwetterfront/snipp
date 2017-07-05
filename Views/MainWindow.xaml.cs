@@ -203,12 +203,16 @@ namespace clipman
             }
             settingsPanel.BeginStoryboard(bubbleStoryboard);
 
-            var rotateStoryboard = FindResource("SettingsButtonRotate") as Storyboard;
-            foreach (DoubleAnimation anim in rotateStoryboard.Children)
+            Storyboard buttonAnim;
+            if (settingsPanelOpen)
             {
-                anim.To = settingsPanelOpen ? 0 : 90;
+                buttonAnim = FindResource("XToBurger") as Storyboard;
             }
-            settingsPanelToggleButton.BeginStoryboard(rotateStoryboard);
+            else
+            {
+                buttonAnim = FindResource("BurgerToX") as Storyboard;
+            }
+            buttonAnim.Begin(settingsPanelToggleButton, settingsPanelToggleButton.Template);
 
             settingsPanelOpen = !settingsPanelOpen;
         }
