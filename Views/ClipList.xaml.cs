@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace clipman.Views
 {
@@ -19,6 +20,13 @@ namespace clipman.Views
 
             var viewModel = (ViewModels.ClipViewModel)(sender as ListBoxItem).DataContext;
             viewModel.Clip.Copy();
+            Echo(sender as ListBoxItem);
+        }
+
+        private void Echo(ListBoxItem control)
+        {
+            var echoAnim = FindResource("Echo") as Storyboard;
+            echoAnim.Begin(control, control.Template);
         }
     }
 }

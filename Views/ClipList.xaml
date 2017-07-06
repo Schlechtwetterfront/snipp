@@ -11,7 +11,7 @@
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <Style BasedOn="{StaticResource FlatListBoxItemStyle}" TargetType="ListBoxItem">
+        <Style BasedOn="{StaticResource FlatListBoxItemStyle}" TargetType="ListBoxItem" x:Key="ClipListItem">
             <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
         </Style>
     </UserControl.Resources>
@@ -58,7 +58,7 @@
                  AlternationCount="{Binding Items.Count, RelativeSource={RelativeSource Self}}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemsSource="{Binding Path=ClipView}"
-                 ItemContainerStyle="{StaticResource FlatListBoxItemStyle}" HorizontalContentAlignment="Stretch"
+                 ItemContainerStyle="{StaticResource ClipListItem}" HorizontalContentAlignment="Stretch"
                  >
             <ListBox.InputBindings>
                 <KeyBinding Key="Return"

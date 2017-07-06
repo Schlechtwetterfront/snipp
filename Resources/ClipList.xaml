@@ -4,6 +4,8 @@
                     >
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#FF000000"/>
     <Color x:Key="Item.MouseOver.BackgroundColor" R="0" G="0" B="0" A="10"/>
+    <Color x:Key="EchoZenith" R="30" G="160" B="218" A="50"/>
+    <Color x:Key="EchoKeyFrame1" R="252" G="181" B="40" A="5"/>
     <Color x:Key="Test" R="255" G="123" B="0" A="100"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#0C000000"/>
@@ -78,4 +80,12 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Storyboard x:Key="Echo">
+        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Fg"
+                                      Storyboard.TargetProperty="Background.Color">
+            <LinearColorKeyFrame KeyTime="0:0:0.1" Value="{StaticResource EchoZenith}"/>
+            <LinearColorKeyFrame KeyTime="0:0:1" Value="Transparent"/>
+        </ColorAnimationUsingKeyFrames>
+    </Storyboard>
 </ResourceDictionary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using static clipman.Clipboard.ClipboardManager;
 
 namespace clipman.ViewModels
 {
