@@ -223,9 +223,18 @@ namespace clipman
             settingsPanelOpen = !settingsPanelOpen;
         }
 
+        /// <summary>
+        /// Global shortcut listener.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnHotkeyPressed(object sender, Settings.KeyboardMonitor.HotkeyEventArgs e)
         {
-            Utility.Logging.Log("ID: " + e.HotkeyId);
+            if (e.HotkeyId == focusHotkeyId)
+            {
+                // Bring window to front.
+                Activate();
+            }
         }
     }
 }
