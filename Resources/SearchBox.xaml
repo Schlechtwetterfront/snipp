@@ -11,7 +11,7 @@
             </Border.Effect>
             <DockPanel>
                 <ScrollViewer x:Name="PART_ContentHost" Margin="12,8"/>
-                <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="/clipman;component/Resources/search-128.png" Stretch="Uniform" Width="26" Height="26" Margin="0,0,6,0"/>
+                <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="/clipman;component/Resources/search-icon.png" Stretch="Uniform" Width="26" Height="26" Margin="0,0,6,0"/>
             </DockPanel>
         </Border>
         <ControlTemplate.Triggers>
