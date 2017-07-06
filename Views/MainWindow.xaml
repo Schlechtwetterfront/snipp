@@ -269,7 +269,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -281,7 +280,7 @@
                  FontFamily="Segoe UI Semilight"
                  BorderThickness="1"
                  BorderBrush="DarkGray"
-                 Margin="10,10,5,10"
+                 Margin="10,10,5,5"
                  VerticalAlignment="Top"
                  TextChanged="searchBox_Changed"
                  Foreground="{DynamicResource Text}" Cursor="IBeam"
@@ -297,7 +296,7 @@
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Margin="5,0,10,0"
+                Margin="5,5,10,0"
                 Cursor="Hand"
                 Panel.ZIndex="3"
                 Click="OnSettingsToggle"
