@@ -309,7 +309,6 @@
         </Button>
         <views:ClipList x:Name="clipList" Grid.Row="1"
                         d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}" Grid.ColumnSpan="2"/>
-        <views:StatusBar x:Name="statusBar" Grid.Row="2" Grid.ColumnSpan="2"/>
         <views:SettingsPanel x:Name="settingsPanel" Grid.ColumnSpan="3" Loaded="OnSettingsPanelLoad" Grid.RowSpan="3" RenderTransformOrigin="1,0" Margin="100,15,5,20">
             <views:SettingsPanel.RenderTransform>
                 <ScaleTransform ScaleX="0" ScaleY="0"/>

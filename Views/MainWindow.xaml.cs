@@ -90,8 +90,8 @@ namespace clipman
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
 
-            statusBarViewModel = new ViewModels.StatusBarViewModel();
-            statusBar.DataContext = statusBarViewModel;
+            //statusBarViewModel = new ViewModels.StatusBarViewModel();
+            //statusBar.DataContext = statusBarViewModel;
 
             settingsPanelViewModel = new ViewModels.SettingsPanelViewModel();
             settingsPanel.DataContext = settingsPanelViewModel;
