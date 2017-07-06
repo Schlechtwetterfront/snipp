@@ -6,11 +6,9 @@ using System.Windows.Interop;
 
 namespace clipman.Settings
 {
-    public static class Keyboard
-    {
-        public static Key ClearTextboxKey = Key.Escape;
-    }
-
+    /// <summary>
+    /// Monitors global shortcuts.
+    /// </summary>
     public class KeyboardMonitor : IDisposable
     {
         private bool disposed = false;
@@ -31,6 +29,9 @@ namespace clipman.Settings
                 [In] int id
             );
 
+            /// <summary>
+            /// Hotkey event.
+            /// </summary>
             public const int WM_HOTKEY = 0x0312;
 
             /// <summary>
@@ -50,6 +51,9 @@ namespace clipman.Settings
 
         private HwndSource hwndSource = new HwndSource(0, 0, 0, 0, 0, 0, 0, null, NativeMethods.HWND_MESSAGE);
 
+        /// <summary>
+        /// List of registered hotkey ids. Used to unregister on dispose.
+        /// </summary>
         private List<int> hotkeyIds = new List<int>();
 
         public KeyboardMonitor()
@@ -57,6 +61,12 @@ namespace clipman.Settings
             hwndSource.AddHook(WndProc);
         }
 
+        /// <summary>
+        /// Add a global hotkey.
+        /// </summary>
+        /// <param name="modifier"></param>
+        /// <param name="key"></param>
+        /// <returns>Returns the id used to identify the hotkey in callbacks.</returns>
         public int AddHotkey(int modifier, int key)
         {
             int id = hotkeyIds.Count + 9000;
@@ -65,6 +75,15 @@ namespace clipman.Settings
             return id;
         }
 
+        /// <summary>
+        /// Listen to window events and fire `KeyPressed` when a registered hotkey is pressed.
+        /// </summary>
+        /// <param name="hwnd"></param>
+        /// <param name="msg"></param>
+        /// <param name="wParam"></param>
+        /// <param name="lParam"></param>
+        /// <param name="handled"></param>
+        /// <returns></returns>
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (msg == NativeMethods.WM_HOTKEY)
@@ -91,6 +110,9 @@ namespace clipman.Settings
             }
         }
 
+        /// <summary>
+        /// Event fired when a hotkey is pressed.
+        /// </summary>
         public event EventHandler<HotkeyEventArgs> KeyPressed;
     }
 }
