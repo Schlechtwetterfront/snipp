@@ -253,7 +253,9 @@
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Command="{Binding FocusSearchCommand}" Gesture="Ctrl+F"/>
-        <KeyBinding Command="{Binding ClearCommand}" Gesture="Escape"/>
+        <KeyBinding Command="{Binding ClearCommand}"
+                    Modifiers="{Binding Settings.ClearAndFocusSearchBox.Modifiers}"
+                    Key="{Binding Settings.ClearAndFocusSearchBox.Key}"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="0" Gesture="Ctrl+1"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="1" Gesture="Ctrl+2"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="2" Gesture="Ctrl+3"/>

@@ -24,6 +24,10 @@ namespace clipman
         Settings.KeyboardMonitor keyboardMonitor;
 
         Settings.Settings settings = new Settings.Settings();
+        public Settings.Settings Settings
+        {
+            get { return settings; }
+        }
 
         /// <summary>
         /// Copy nth clip by pressing Ctrl+N.
@@ -105,11 +109,6 @@ namespace clipman
             keyboardMonitor = new Settings.KeyboardMonitor();
             keyboardMonitor.KeyPressed += OnHotkeyPressed;
 
-            focusHotkeyId = keyboardMonitor.AddHotkey(
-                (int)settings.FocusWindowHotkey.Modifiers,
-                KeyInterop.VirtualKeyFromKey(settings.FocusWindowHotkey.Key)
-            );
-
             InitializeKeybindings();
 
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
@@ -119,8 +118,16 @@ namespace clipman
 #endif
         }
 
+        /// <summary>
+        /// Initialize special keybindings like global shortcuts.
+        /// </summary>
         void InitializeKeybindings()
         {
+            // Global bring window to front shortcut.
+            focusHotkeyId = keyboardMonitor.AddHotkey(
+                (int)settings.FocusWindowHotkey.Modifiers,
+                KeyInterop.VirtualKeyFromKey(settings.FocusWindowHotkey.Key)
+            );
         }
 
         #region Callbacks

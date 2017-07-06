@@ -11,6 +11,22 @@ namespace clipman.Settings
     {
         public int ClipLimit;
 
-        public KeyGesture FocusWindowHotkey = new KeyGesture(Key.OemTilde, ModifierKeys.Control);
+        private KeyGesture focusWindowHotkey = new KeyGesture(Key.OemTilde, ModifierKeys.Control);
+        public KeyGesture FocusWindowHotkey
+        {
+            get { return focusWindowHotkey; }
+        }
+
+        private KeyGesture focusSearchBox = new KeyGesture(Key.F, ModifierKeys.Control);
+        public KeyGesture FocusSearchBox
+        {
+            get { return focusSearchBox; }
+        }
+
+        private KeyGesture clearAndFocusSearchBox = new KeyGesture(Key.Escape);
+        public KeyGesture ClearAndFocusSearchBox
+        {
+            get { return clearAndFocusSearchBox; }
+        }
     }
 }
