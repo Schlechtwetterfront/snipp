@@ -72,9 +72,9 @@
         </Button>
         <views:ClipList x:Name="clipList" Grid.Row="1"
                         d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}" Grid.ColumnSpan="2"/>
-        <views:SettingsPanel x:Name="settingsPanel" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Grid.RowSpan="2" RenderTransformOrigin="1,0" Margin="100,10,5,20">
+        <views:SettingsPanel x:Name="settingsPanel" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.25" Margin="0" Opacity="0">
             <views:SettingsPanel.RenderTransform>
-                <ScaleTransform ScaleX="0" ScaleY="0"/>
+                <ScaleTransform ScaleX="0.6" ScaleY="0.6"/>
             </views:SettingsPanel.RenderTransform>
         </views:SettingsPanel>
     </Grid>

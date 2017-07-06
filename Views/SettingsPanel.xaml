@@ -11,10 +11,10 @@
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
     </UserControl.Resources>
-    <Border Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
-        <Border.Effect>
+    <Border Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
+        <!--<Border.Effect>
             <DropShadowEffect Direction="290" ShadowDepth="2" Opacity="0.35" BlurRadius="6"/>
-        </Border.Effect>
+        </Border.Effect>-->
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

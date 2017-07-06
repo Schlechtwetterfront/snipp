@@ -1,14 +1,48 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:clipman.Resources">
-    <Storyboard x:Key="SettingsBubble">
+    <Storyboard x:Key="SettingsBubbleUp">
         <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                             Storyboard.TargetName="settingsPanel"
-                             Duration="{StaticResource ShortAnimationDuration}"
-                             />
+                         Storyboard.TargetName="settingsPanel"
+                         Duration="{StaticResource AnimationDuration}"
+                         To="1"
+                         />
         <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                             Storyboard.TargetName="settingsPanel"
-                             Duration="{StaticResource ShortAnimationDuration}"
-                             />
+                         Storyboard.TargetName="settingsPanel"
+                         Duration="{StaticResource AnimationDuration}"
+                         To="1"
+                         />
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         Storyboard.TargetName="settingsPanel"
+                         Duration="{StaticResource AnimationDuration}"
+                         To="1"
+                         />
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="settingsPanel"
+                                       Storyboard.TargetProperty="Visibility">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0"
+                                    Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="SettingsBubbleDown">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                         Storyboard.TargetName="settingsPanel"
+                         Duration="{StaticResource AnimationDuration}"
+                         To="0.6"
+                         />
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                         Storyboard.TargetName="settingsPanel"
+                         Duration="{StaticResource AnimationDuration}"
+                         To="0.6"
+                         />
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         Storyboard.TargetName="settingsPanel"
+                         Duration="{StaticResource AnimationDuration}"
+                         To="0"
+                         />
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="settingsPanel"
+                                       Storyboard.TargetProperty="Visibility">
+            <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationTime}"
+                                    Value="{x:Static Visibility.Collapsed}"/>
+        </ObjectAnimationUsingKeyFrames>
     </Storyboard>
 </ResourceDictionary>

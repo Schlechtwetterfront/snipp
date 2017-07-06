@@ -55,6 +55,7 @@ namespace clipman
             {
                 return clearCommand ?? (clearCommand = new Commands.Command(param =>
                 {
+                    ToggleSettingsPanel(false);
                     searchBox.Clear();
                     searchBox.Focus();
                 }));
@@ -71,6 +72,7 @@ namespace clipman
             {
                 return focusSearchCommand ?? (focusSearchCommand = new Commands.Command(param =>
                 {
+                    ToggleSettingsPanel(false);
                     searchBox.Focus();
                     searchBox.SelectAll();
                 }));
@@ -196,17 +198,24 @@ namespace clipman
 
         private void OnSettingsToggle(object sender, RoutedEventArgs e)
         {
-            var bubbleStoryboard = (FindResource("SettingsBubble") as Storyboard).Clone();
-            foreach (DoubleAnimation anim in bubbleStoryboard.Children)
+            ToggleSettingsPanel(!settingsPanelOpen);
+        }
+
+        public void ToggleSettingsPanel(bool open)
+        {
+            if (open == settingsPanelOpen)
             {
-                if (settingsPanelOpen)
-                {
-                    anim.To = 0;
-                }
-                else
-                {
-                    anim.To = 1;
-                }
+                return;
+            }
+
+            Storyboard bubbleStoryboard;
+            if (settingsPanelOpen)
+            {
+                bubbleStoryboard = FindResource("SettingsBubbleDown") as Storyboard;
+            }
+            else
+            {
+                bubbleStoryboard = FindResource("SettingsBubbleUp") as Storyboard;
             }
             settingsPanel.BeginStoryboard(bubbleStoryboard);
 
@@ -221,7 +230,7 @@ namespace clipman
             }
             buttonAnim.Begin(settingsPanelToggleButton, settingsPanelToggleButton.Template);
 
-            settingsPanelOpen = !settingsPanelOpen;
+            settingsPanelOpen = open;
         }
 
         /// <summary>
