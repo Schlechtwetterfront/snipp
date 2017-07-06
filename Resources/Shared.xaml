@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:clipman.Resources">
+    <KeyTime x:Key="AnimationTime">0:0:0.1</KeyTime>
+    <Duration x:Key="AnimationDuration">0:0:0.1</Duration>
+    <SolidColorBrush x:Key="TitleText" Color="Black"/>
+    <SolidColorBrush x:Key="Text" Color="#FF666666"/>
+</ResourceDictionary>

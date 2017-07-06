@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:clipman.Resources">
+    <Duration x:Key="SettingsPanelAnimDuration">0:0:0.1666</Duration>
+    <Storyboard x:Key="SettingsBubble">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                             Storyboard.TargetName="settingsPanel"
+                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             />
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                             Storyboard.TargetName="settingsPanel"
+                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             />
+    </Storyboard>
+</ResourceDictionary>

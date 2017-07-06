@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:clipman"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\Shared.xaml"/>
+                <ResourceDictionary Source="Resources\BurgerButton.xaml"/>
+                <ResourceDictionary Source="Resources\ClipList.xaml"/>
+                <ResourceDictionary Source="Resources\SearchBox.xaml"/>
+                <ResourceDictionary Source="Resources\SettingsPanel.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
