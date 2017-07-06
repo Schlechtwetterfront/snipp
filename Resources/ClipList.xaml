@@ -4,6 +4,7 @@
                     >
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#FF000000"/>
     <Color x:Key="Item.MouseOver.BackgroundColor" R="0" G="0" B="0" A="10"/>
+    <Color x:Key="Test" R="255" G="123" B="0" A="100"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#0C000000"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FF26A0DA"/>
@@ -21,14 +22,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <Border x:Name="Fg" Background="Transparent" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
-                                <Condition Property="IsSelected" Value="False"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -36,7 +38,7 @@
                                         <ColorAnimation Duration="{StaticResource AnimationDuration}"
                                                             To="{StaticResource Item.MouseOver.BackgroundColor}"
                                                             Storyboard.TargetProperty="Background.Color"
-                                                            Storyboard.TargetName="Bd"/>
+                                                            Storyboard.TargetName="Fg"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
@@ -46,11 +48,10 @@
                                         <ColorAnimation Duration="{StaticResource AnimationDuration}"
                                                             To="Transparent"
                                                             Storyboard.TargetProperty="Background.Color"
-                                                            Storyboard.TargetName="Bd"/>
+                                                            Storyboard.TargetName="Fg"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.ExitActions>
-                            <!--<Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>-->
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>
                         </MultiTrigger>
                         <MultiTrigger>
