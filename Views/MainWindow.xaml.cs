@@ -19,9 +19,11 @@ namespace clipman
         const int settingsPanelOffset = 200;
 
         ViewModels.ClipListViewModel clipViewModel;
-        ViewModels.StatusBarViewModel statusBarViewModel;
         ViewModels.SettingsPanelViewModel settingsPanelViewModel;
         Clipboard.ClipboardManager clipboardManager;
+        Settings.KeyboardMonitor keyboardMonitor;
+
+        Settings.Settings settings = new Settings.Settings();
 
         /// <summary>
         /// Copy nth clip by pressing Ctrl+N.
@@ -79,6 +81,8 @@ namespace clipman
 
         bool settingsPanelOpen = false;
 
+        int focusHotkeyId;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -90,9 +94,6 @@ namespace clipman
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
 
-            //statusBarViewModel = new ViewModels.StatusBarViewModel();
-            //statusBar.DataContext = statusBarViewModel;
-
             settingsPanelViewModel = new ViewModels.SettingsPanelViewModel();
             settingsPanel.DataContext = settingsPanelViewModel;
 
@@ -100,6 +101,14 @@ namespace clipman
 
             clipboardManager = new Clipboard.ClipboardManager();
             clipboardManager.ClipCaptured += OnClipCaptured;
+
+            keyboardMonitor = new Settings.KeyboardMonitor();
+            keyboardMonitor.KeyPressed += OnHotkeyPressed;
+
+            focusHotkeyId = keyboardMonitor.AddHotkey(
+                (int)settings.FocusWindowHotkey.Modifiers,
+                KeyInterop.VirtualKeyFromKey(settings.FocusWindowHotkey.Key)
+            );
 
             InitializeKeybindings();
 
@@ -205,6 +214,11 @@ namespace clipman
             buttonAnim.Begin(settingsPanelToggleButton, settingsPanelToggleButton.Template);
 
             settingsPanelOpen = !settingsPanelOpen;
+        }
+
+        private void OnHotkeyPressed(object sender, Settings.KeyboardMonitor.HotkeyEventArgs e)
+        {
+            Utility.Logging.Log("ID: " + e.HotkeyId);
         }
     }
 }
