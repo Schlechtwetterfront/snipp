@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:clipman.Resources">
     <KeyTime x:Key="AnimationTime">0:0:0.1</KeyTime>
     <Duration x:Key="AnimationDuration">0:0:0.1</Duration>
+    <Duration x:Key="ShortAnimationDuration">0:0:0.1666</Duration>
     <SolidColorBrush x:Key="TitleText" Color="Black"/>
     <SolidColorBrush x:Key="Text" Color="#FF666666"/>
 </ResourceDictionary>

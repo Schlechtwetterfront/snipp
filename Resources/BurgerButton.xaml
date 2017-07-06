@@ -69,7 +69,7 @@
                             <ColorAnimation 
                                                 Storyboard.TargetProperty="(Background).Color"
                                                 To="{StaticResource TriButton.Hover.BackgroundColor}"
-                                                Duration="{DynamicResource AnimationDuration}"
+                                                Duration="{StaticResource AnimationDuration}"
                                                 />
                         </Storyboard>
                     </BeginStoryboard>
@@ -80,7 +80,7 @@
                             <ColorAnimation 
                                                 Storyboard.TargetProperty="(Background).Color"
                                                 To="{StaticResource TriButton.BackgroundColor}"
-                                                Duration="{DynamicResource AnimationDuration}"
+                                                Duration="{StaticResource AnimationDuration}"
                                                 />
                         </Storyboard>
                     </BeginStoryboard>
@@ -91,64 +91,64 @@
     <Storyboard x:Key="BurgerToX">
         <DoubleAnimation Storyboard.TargetName="CenterBar"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="45"
                              />
         <DoubleAnimation Storyboard.TargetName="CenterBar"
                              Storyboard.TargetProperty="Width"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="30"
                              />
         <DoubleAnimation Storyboard.TargetName="CrossHelper"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="-45"
                              />
         <DoubleAnimation Storyboard.TargetName="CrossHelper"
                              Storyboard.TargetProperty="Width"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="30"
                              />
         <DoubleAnimation Storyboard.TargetName="UpperBar"
                              Storyboard.TargetProperty="Opacity"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="0"
                              />
         <DoubleAnimation Storyboard.TargetName="LowerBar"
                              Storyboard.TargetProperty="Opacity"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="0"
                              />
     </Storyboard>
     <Storyboard x:Key="XToBurger">
         <DoubleAnimation Storyboard.TargetName="CenterBar"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="0"
                              />
         <DoubleAnimation Storyboard.TargetName="CenterBar"
                              Storyboard.TargetProperty="Width"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="26"
                              />
         <DoubleAnimation Storyboard.TargetName="CrossHelper"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="0"
                              />
         <DoubleAnimation Storyboard.TargetName="CrossHelper"
                              Storyboard.TargetProperty="Width"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="26"
                              />
         <DoubleAnimation Storyboard.TargetName="UpperBar"
                              Storyboard.TargetProperty="Opacity"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="1"
                              />
         <DoubleAnimation Storyboard.TargetName="LowerBar"
                              Storyboard.TargetProperty="Opacity"
-                             Duration="{StaticResource SettingsPanelAnimDuration}"
+                             Duration="{StaticResource ShortAnimationDuration}"
                              To="1"
                              />
     </Storyboard>

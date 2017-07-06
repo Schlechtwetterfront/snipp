@@ -91,6 +91,7 @@ namespace clipman
         {
             InitializeComponent();
 
+            // Try to sharpen text.
             TextOptions.SetTextFormattingMode(this, TextFormattingMode.Display);
 
             DataContext = this;
@@ -195,7 +196,7 @@ namespace clipman
 
         private void OnSettingsToggle(object sender, RoutedEventArgs e)
         {
-            var bubbleStoryboard = FindResource("SettingsBubble") as Storyboard;
+            var bubbleStoryboard = (FindResource("SettingsBubble") as Storyboard).Clone();
             foreach (DoubleAnimation anim in bubbleStoryboard.Children)
             {
                 if (settingsPanelOpen)
