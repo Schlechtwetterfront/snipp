@@ -14,7 +14,8 @@
                                Fill="{TemplateBinding Background}"
                                x:Name="UpperBar"
                                DockPanel.Dock="Top" Panel.ZIndex="1"
-                               HorizontalAlignment="Center" 
+                               HorizontalAlignment="Center"
+                               SnapsToDevicePixels="True"
                                >
                     <Rectangle.RenderTransform>
                         <RotateTransform />
@@ -27,6 +28,7 @@
                                x:Name="CenterBar"
                                DockPanel.Dock="Top" Panel.ZIndex="1"
                                HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"
+                               SnapsToDevicePixels="True"
                                >
                     <Rectangle.RenderTransform>
                         <RotateTransform />
@@ -39,6 +41,7 @@
                                x:Name="CrossHelper"
                                DockPanel.Dock="Top" Panel.ZIndex="1"
                                HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"
+                               SnapsToDevicePixels="True"
                                >
                     <Rectangle.RenderTransform>
                         <RotateTransform />
@@ -51,6 +54,7 @@
                                x:Name="LowerBar"
                                DockPanel.Dock="Bottom" Panel.ZIndex="1"
                                HorizontalAlignment="Center"
+                               SnapsToDevicePixels="True"
                                >
                     <Rectangle.RenderTransform>
                         <RotateTransform />
