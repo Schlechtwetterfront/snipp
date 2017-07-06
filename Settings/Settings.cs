@@ -28,5 +28,11 @@ namespace clipman.Settings
         {
             get { return clearAndFocusSearchBox; }
         }
+
+        private KeyGesture copySelectedClip = new KeyGesture(Key.C, ModifierKeys.Control);
+        public KeyGesture CopySelectedClip
+        {
+            get { return copySelectedClip; }
+        }
     }
 }

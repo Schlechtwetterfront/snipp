@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:clipman.Views"
              xmlns:viewmodels="clr-namespace:clipman.ViewModels"
+             xmlns:clipman="clr-namespace:clipman"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
@@ -64,7 +65,8 @@
                             Command="{Binding CopyClipCommand}"
                             CommandParameter="{Binding SelectedItem, ElementName=clipList}"
                             />
-                <KeyBinding Gesture="Ctrl+C"
+                <KeyBinding Key="{Binding Settings.CopySelectedClip.Key, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
+                            Modifiers="{Binding Settings.CopySelectedClip.Modifiers, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
                             Command="{Binding CopyClipCommand}"
                             CommandParameter="{Binding SelectedItem, ElementName=clipList}"
                             />
