@@ -28,5 +28,11 @@ namespace clipman.Views
             var echoAnim = FindResource("Echo") as Storyboard;
             echoAnim.Begin(control, control.Template);
         }
+
+        private void OnClearButtonClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var viewModel = (ViewModels.ClipListViewModel)DataContext;
+            viewModel.Clips.Clear();
+        }
     }
 }

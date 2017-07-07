@@ -21,35 +21,65 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <DockPanel x:Name="listHeader" Margin="0,0,0,6">
-            <TextBlock Margin="0,0,12,0"
-                       DockPanel.Dock="Right"
-                       TextAlignment="Right"
-                       HorizontalAlignment="Right"
-                       Text="{Binding ClipView.Count}"
-                       Foreground="{DynamicResource Text}"
-                       FontSize="16"
-                       FontFamily="Segoe UI Light"
-                       />
-            <TextBlock Margin="0,0,4,0"
-                       DockPanel.Dock="Right"
-                       TextAlignment="Right"
-                       HorizontalAlignment="Right"
-                       Text="#"
-                       Foreground="{DynamicResource Text}"
-                       FontSize="16"
-                       FontFamily="Segoe UI Light"
-                       />
-            <DockPanel.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ClipView.Count}"
+        <DockPanel x:Name="listHeader" Margin="0,0,0,6" LastChildFill="False">
+            <StackPanel x:Name="clipControls" Orientation="Horizontal" DockPanel.Dock="Right" Margin="0,0,10,0" VerticalAlignment="Center">
+                <TextBlock Margin="0,0,4,0"
+                           DockPanel.Dock="Right"
+                           TextAlignment="Right"
+                           HorizontalAlignment="Right"
+                           Text="#"
+                           Foreground="{DynamicResource Text}"
+                           FontSize="16"
+                           FontFamily="Segoe UI Light" VerticalAlignment="Center"
+                           />
+                <TextBlock DockPanel.Dock="Right"
+                           TextAlignment="Right"
+                           HorizontalAlignment="Right"
+                           Text="{Binding ClipView.Count}"
+                           Foreground="{DynamicResource Text}"
+                           FontSize="16"
+                           FontFamily="Segoe UI Light"
+                           Margin="0,0,4,0" VerticalAlignment="Center"
+                           />
+                <Button Style="{StaticResource TrashButton}" DockPanel.Dock="Right" Padding="4" Click="OnClearButtonClick"/>
+                <StackPanel.RenderTransform>
+                    <TranslateTransform />
+                </StackPanel.RenderTransform>
+                <StackPanel.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ClipView.Count}"
                                      Value="0">
-                            <Setter Property="Control.Visibility" Value="Hidden" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DockPanel.Style>
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="{StaticResource AnimationDuration}"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"/>
+                                            <DoubleAnimation Duration="{StaticResource AnimationDuration}"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                         To="30"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="{StaticResource AnimationDuration}"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"/>
+                                            <DoubleAnimation Duration="{StaticResource AnimationDuration}"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                                         To="0"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                                <!--<Setter Property="Control.Visibility" Value="Hidden" />-->
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+            </StackPanel>
         </DockPanel>
 
         <ListBox x:Name="clipList"
