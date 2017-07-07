@@ -243,8 +243,18 @@ namespace clipman
             if (e.HotkeyId == focusHotkeyId)
             {
                 // Bring window to front.
-                Activate();
+                FocusWindow();
             }
+        }
+
+        /// <summary>
+        /// Brings window to front and focuses search box.
+        /// </summary>
+        public void FocusWindow()
+        {
+            Activate();
+            searchBox.Focus();
+            searchBox.SelectAll();
         }
     }
 }
