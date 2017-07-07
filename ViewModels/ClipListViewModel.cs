@@ -62,11 +62,13 @@ namespace clipman.ViewModels
             Clips = new ObservableCollection<ClipViewModel>();
             ClipView = CollectionViewSource.GetDefaultView(Clips);
             ClipView.Filter = Filter;
+            ClipView.SortDescriptions.Add(new SortDescription("Clip", ListSortDirection.Descending));
         }
 
         public void AddClip(Clipboard.Clip clip)
         {
             Clips.Add(new ClipViewModel(clip));
+            ClipView.Refresh();
         }
 
         public bool Filter(object item)

@@ -3,7 +3,7 @@ using static clipman.Clipboard.ClipboardManager;
 
 namespace clipman.ViewModels
 {
-    public class ClipViewModel
+    public class ClipViewModel : IComparable
     {
         protected Clipboard.Clip clip;
         public Clipboard.Clip Clip
@@ -36,6 +36,15 @@ namespace clipman.ViewModels
         public ClipViewModel(Clipboard.Clip clip)
         {
             this.clip = clip;
+        }
+
+        public int CompareTo(object other)
+        {
+            ClipViewModel otherVM = other as ClipViewModel;
+            if (otherVM == null)
+                return 1;
+
+            return Clip.CompareTo(otherVM.Clip);
         }
     }
 }

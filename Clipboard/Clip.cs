@@ -8,7 +8,7 @@ namespace clipman.Clipboard
 {
 
 
-    public class Clip : INotifyPropertyChanged
+    public class Clip : INotifyPropertyChanged, IComparable
     {
         static int TitleCharCount = 60;
 
@@ -231,6 +231,17 @@ namespace clipman.Clipboard
             {
                 TitleSuffix = String.Format("{0}...", suffix);
             }
+        }
+
+        public int CompareTo(object other)
+        {
+            Clip otherClip = other as Clip;
+            if (otherClip == null)
+            {
+                return 1;
+            }
+
+            return Created.CompareTo(otherClip.Created);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
