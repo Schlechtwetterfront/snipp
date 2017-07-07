@@ -178,30 +178,32 @@ namespace clipman.Clipboard
             int suffixStart = index + searchLength;
 
             int spaceLeft = limit - searchLength;
-            int spaceForParts = spaceLeft / 2;
+            int spaceForPrefix = (int)Math.Ceiling(spaceLeft * 0.5);
+            int spaceForSuffix = (int)Math.Floor(spaceLeft * 0.5);
 
             int suffixLength = contentLength - suffixStart;
             int prefixLength = index;
             // Suffix is smaller than half of the leftover space, so give more
             // space to prefix.
-            if (suffixLength < spaceForParts)
+            if (suffixLength < spaceForSuffix)
             {
-                prefixLength = spaceLeft - suffixLength;
+                prefixLength = Math.Min(prefixLength, index + spaceForSuffix - suffixLength);
                 start = Math.Max(index - prefixLength, 0);
                 end = contentLength;
             }
             // Prefix is smaller than half of the leftover space.
-            else if (prefixLength < spaceForParts)
+            else if (prefixLength < spaceForPrefix)
             {
                 start = 0;
-                suffixLength = spaceLeft - prefixLength;
+                suffixLength = Math.Min(suffixLength, spaceForSuffix + spaceForPrefix - prefixLength);
                 end = Math.Min(suffixStart + suffixLength, limit);
             }
             else
             {
-                prefixLength = suffixLength = spaceForParts;
-                start = index - spaceForParts;
-                end = suffixStart + spaceForParts;
+                prefixLength = spaceForPrefix;
+                suffixLength = spaceForSuffix;
+                start = index - spaceForPrefix;
+                end = suffixStart + spaceForSuffix;
             }
 
             prefix = processedContent.Substring(start, prefixLength);
