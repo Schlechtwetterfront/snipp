@@ -10,6 +10,20 @@
         <Setter Property="Background" Value="{StaticResource Button.Background}"/>
     </Style>
 
+    <Storyboard x:Key="Button.Hover.InAnimation">
+        <ColorAnimation Storyboard.TargetProperty="(Background).Color"
+                        To="{StaticResource Button.Hover.BackgroundColor}"
+                        Duration="{StaticResource AnimationDuration}"
+                        />
+    </Storyboard>
+
+    <Storyboard x:Key="Button.Hover.OutAnimation">
+        <ColorAnimation Storyboard.TargetProperty="(Background).Color"
+                        To="{StaticResource Button.BackgroundColor}"
+                        Duration="{StaticResource AnimationDuration}"
+                        />
+    </Storyboard>
+
     <Style x:Key="TrashButton" TargetType="Button" BasedOn="{StaticResource GenericButton}">
         <Setter Property="Template">
             <Setter.Value>
@@ -26,24 +40,82 @@
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource Button.Hover.InAnimation}" />
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource Button.Hover.OutAnimation}" />
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ClearItemsButton" TargetType="Button" BasedOn="{StaticResource GenericButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="Transparent">
+                        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="{TemplateBinding Padding}">
+                            <Canvas Height="24" Width="24">
+                                <Rectangle Width="22" Fill="LightGray" Height="2"
+                                           Canvas.Top="6"
+                                           Canvas.Left="1"/>
+                                <Rectangle Width="22" Fill="LightGray" Height="2"
+                                           Canvas.Top="11"
+                                           Canvas.Left="1"/>
+                                <Rectangle Width="22" Fill="LightGray" Height="2"
+                                           Canvas.Top="16"
+                                           Canvas.Left="1"/>
+                                <!--<Rectangle Width="20" Fill="LightGray" Height="2" Canvas.Top="16"/>-->
+
+                                <Rectangle Width="24"
+                                           Height="2"
+                                           Fill="{TemplateBinding Background}"
+                                           RenderTransformOrigin="0.5,0.5" Canvas.Top="11" Canvas.Left="0">
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="45"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                                <Rectangle Width="24"
+                                           Height="2"
+                                           Fill="{TemplateBinding Background}"
+                                           RenderTransformOrigin="0.5,0.5" Canvas.Top="11" Canvas.Left="0">
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-45"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Canvas>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation Storyboard.TargetProperty="(Background).Color"
-                                            To="{StaticResource Button.Hover.BackgroundColor}"
-                                            Duration="{StaticResource AnimationDuration}"
-                                            />
+                                                        To="DarkRed"
+                                                        Duration="{StaticResource AnimationDuration}"
+                                                        />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="(Background).Color"
-                                            To="{StaticResource Button.BackgroundColor}"
-                                            Duration="{StaticResource AnimationDuration}"
-                                            />
-                                    </Storyboard>
-                                </BeginStoryboard>
+                                <BeginStoryboard Storyboard="{StaticResource Button.Hover.OutAnimation}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

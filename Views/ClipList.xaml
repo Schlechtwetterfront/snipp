@@ -42,7 +42,7 @@
                            FontFamily="Segoe UI Light"
                            Margin="0,0,4,0" VerticalAlignment="Center"
                            />
-                <Button Style="{StaticResource TrashButton}" DockPanel.Dock="Right" Padding="4" Click="OnClearButtonClick" ToolTip="Clear all clips"/>
+                <Button Style="{StaticResource ClearItemsButton}" DockPanel.Dock="Right" Padding="0" Click="OnClearButtonClick" ToolTip="Clear all clips" VerticalAlignment="Bottom" BorderThickness="0"/>
                 <StackPanel.RenderTransform>
                     <TranslateTransform />
                 </StackPanel.RenderTransform>
