@@ -61,6 +61,10 @@ namespace clipman.Clipboard
         void OnClipboardDelayFinished(object sender, EventArgs e)
         {
             var clip = CaptureClipboard();
+            if (clip == null)
+            {
+                return;
+            }
             clip.Copied += OnCopyClip;
 
             var args = new ClipEventArgs();

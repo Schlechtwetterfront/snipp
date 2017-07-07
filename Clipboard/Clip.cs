@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace clipman.Clipboard
 {
@@ -94,13 +96,29 @@ namespace clipman.Clipboard
         {
             try
             {
-                return new Clip(System.Windows.Clipboard.GetText());
+                var data = System.Windows.Clipboard.GetDataObject();
+                var formats = data.GetFormats();
+                var textFormats = new string[]
+                {
+                    DataFormats.Html,
+                    DataFormats.OemText,
+                    DataFormats.Rtf,
+                    DataFormats.StringFormat,
+                    DataFormats.Text,
+                    DataFormats.UnicodeText,
+                    DataFormats.Xaml,
+                    DataFormats.CommaSeparatedValue,
+                };
+                // Only make clip if it contains text data.
+                if (textFormats.Any(s => formats.Contains(s))) {
+                    return new Clip(System.Windows.Clipboard.GetText());
+                }
             }
             catch (System.Runtime.InteropServices.ExternalException e)
             {
                 Utility.Logging.Log("Failed to read clipboard: " + e.Message);
-                return null;
             }
+            return null;
         }
 
         public bool Copy()
