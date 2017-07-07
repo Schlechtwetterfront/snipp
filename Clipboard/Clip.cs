@@ -10,7 +10,7 @@ namespace clipman.Clipboard
 
     public class Clip : INotifyPropertyChanged, IComparable
     {
-        static int TitleCharCount = 60;
+        static int TitleCharCount = 45;
 
         String processedContent;
         String content;
@@ -28,7 +28,7 @@ namespace clipman.Clipboard
                 defaultTitle = processedContent.Substring(
                     0,
                     Math.Min(Clip.TitleCharCount, processedContent.Length)
-                );
+                ) + "...";
                 Title = defaultTitle;
             }
         }
@@ -187,7 +187,7 @@ namespace clipman.Clipboard
             // space to prefix.
             if (suffixLength < spaceForSuffix)
             {
-                prefixLength = Math.Min(prefixLength, index + spaceForSuffix - suffixLength);
+                prefixLength = Math.Min(prefixLength, spaceForPrefix + spaceForSuffix - suffixLength);
                 start = Math.Max(index - prefixLength, 0);
                 end = contentLength;
             }
