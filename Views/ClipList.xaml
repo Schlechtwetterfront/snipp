@@ -14,6 +14,7 @@
         <Style BasedOn="{StaticResource FlatListBoxItemStyle}" TargetType="ListBoxItem" x:Key="ClipListItem">
             <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
             <Setter Property="ToolTip" Value="{Binding Clip.Content, Mode=OneWay}"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -31,7 +32,7 @@
                            Text="#"
                            Foreground="{DynamicResource Text}"
                            FontSize="16"
-                           FontFamily="Segoe UI Light" VerticalAlignment="Center"
+                           FontFamily="Segoe UI Light"
                            />
                 <TextBlock DockPanel.Dock="Right"
                            TextAlignment="Right"
@@ -40,7 +41,7 @@
                            Foreground="{DynamicResource Text}"
                            FontSize="16"
                            FontFamily="Segoe UI Light"
-                           Margin="0,0,4,0" VerticalAlignment="Center"
+                           Margin="0,0,10,0"
                            />
                 <Button Style="{StaticResource ClearItemsButton}" DockPanel.Dock="Right" Padding="0" Click="OnClearButtonClick" ToolTip="Clear all clips" VerticalAlignment="Bottom" BorderThickness="0"/>
                 <StackPanel.RenderTransform>
@@ -110,7 +111,7 @@
                 <DataTemplate>
                     <DockPanel>
                         <TextBlock Grid.ColumnSpan="4"
-                               FontSize="16"
+                               FontSize="14"
                                Foreground="{StaticResource TitleText}" Margin="0,0,0,6" DockPanel.Dock="Top">
                             <Run Text="{Binding Clip.TitlePrefix}" /><Run Text="{Binding Clip.TitleMain}" Foreground="Blue"/><Run Text="{Binding Clip.TitleSuffix}" />
                         </TextBlock>
