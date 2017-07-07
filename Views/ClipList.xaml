@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <Style BasedOn="{StaticResource FlatListBoxItemStyle}" TargetType="ListBoxItem" x:Key="ClipListItem">
             <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
+            <Setter Property="ToolTip" Value="{Binding Clip.Content, Mode=OneWay}"/>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -21,7 +22,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <DockPanel x:Name="listHeader" Margin="0,0,0,6" LastChildFill="False">
+        <DockPanel x:Name="listHeader" LastChildFill="False">
             <StackPanel x:Name="clipControls" Orientation="Horizontal" DockPanel.Dock="Right" Margin="0,0,10,0" VerticalAlignment="Center">
                 <TextBlock Margin="0,0,4,0"
                            DockPanel.Dock="Right"
@@ -41,7 +42,7 @@
                            FontFamily="Segoe UI Light"
                            Margin="0,0,4,0" VerticalAlignment="Center"
                            />
-                <Button Style="{StaticResource TrashButton}" DockPanel.Dock="Right" Padding="4" Click="OnClearButtonClick"/>
+                <Button Style="{StaticResource TrashButton}" DockPanel.Dock="Right" Padding="4" Click="OnClearButtonClick" ToolTip="Clear all clips"/>
                 <StackPanel.RenderTransform>
                     <TranslateTransform />
                 </StackPanel.RenderTransform>
