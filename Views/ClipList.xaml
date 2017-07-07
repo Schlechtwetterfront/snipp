@@ -20,7 +20,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        
+
         <DockPanel x:Name="listHeader" Margin="0,0,0,6">
             <TextBlock Margin="0,0,12,0"
                        DockPanel.Dock="Right"
@@ -51,7 +51,7 @@
                 </Style>
             </DockPanel.Style>
         </DockPanel>
-        
+
         <ListBox x:Name="clipList"
                  Grid.Row="1"
                  BorderThickness="0"
@@ -81,9 +81,7 @@
                         <TextBlock Grid.ColumnSpan="4"
                                FontSize="16"
                                Foreground="{StaticResource TitleText}" Margin="0,0,0,6" DockPanel.Dock="Top">
-                            <Run Text="{Binding Clip.TitlePrefix}" />
-                            <Run Text="{Binding Clip.TitleMain}" FontFamily="Segoe UI Semibold" />
-                            <Run Text="{Binding Clip.TitleSuffix}" />
+                            <Run Text="{Binding Clip.TitlePrefix}" /><Run Text="{Binding Clip.TitleMain}" Foreground="Blue"/><Run Text="{Binding Clip.TitleSuffix}" />
                         </TextBlock>
                         <DockPanel Margin="2,0">
                             <TextBlock x:Name="created"
