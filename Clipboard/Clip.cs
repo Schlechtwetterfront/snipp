@@ -28,8 +28,16 @@ namespace clipman.Clipboard
                 defaultTitle = processedContent.Substring(
                     0,
                     Math.Min(Clip.TitleCharCount, processedContent.Length)
-                ) + "...";
+                );
+
+                if (defaultTitle.Length < processedContent.Length)
+                {
+                    defaultTitle += "...";
+                }
                 Title = defaultTitle;
+
+                RaisePropertyChanged("Content");
+                RaisePropertyChanged("Title");
             }
         }
 

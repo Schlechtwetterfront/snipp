@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace clipman.ViewModels
 {
-    public class ClipListViewModel
+    public class ClipListViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<ClipViewModel> Clips
         {
@@ -27,6 +27,7 @@ namespace clipman.ViewModels
             set
             {
                 filterString = value.Trim().ToLower();
+                RaisePropertyChanged("FilterString");
                 ClipView.Refresh();
             }
         }
@@ -79,6 +80,13 @@ namespace clipman.ViewModels
                 return clip.Matches(FilterString);
             }
             return true;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

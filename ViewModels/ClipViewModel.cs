@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Windows.Input;
 using static clipman.Clipboard.ClipboardManager;
 
 namespace clipman.ViewModels
 {
-    public class ClipViewModel : IComparable
+    public class ClipViewModel : IComparable, INotifyPropertyChanged
     {
         protected Clipboard.Clip clip;
         public Clipboard.Clip Clip
@@ -15,6 +17,7 @@ namespace clipman.ViewModels
             set
             {
                 clip = value;
+                RaisePropertyChanged("Clip");
             }
         }
 
@@ -45,6 +48,13 @@ namespace clipman.ViewModels
                 return 1;
 
             return Clip.CompareTo(otherVM.Clip);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
