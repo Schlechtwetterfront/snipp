@@ -21,6 +21,7 @@
         <ColorAnimation Storyboard.TargetProperty="(Background).Color"
                         To="{StaticResource Button.BackgroundColor}"
                         Duration="{StaticResource AnimationDuration}"
+                        FillBehavior="Stop"
                         />
     </Storyboard>
 
@@ -132,6 +133,78 @@
                                 <BeginStoryboard Storyboard="{StaticResource Button.Hover.OutAnimation}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PinButton" TargetType="Button" BasedOn="{StaticResource GenericButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="Transparent" SnapsToDevicePixels="True">
+                        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="{TemplateBinding Padding}"
+                                    SnapsToDevicePixels="True"
+                                    >
+                            <Canvas Width="20" Height="20">
+                                <Polygon Fill="{TemplateBinding Background}"
+                                     Points="0,0 6,0 5,1 5,4 6,6 4,6 3,12 2,6 0,6 1,4 1,1"
+                                     RenderTransformOrigin=".5,0"
+                                     Canvas.Top="3"
+                                     >
+                                    <Polygon.RenderTransform>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="-45" />
+                                            <ScaleTransform ScaleX="2" ScaleY="2" />
+                                        </TransformGroup>
+                                    </Polygon.RenderTransform>
+                                </Polygon>
+                            </Canvas>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Pinned}" Value="False"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource Button.Hover.InAnimation}" />
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource Button.Hover.OutAnimation}" />
+                            </MultiDataTrigger.ExitActions>
+                            <Setter Property="Background" Value="{StaticResource Button.Background}"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Pinned}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsMouseOver}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Background).Color"
+                                                To="{StaticResource DarkAccentColor}"
+                                                Duration="{StaticResource AnimationDuration}"
+                                                />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Background).Color"
+                                                To="{StaticResource AccentColor}"
+                                                        FillBehavior="Stop"
+                                                Duration="{StaticResource AnimationDuration}"
+                                                />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                            <Setter Property="Background" Value="{StaticResource Accent}"/>
+                        </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
