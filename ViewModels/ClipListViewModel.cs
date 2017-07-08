@@ -51,8 +51,26 @@ namespace clipman.ViewModels
             {
                 return copyClipCommand ?? (copyClipCommand = new Commands.Command(param =>
                 {
-                    Utility.Logging.Log("Enter copy command");
                     (param as ClipViewModel)?.Clip.Copy();
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Command pinning the clip it was used on (Ctrl+P on selection).
+        /// </summary>
+        private ICommand pinClipCommand;
+        public ICommand PinClipCommand
+        {
+            get
+            {
+                return pinClipCommand ?? (pinClipCommand = new Commands.Command(param =>
+                {
+                    if (param is ClipViewModel)
+                    {
+                        var cvm = (ClipViewModel)param;
+                        cvm.Pinned = !cvm.Pinned;
+                    }
                 }));
             }
         }
@@ -67,7 +85,6 @@ namespace clipman.ViewModels
             {
                 return deleteClipCommand ?? (deleteClipCommand = new Commands.Command(param =>
                 {
-                    Utility.Logging.Log("Delete clip command");
                     Clips.Remove(param as ClipViewModel);
                 }));
             }

@@ -34,5 +34,11 @@ namespace clipman.Settings
         {
             get { return copySelectedClip; }
         }
+
+        private KeyGesture pinSelectedClip = new KeyGesture(Key.P, ModifierKeys.Control);
+        public KeyGesture PinSelectedClip
+        {
+            get { return pinSelectedClip; }
+        }
     }
 }

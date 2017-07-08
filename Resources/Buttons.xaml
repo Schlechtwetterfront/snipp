@@ -25,6 +25,23 @@
                         />
     </Storyboard>
 
+    <ControlTemplate x:Key="PinIcon">
+        <Canvas  Width="12" Height="12">
+            <Polygon Fill="{TemplateBinding Background}"
+                     Points="0,0 6,0 5,1 5,4 6,6 4,6 3,12 2,6 0,6 1,4 1,1"
+                     RenderTransformOrigin=".5,0"
+                     Canvas.Top="3"
+                     >
+                <Polygon.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="-45" />
+                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                    </TransformGroup>
+                </Polygon.RenderTransform>
+            </Polygon>
+        </Canvas>
+    </ControlTemplate>
+
     <Style x:Key="LeftClickContextMenu" TargetType="Button">
         <Style.Triggers>
             <EventTrigger RoutedEvent="Click">

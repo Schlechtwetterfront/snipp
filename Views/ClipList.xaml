@@ -115,6 +115,11 @@
                             Command="{Binding DeleteClipCommand}"
                             CommandParameter="{Binding SelectedItem, ElementName=clipList}"
                             />
+                <KeyBinding Key="{Binding Settings.PinSelectedClip.Key, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
+                            Modifiers="{Binding Settings.PinSelectedClip.Modifiers, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
+                            Command="{Binding PinClipCommand}"
+                            CommandParameter="{Binding SelectedItem, ElementName=clipList}"
+                            />
             </ListBox.InputBindings>
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -144,6 +149,12 @@
                                     Margin="8,0,0,0"
                                     Command="{Binding OpenCtxtMenuCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ClipList}}}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}"/>
+
+                            <Control x:Name="pinStatus" Template="{StaticResource PinIcon}"
+                                     DockPanel.Dock="Right"
+                                     Background="#0F000000"
+                                     />
+
                             <TextBlock x:Name="shortcut" 
                                        Foreground="{StaticResource Text}"
                                        DockPanel.Dock="Right" HorizontalAlignment="Right"
@@ -151,6 +162,17 @@
                         </DockPanel>
                     </DockPanel>
                     <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Pinned}"
+                                     Value="True">
+                            <Setter TargetName="pinStatus"
+                                    Property="Background"
+                                    Value="{StaticResource Accent}"
+                                    />
+                            <Setter TargetName="pinStatus"
+                                    Property="ToolTip"
+                                    Value="Pinned"
+                                    />
+                        </DataTrigger>
                         <!--Set number shortcut text-->
                         <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
                                                RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
