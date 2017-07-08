@@ -113,7 +113,7 @@
                         <TextBlock Grid.ColumnSpan="4"
                                FontSize="14"
                                Foreground="{StaticResource TitleText}" Margin="0,0,0,6" DockPanel.Dock="Top">
-                            <Run Text="{Binding Clip.TitlePrefix}" /><Run Text="{Binding Clip.TitleMain}" Foreground="Blue"/><Run Text="{Binding Clip.TitleSuffix}" />
+                            <Run Text="{Binding Clip.TitlePrefix}" /><Run Text="{Binding Clip.TitleMain}" Foreground="{StaticResource Accent}"/><Run Text="{Binding Clip.TitleSuffix}" />
                         </TextBlock>
                         <DockPanel Margin="2,0">
                             <TextBlock x:Name="created"
