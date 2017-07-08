@@ -24,10 +24,5 @@ namespace clipman.Views
         {
             InitializeComponent();
         }
-
-        private void OnClearButtonClick(object sender, RoutedEventArgs e)
-        {
-            ((ViewModels.SettingsPanelViewModel)DataContext).ClearClips();
-        }
     }
 }

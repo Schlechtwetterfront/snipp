@@ -104,8 +104,6 @@ namespace clipman
             settingsPanelViewModel = new ViewModels.SettingsPanelViewModel();
             settingsPanel.DataContext = settingsPanelViewModel;
 
-            settingsPanelViewModel.ClearRequested += OnClearRequested;
-
             clipboardManager = new Clipboard.ClipboardManager();
             clipboardManager.ClipCaptured += OnClipCaptured;
 
