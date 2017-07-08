@@ -16,7 +16,7 @@
             <Setter Property="FontFamily" Value="Consolas"/>
             <Setter Property="ContextMenu">
                 <Setter.Value>
-                    <ContextMenu>
+                    <ContextMenu Style="{StaticResource FlatContextMenu}" ItemContainerStyle="{StaticResource FlatMenuItem}">
                         <MenuItem Header="_Pin" IsCheckable="True" IsChecked="{Binding Pinned}"/>
                         <MenuItem Header="_Copy" Command="{Binding CopyCommand}" InputGestureText="Enter"/>
                         <MenuItem Header="_Delete" Command="{Binding DeleteCommand}" InputGestureText="Delete"/>
