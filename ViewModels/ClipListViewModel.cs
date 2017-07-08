@@ -8,18 +8,27 @@ namespace clipman.ViewModels
 {
     public class ClipListViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Base collection of `ClipViewModels` (which contain the `Clip`s).
+        /// </summary>
         public ObservableCollection<ClipViewModel> Clips
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Filtered and sorted collection view of `ClipViewModels`.
+        /// </summary>
         public ListCollectionView ClipView
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// String used to filter clips.
+        /// </summary>
         String filterString;
         public String FilterString
         {
@@ -32,6 +41,9 @@ namespace clipman.ViewModels
             }
         }
 
+        /// <summary>
+        /// Command copying the clip it was used on (Ctrl+C/Enter on selection).
+        /// </summary>
         private ICommand copyClipCommand;
         public ICommand CopyClipCommand
         {
@@ -45,6 +57,9 @@ namespace clipman.ViewModels
             }
         }
 
+        /// <summary>
+        /// Command deleting the clip it was used on (Delete).
+        /// </summary>
         private ICommand deleteClipCommand;
         public ICommand DeleteClipCommand
         {
@@ -75,6 +90,11 @@ namespace clipman.ViewModels
             Clips.Add(new ClipViewModel(clip));
         }
 
+        /// <summary>
+        /// Method used to filter the clips by search box input.
+        /// </summary>
+        /// <param name="item">`ClipViewModel`</param>
+        /// <returns>True if `Clip` matches the search string or the search string is empty.</returns>
         public bool Filter(object item)
         {
             Clipboard.Clip clip = (item as ClipViewModel).Clip;

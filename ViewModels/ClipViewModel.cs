@@ -8,6 +8,9 @@ namespace clipman.ViewModels
     public class ClipViewModel : IComparable, INotifyPropertyChanged
     {
         protected Clipboard.Clip clip;
+        /// <summary>
+        /// The `Clip` this ViewModel is wrapped around.
+        /// </summary>
         public Clipboard.Clip Clip
         {
             get
@@ -21,6 +24,9 @@ namespace clipman.ViewModels
             }
         }
 
+        /// <summary>
+        /// String displaying the creation date of the wrapped `Clip`.
+        /// </summary>
         public String CreatedString
         {
             get
@@ -37,6 +43,9 @@ namespace clipman.ViewModels
         }
 
         private ICommand pinClipCommand;
+        /// <summary>
+        /// Executed when this `ClipViewModel` is pinned.
+        /// </summary>
         public ICommand PinClipCommand
         {
             get
@@ -49,6 +58,9 @@ namespace clipman.ViewModels
         }
 
         private bool pinned = false;
+        /// <summary>
+        /// If this `ClipViewModel`/`Clip` is pinned.
+        /// </summary>
         public bool Pinned
         {
             get { return pinned; }
