@@ -20,7 +20,7 @@ namespace clipman.Views
 
             var viewModel = (ViewModels.ClipViewModel)(sender as ListBoxItem).DataContext;
             viewModel.Clip.Copy();
-            Echo(sender as ListBoxItem);
+            //Echo(sender as ListBoxItem);
         }
 
         private void Echo(ListBoxItem control)
