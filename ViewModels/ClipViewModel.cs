@@ -36,6 +36,25 @@ namespace clipman.ViewModels
             }
         }
 
+        private ICommand pinClipCommand;
+        public ICommand PinClipCommand
+        {
+            get
+            {
+                return pinClipCommand ?? (pinClipCommand = new Commands.Command(param =>
+                {
+                    Pinned = !Pinned;
+                }));
+            }
+        }
+
+        private bool pinned = false;
+        public bool Pinned
+        {
+            get { return pinned; }
+            set { pinned = value; RaisePropertyChanged("Pinned"); }
+        }
+
         public ClipViewModel(Clipboard.Clip clip)
         {
             this.clip = clip;

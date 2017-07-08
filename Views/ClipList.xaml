@@ -117,17 +117,31 @@
                         </TextBlock>
                         <DockPanel Margin="2,0">
                             <TextBlock x:Name="created"
-                                   Text="{Binding CreatedString, Mode=OneWay}"
-                                   Foreground="{StaticResource Text}"
+                                       Text="{Binding CreatedString, Mode=OneWay}"
+                                       Foreground="{StaticResource Text}"
                                        HorizontalAlignment="Left"
                                        />
                             <TextBlock x:Name="shortcut" 
                                        Foreground="{StaticResource Text}"
-                                       HorizontalAlignment="Right"
+                                       DockPanel.Dock="Right" HorizontalAlignment="Right"
                                        />
+                            <Button x:Name="pin"
+                                    DockPanel.Dock="Right" HorizontalAlignment="Right" Content="PIN"
+                                    Command="{Binding PinClipCommand}"
+                                    />
                         </DockPanel>
                     </DockPanel>
                     <DataTemplate.Triggers>
+                        <!--Highlight Pin button-->
+                        <DataTrigger Binding="{Binding Pinned, Mode=OneWay}"
+                                     Value="True">
+                            <Setter TargetName="pin" Property="Foreground" Value="{StaticResource Accent}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Pinned, Mode=OneWay}"
+                                     Value="False">
+                            <Setter TargetName="pin" Property="Foreground" Value="{StaticResource Text}"/>
+                        </DataTrigger>
+                        <!--Set number shortcut text-->
                         <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
                                                RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
                                      Value="0">
