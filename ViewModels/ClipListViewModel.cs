@@ -14,7 +14,7 @@ namespace clipman.ViewModels
             set;
         }
 
-        public ICollectionView ClipView
+        public ListCollectionView ClipView
         {
             get;
             set;
@@ -61,15 +61,18 @@ namespace clipman.ViewModels
         public ClipListViewModel()
         {
             Clips = new ObservableCollection<ClipViewModel>();
-            ClipView = CollectionViewSource.GetDefaultView(Clips);
+            ClipView = CollectionViewSource.GetDefaultView(Clips) as ListCollectionView;
+            ClipView.IsLiveFiltering = true;
             ClipView.Filter = Filter;
+            ClipView.IsLiveSorting = true;
+            ClipView.LiveSortingProperties.Add("Pinned");
+            ClipView.SortDescriptions.Add(new SortDescription("Pinned", ListSortDirection.Descending));
             ClipView.SortDescriptions.Add(new SortDescription("Clip", ListSortDirection.Descending));
         }
 
         public void AddClip(Clipboard.Clip clip)
         {
             Clips.Add(new ClipViewModel(clip));
-            ClipView.Refresh();
         }
 
         public bool Filter(object item)
