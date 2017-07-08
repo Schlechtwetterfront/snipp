@@ -9,10 +9,17 @@
             <Border.Effect>
                 <DropShadowEffect x:Name="Shadow" Direction="290" ShadowDepth="2" BlurRadius="4" Opacity="0.35"/>
             </Border.Effect>
-            <DockPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <ScrollViewer x:Name="PART_ContentHost" Margin="12,8"/>
-                <Image DockPanel.Dock="Right" HorizontalAlignment="Right" Source="/clipman;component/Resources/search-icon.png" Stretch="Uniform" Width="26" Height="26" Margin="0,0,6,0"/>
-            </DockPanel>
+                <Image Source="/clipman;component/Resources/search-icon.png"
+                       Width="26" Height="26"
+                       Grid.Column="1"
+                       Margin="0,0,6,0"/>
+            </Grid>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsFocused" Value="True">
