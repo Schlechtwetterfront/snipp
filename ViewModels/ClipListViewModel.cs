@@ -104,7 +104,18 @@ namespace clipman.ViewModels
 
         public void AddClip(Clipboard.Clip clip)
         {
-            Clips.Add(new ClipViewModel(clip));
+            var viewModel = new ClipViewModel(clip);
+            viewModel.PropertyChanged += OnClipViewModelPropChanged;
+            Clips.Add(viewModel);
+        }
+
+        private void OnClipViewModelPropChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var cvm = sender as ClipViewModel;
+            if (e.PropertyName == "Clip" && cvm.Clip == null)
+            {
+                Clips.Remove(cvm);
+            }
         }
 
         /// <summary>
