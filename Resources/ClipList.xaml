@@ -2,13 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:clipman.Resources"
                     >
-    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#FF000000"/>
-    <Color x:Key="Item.MouseOver.BackgroundColor" R="0" G="0" B="0" A="10"/>
     <Color x:Key="EchoZenith" R="30" G="160" B="218" A="50"/>
+    
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#FF000000"/>
+    <Color x:Key="Item.MouseOver.BackgroundColor" R="0" G="0" B="0" A="6"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#0C000000"/>
+    
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#0A000000"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FF26A0DA"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#0C000000"/>
+    
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#0A000000"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
 
     <ContextMenu x:Key="ClipContextMenu">
