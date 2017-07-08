@@ -56,24 +56,35 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="Transparent">
-                        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="{TemplateBinding Padding}">
-                            <Canvas Height="24" Width="24">
-                                <Rectangle Width="22" Fill="LightGray" Height="2"
-                                           Canvas.Top="6"
-                                           Canvas.Left="1"/>
-                                <Rectangle Width="22" Fill="LightGray" Height="2"
-                                           Canvas.Top="11"
-                                           Canvas.Left="1"/>
-                                <Rectangle Width="22" Fill="LightGray" Height="2"
-                                           Canvas.Top="16"
-                                           Canvas.Left="1"/>
+                    <Border Background="Transparent" SnapsToDevicePixels="True">
+                        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="{TemplateBinding Padding}"
+                                    SnapsToDevicePixels="True">
+                            <Canvas Height="24" Width="24"
+                                    SnapsToDevicePixels="True">
+                                <Rectangle Width="20" Fill="LightGray" Height="4"
+                                           Canvas.Top="3"
+                                           Canvas.Left="2"
+                                           SnapsToDevicePixels="True"
+                                           />
+                                <Rectangle Width="6" Fill="LightGray" Height="4"
+                                           Canvas.Top="10"
+                                           Canvas.Left="2"
+                                           SnapsToDevicePixels="True"
+                                           />
+                                <Rectangle Width="6" Fill="LightGray" Height="4"
+                                           Canvas.Top="17"
+                                           Canvas.Left="2"
+                                           SnapsToDevicePixels="True"
+                                           />
                                 <!--<Rectangle Width="20" Fill="LightGray" Height="2" Canvas.Top="16"/>-->
 
-                                <Rectangle Width="24"
-                                           Height="2"
+                                <Rectangle Width="16"
+                                           Height="4"
                                            Fill="{TemplateBinding Background}"
-                                           RenderTransformOrigin="0.5,0.5" Canvas.Top="11" Canvas.Left="0">
+                                           RenderTransformOrigin="0.5,0.5"
+                                           Canvas.Bottom="7"
+                                           Canvas.Right="0"
+                                           SnapsToDevicePixels="True">
                                     <Rectangle.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform/>
@@ -83,10 +94,13 @@
                                         </TransformGroup>
                                     </Rectangle.RenderTransform>
                                 </Rectangle>
-                                <Rectangle Width="24"
-                                           Height="2"
+                                <Rectangle Width="16"
+                                           Height="4"
                                            Fill="{TemplateBinding Background}"
-                                           RenderTransformOrigin="0.5,0.5" Canvas.Top="11" Canvas.Left="0">
+                                           RenderTransformOrigin="0.5,0.5"
+                                           Canvas.Bottom="7"
+                                           Canvas.Right="0"
+                                           SnapsToDevicePixels="True">
                                     <Rectangle.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform/>
@@ -108,7 +122,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation Storyboard.TargetProperty="(Background).Color"
-                                                        To="DarkRed"
+                                                        To="Crimson"
                                                         Duration="{StaticResource AnimationDuration}"
                                                         />
                                     </Storyboard>
