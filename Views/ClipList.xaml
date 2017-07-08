@@ -15,6 +15,15 @@
             <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
             <Setter Property="ToolTip" Value="{Binding Clip.Content, Mode=OneWay}"/>
             <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <MenuItem Header="_Pin" IsCheckable="True" IsChecked="{Binding Pinned}"/>
+                        <MenuItem Header="_Copy" Command="{Binding CopyCommand}" InputGestureText="Enter"/>
+                        <MenuItem Header="_Delete" Command="{Binding DeleteCommand}" InputGestureText="Delete"/>
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -130,6 +139,11 @@
                                        Foreground="{StaticResource Text}"
                                        HorizontalAlignment="Left"
                                        />
+                            <Button Content="..." DockPanel.Dock="Right" BorderThickness="0"
+                                    Style="{StaticResource TriDotButton}"
+                                    Margin="8,0,0,0"
+                                    Command="{Binding OpenCtxtMenuCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ClipList}}}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}"/>
                             <TextBlock x:Name="shortcut" 
                                        Foreground="{StaticResource Text}"
                                        DockPanel.Dock="Right" HorizontalAlignment="Right"

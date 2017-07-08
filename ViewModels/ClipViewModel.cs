@@ -20,26 +20,31 @@ namespace clipman.ViewModels
             set
             {
                 clip = value;
+
                 RaisePropertyChanged("Clip");
+
+                if (clip != null)
+                {
+                    if (clip.Created.Date == DateTime.Today)
+                    {
+                        createdDateString = clip.Created.ToShortTimeString();
+                    }
+                    else
+                    {
+                        createdDateString = clip.Created.ToString("d");
+                    }
+                }
+
             }
         }
 
+        private String createdDateString;
         /// <summary>
         /// String displaying the creation date of the wrapped `Clip`.
         /// </summary>
         public String CreatedString
         {
-            get
-            {
-                if (clip.Created.Date == DateTime.Today)
-                {
-                    return clip.Created.ToShortTimeString();
-                }
-                else
-                {
-                    return clip.Created.ToString("d");
-                }
-            }
+            get { return createdDateString; }
         }
 
         private ICommand pinClipCommand;
@@ -67,9 +72,34 @@ namespace clipman.ViewModels
             set { pinned = value; RaisePropertyChanged("Pinned"); }
         }
 
+        private ICommand deleteCommand;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ?? (deleteCommand = new Commands.Command(param =>
+                {
+                    Clip = null;
+                    RaisePropertyChanged("Clip");
+                }));
+            }
+        }
+
+        private ICommand copyCommand;
+        public ICommand CopyCommand
+        {
+            get
+            {
+                return copyCommand ?? (copyCommand = new Commands.Command(param =>
+                {
+                    Clip?.Copy();
+                }));
+            }
+        }
+
         public ClipViewModel(Clipboard.Clip clip)
         {
-            this.clip = clip;
+            this.Clip = clip;
         }
 
         public int CompareTo(object other)

@@ -10,6 +10,13 @@
     <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FF26A0DA"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#0C000000"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
+
+    <ContextMenu x:Key="ClipContextMenu">
+        <MenuItem Header="Pin" IsCheckable="True" IsChecked="{Binding Pinned}"/>
+        <MenuItem Header="Copy" />
+        <MenuItem Header="Delete" />
+    </ContextMenu>
+    
     <Style x:Key="FlatListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="6,6,10,6"/>

@@ -9,6 +9,25 @@ namespace clipman.Views
     /// </summary>
     public partial class ClipList : UserControl
     {
+        private ICommand openCtxtMenuCommand;
+        public ICommand OpenCtxtMenuCommand
+        {
+            get
+            {
+                return openCtxtMenuCommand ?? (openCtxtMenuCommand = new Commands.Command(param =>
+                {
+                    if (param is ListBoxItem) {
+                        var item = param as ListBoxItem;
+                        Utility.Logging.Log(((ViewModels.ClipViewModel)item.DataContext).Clip.Title);
+                        Utility.Logging.Log(((ViewModels.ClipViewModel)item.DataContext).Pinned.ToString());
+                        item.IsSelected = true;
+                        item.ContextMenu.PlacementTarget = item;
+                        item.ContextMenu.IsOpen = true;
+                    }
+                }));
+            }
+        }
+
         public ClipList()
         {
             InitializeComponent();

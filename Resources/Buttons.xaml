@@ -25,6 +25,22 @@
                         />
     </Storyboard>
 
+    <Style x:Key="LeftClickContextMenu" TargetType="Button">
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Click">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen" Storyboard.Target="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}">
+                                <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="TrashButton" TargetType="Button" BasedOn="{StaticResource GenericButton}">
         <Setter Property="Template">
             <Setter.Value>
