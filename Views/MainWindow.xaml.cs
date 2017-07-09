@@ -1,5 +1,6 @@
 ﻿using clipman.Utility;
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,9 +56,15 @@ namespace clipman
             {
                 return clearCommand ?? (clearCommand = new Commands.Command(param =>
                 {
-                    ToggleSettingsPanel(false);
-                    searchBox.Clear();
-                    searchBox.Focus();
+                    if (settingsPanelOpen)
+                    {
+                        ToggleSettingsPanel(false);
+                    }
+                    else
+                    {
+                        searchBox.Clear();
+                        searchBox.Focus();
+                    }
                 }));
             }
         }
@@ -115,7 +122,7 @@ namespace clipman
             clipList.DataContext = clipViewModel;
             clipViewModel.ClipLimit = settings.ClipLimit;
 
-            settingsPanelViewModel = new ViewModels.SettingsPanelViewModel();
+            settingsPanelViewModel = new ViewModels.SettingsPanelViewModel(settings);
             settingsPanel.DataContext = settingsPanelViewModel;
 
             clipboardManager = new Clipboard.ClipboardManager();
@@ -223,25 +230,23 @@ namespace clipman
             }
 
             Storyboard bubbleStoryboard;
+            Storyboard buttonAnim;
+
             if (settingsPanelOpen)
             {
                 bubbleStoryboard = FindResource("SettingsBubbleDown") as Storyboard;
+                buttonAnim = FindResource("XToBurger") as Storyboard;
+
+                searchBox.Focus();
+                searchBox.SelectAll();
             }
             else
             {
                 bubbleStoryboard = FindResource("SettingsBubbleUp") as Storyboard;
-            }
-            settingsPanel.BeginStoryboard(bubbleStoryboard);
-
-            Storyboard buttonAnim;
-            if (settingsPanelOpen)
-            {
-                buttonAnim = FindResource("XToBurger") as Storyboard;
-            }
-            else
-            {
                 buttonAnim = FindResource("BurgerToX") as Storyboard;
             }
+
+            settingsPanel.BeginStoryboard(bubbleStoryboard);
             buttonAnim.Begin(settingsPanelToggleButton, settingsPanelToggleButton.Template);
 
             settingsPanelOpen = open;
