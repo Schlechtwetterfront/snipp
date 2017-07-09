@@ -4,23 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:clipman.Views"
+             xmlns:clipman="clr-namespace:clipman"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="420"
              x:Name="settingsPanel">
     <UserControl.Resources>
         <SolidColorBrush x:Key="TitleText" Color="Black"/>
         <SolidColorBrush x:Key="Text" Color="#FF666666"/>
+
+        <Style x:Key="SettingLabel" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <Style x:Key="SettingBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
     </UserControl.Resources>
     <Border Background="White" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock FontFamily="Segoe UI Light" FontSize="24" Margin="0,0,0,10">ClipMan</TextBlock>
-            <Grid Grid.Row="1">
+            <TextBlock FontFamily="Segoe UI Light" FontSize="22" Margin="0,0,0,10">
+                Settings <Run FontSize="12" Foreground="{StaticResource Text}">0.1.0</Run>
+            </TextBlock>
+            <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="1">
+                Key Bindings
+            </TextBlock>
+            <Grid Grid.Row="2" Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="150" />
                     <ColumnDefinition Width="62" />
@@ -35,55 +55,54 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label Content="Copy clip" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBlock Text="Copy clip" Grid.Row="0" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Double-click" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                         Margin="5" VerticalAlignment="Center"
-                         Padding="5" IsEnabled="False"/>
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <Label Content="Copy selected clip" Grid.Row="1" VerticalAlignment="Center"/>
+                <TextBlock Text="Copy selected clip" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Enter" Grid.Row="1" Grid.Column="1"
-                         Margin="5" VerticalAlignment="Center"
-                         Padding="5" IsEnabled="False"/>
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
                 <TextBox Text="Ctrl+C" Grid.Row="1" Grid.Column="2"
-                         Margin="5" VerticalAlignment="Center"
+                         Style="{StaticResource SettingBox}"
                          Padding="5" IsEnabled="False"/>
 
-                <Label Content="Pin selected clip" Grid.Row="2" VerticalAlignment="Center"/>
+                <TextBlock Text="Pin selected clip" Grid.Row="2" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Ctrl+P" Grid.Row="2" Grid.Column="2"
-                         Margin="5" VerticalAlignment="Center"
-                         Padding="5" IsEnabled="False"/>
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <Label Content="Delete selected clip" Grid.Row="3" VerticalAlignment="Center"/>
+                <TextBlock Text="Delete selected clip" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Delete" Grid.Row="3" Grid.Column="2"
-                         Margin="5" VerticalAlignment="Center"
-                         Padding="5" IsEnabled="False"/>
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <Label Content="Focus search bar" Grid.Row="4" VerticalAlignment="Center"/>
+                <TextBlock Text="Focus search bar" Grid.Row="4" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Ctrl+F" Grid.Row="4" Grid.Column="2"
-                         Margin="5" VerticalAlignment="Center"
-                         Padding="5" IsEnabled="False"/>
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <Label Content="Focus and clear search bar" Grid.Row="5" VerticalAlignment="Center"/>
+                <TextBlock Text="Focus and clear search bar" Grid.Row="5" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Escape" Grid.Row="5" Grid.Column="2"
-                         Margin="5" VerticalAlignment="Center"
-                         Padding="5" IsEnabled="False"/>
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <Label Content="Bring window to front (global)"
-                       Grid.Row="6" VerticalAlignment="Center"/>
+                <TextBlock Text="Bring window to front (global)"
+                       Grid.Row="6" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Ctrl+`" Grid.Row="6" Grid.Column="2"
-                         Margin="5" VerticalAlignment="Center"
-                         Padding="5" IsEnabled="False"/>
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <Label Content="Quit"
-                       Grid.Row="7" VerticalAlignment="Center"/>
+                <TextBlock Text="Quit"
+                       Grid.Row="7" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Ctrl+Q" Grid.Row="7" Grid.Column="2"
-                         Margin="5" VerticalAlignment="Center"
-                         Padding="5" IsEnabled="False"/>
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+
+                <TextBlock Text="Quit"
+                       Grid.Row="7" Style="{StaticResource SettingLabel}"/>
+                <TextBox Text="Ctrl+Q" Grid.Row="7" Grid.Column="2"
+                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
             </Grid>
-            <TextBlock Grid.Row="3" FontSize="20" Foreground="{DynamicResource Text}" FontFamily="Segoe UI Light">
-                v0.1.0
+            
+            <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="3">
+                Configuration
             </TextBlock>
         </Grid>
     </Border>
