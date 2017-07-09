@@ -90,6 +90,22 @@ namespace clipman.ViewModels
             }
         }
 
+        private int clipLimit;
+        public int ClipLimit
+        {
+            get { return clipLimit; }
+            set
+            {
+                clipLimit = value;
+                while (Clips.Count > clipLimit)
+                {
+                    Clips.RemoveAt(0);
+                }
+                RaisePropertyChanged("ClipLimit");
+                RaisePropertyChanged("Clips");
+            }
+        }
+
         public ClipListViewModel()
         {
             Clips = new ObservableCollection<ClipViewModel>();
@@ -106,6 +122,11 @@ namespace clipman.ViewModels
         {
             var viewModel = new ClipViewModel(clip);
             viewModel.PropertyChanged += OnClipViewModelPropChanged;
+            if (Clips.Count >= ClipLimit)
+            {
+                // If the limit is reached, throw out the oldest one.
+                Clips.RemoveAt(0);
+            }
             Clips.Add(viewModel);
         }
 

@@ -113,6 +113,7 @@ namespace clipman
 
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
+            clipViewModel.ClipLimit = settings.ClipLimit;
 
             settingsPanelViewModel = new ViewModels.SettingsPanelViewModel();
             settingsPanel.DataContext = settingsPanelViewModel;
@@ -126,6 +127,8 @@ namespace clipman
             InitializeKeybindings();
 
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
+
+            settings.PropertyChanged += (sender, args) => { if (args.PropertyName == "ClipLimit") clipViewModel.ClipLimit = settings.ClipLimit; };
 
 #if DEBUG
             Left = -1400;

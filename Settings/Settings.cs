@@ -10,7 +10,12 @@ namespace clipman.Settings
 {
     public class Settings : INotifyPropertyChanged
     {
-        public int ClipLimit;
+        protected int clipLimit = 100;
+        public int ClipLimit
+        {
+            get { return clipLimit; }
+            set { clipLimit = value; RaisePropertyChanged("ClipLimit"); }
+        }
 
         private KeyGesture focusWindowHotkey = new KeyGesture(Key.OemTilde, ModifierKeys.Control);
         public KeyGesture FocusWindowHotkey
