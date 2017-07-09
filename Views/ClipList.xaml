@@ -153,6 +153,7 @@
                                        Text="{Binding CreatedString, Mode=OneWay}"
                                        Foreground="{StaticResource Text}"
                                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                       ToolTip="{Binding Clip.Created}"
                                        />
                             <Button Content="..." DockPanel.Dock="Right" BorderThickness="0"
                                     Style="{StaticResource TriDotButton}"
