@@ -68,7 +68,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="DarkGray"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="12,4"/>
+        <Setter Property="Padding" Value="0,6"/>
         <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{StaticResource TitleText}"/>
@@ -82,12 +82,12 @@
                             SnapsToDevicePixels="True">
                         <Grid x:Name="Grid" Uid="Grid_49">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="17" SharedSizeGroup="MenuItemIconColumnGroup" Width="Auto"/>
-                                <ColumnDefinition Width="*" MinWidth="100"/>
+                                <ColumnDefinition MinWidth="28" SharedSizeGroup="MenuItemIconColumnGroup" Width="Auto"/>
+                                <ColumnDefinition Width="*" MinWidth="120"/>
                                 <ColumnDefinition SharedSizeGroup="MenuItemIGTColumnGroup" Width="Auto"/>
                                 <ColumnDefinition Width="14"/>
                             </Grid.ColumnDefinitions>
-                            <Ellipse x:Name="GlyphPanel" Fill="{StaticResource Accent}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="8" Visibility="Hidden"/>
+                            <Ellipse x:Name="GlyphPanel" Fill="#1F000000" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="8" Visibility="Hidden"/>
                             <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Uid="ContentPresenter_33"
                                               Margin="{TemplateBinding Padding}"
                                               />
@@ -97,32 +97,14 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
+                        <Trigger Property="IsCheckable" Value="True">
                             <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
                         </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Fill" TargetName="GlyphPanel" Value="{StaticResource Accent}"/>
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.06"
-                                                        To="#0C000000"
-                                                        Storyboard.TargetProperty="Background.Color"
-                                                        Storyboard.TargetName="Border"
-                                            />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.06"
-                                                        To="Transparent"
-                                                        Storyboard.TargetProperty="Background.Color"
-                                                        Storyboard.TargetName="Border"
-                                            />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
+                            <Setter Property="Background" Value="{StaticResource Item.SelectedActive.Background}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

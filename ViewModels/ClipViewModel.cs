@@ -72,6 +72,14 @@ namespace clipman.ViewModels
             set { pinned = value; RaisePropertyChanged("Pinned"); }
         }
 
+        public String PinLabel
+        {
+            get
+            {
+                return Pinned ? "Un_pin" : "_Pin";
+            }
+        }
+
         private ICommand deleteCommand;
         public ICommand DeleteCommand
         {
