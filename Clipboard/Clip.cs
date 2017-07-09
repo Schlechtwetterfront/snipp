@@ -11,6 +11,7 @@ namespace clipman.Clipboard
     public class Clip : INotifyPropertyChanged, IComparable
     {
         static int TitleCharCount = 45;
+        static char TrimmingCharacter = '\u2026';
 
         String processedContent;
         String content;
@@ -35,7 +36,7 @@ namespace clipman.Clipboard
 
                 if (defaultTitle.Length < processedContent.Length)
                 {
-                    defaultTitle += "...";
+                    defaultTitle += Clip.TrimmingCharacter;
                 }
                 Title = defaultTitle;
 
@@ -259,7 +260,7 @@ namespace clipman.Clipboard
             }
             else
             {
-                TitlePrefix = String.Format("...{0}", prefix);
+                TitlePrefix = Clip.TrimmingCharacter + prefix;
             }
 
             TitleMain = foundString;
@@ -271,7 +272,7 @@ namespace clipman.Clipboard
             }
             else
             {
-                TitleSuffix = String.Format("{0}...", suffix);
+                TitleSuffix = suffix + Clip.TrimmingCharacter;
             }
         }
 
