@@ -54,7 +54,7 @@
                  Margin="10,10,5,5"
                  VerticalAlignment="Top"
                  TextChanged="searchBox_Changed"
-                 Foreground="{DynamicResource Text}" Cursor="IBeam"
+                 Foreground="{DynamicResource TitleText}" Cursor="IBeam"
                  >
             <TextBox.Style>
                 <Style TargetType="TextBox">
