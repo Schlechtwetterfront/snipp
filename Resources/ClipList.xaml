@@ -103,7 +103,7 @@
                                 <ColumnDefinition SharedSizeGroup="MenuItemIGTColumnGroup" Width="Auto"/>
                                 <ColumnDefinition Width="14"/>
                             </Grid.ColumnDefinitions>
-                            <Ellipse x:Name="GlyphPanel" Fill="#1F000000" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="8" Visibility="Hidden"/>
+                            <Ellipse x:Name="GlyphPanel" Fill="#1F000000" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="8" Visibility="Hidden" Margin="0,0,0,2"/>
                             <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Uid="ContentPresenter_33"
                                               Margin="{TemplateBinding Padding}"
                                               />
