@@ -21,6 +21,10 @@
         <KeyBinding Command="{Binding ClearCommand}"
                     Modifiers="{Binding Settings.ClearAndFocusSearchBox.Modifiers}"
                     Key="{Binding Settings.ClearAndFocusSearchBox.Key}"/>
+        <KeyBinding Command="{Binding QuitCommand}"
+                    Modifiers="{Binding Settings.Quit.Modifiers}"
+                    Key="{Binding Settings.Quit.Key}"/>
+
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="0" Gesture="Ctrl+1"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="1" Gesture="Ctrl+2"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="2" Gesture="Ctrl+3"/>

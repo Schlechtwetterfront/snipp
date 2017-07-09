@@ -40,5 +40,11 @@ namespace clipman.Settings
         {
             get { return pinSelectedClip; }
         }
+
+        private KeyGesture quit = new KeyGesture(Key.Q, ModifierKeys.Control);
+        public KeyGesture Quit
+        {
+            get { return quit; }
+        }
     }
 }

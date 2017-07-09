@@ -79,6 +79,19 @@ namespace clipman
             }
         }
 
+        private ICommand quitCommand;
+        public ICommand QuitCommand
+        {
+            get
+            {
+                return quitCommand ?? (quitCommand = new Commands.Command(param =>
+                {
+                    Utility.Logging.Log("Quit");
+                    Close();
+                }));
+            }
+        }
+
         /// <summary>
         /// Delay after last input until search is started.
         /// </summary>
