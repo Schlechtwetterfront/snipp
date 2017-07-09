@@ -203,6 +203,14 @@ namespace clipman.Clipboard
             searchLength = searchString.Length;
             contentLength = SearchContent.Length;
 
+            // If the length is equal,
+            if (searchLength == contentLength)
+            {
+                TitleMain = defaultTitle;
+                TitlePrefix = TitleSuffix = "";
+                return;
+            }
+
             // Limit the string to ensure that it fully displays at our default
             // window width.
             limit = Math.Min(contentLength, Clip.TitleCharCount);
