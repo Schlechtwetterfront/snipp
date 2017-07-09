@@ -8,7 +8,7 @@
         xmlns:viewmodels="clr-namespace:clipman.ViewModels"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="ClipMan" Height="600" Width="420"
+        Title="{StaticResource AppName}" Height="600" Width="420"
         Icon="..\Resources\icon.png"
         FocusManager.FocusedElement="{Binding ElementName=searchBox}"
         >

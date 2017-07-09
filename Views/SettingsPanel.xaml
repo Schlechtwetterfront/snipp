@@ -35,7 +35,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock FontFamily="Segoe UI Light" FontSize="22" Margin="0,0,0,10">
-                Settings <Run FontSize="12" Foreground="{StaticResource Text}">0.1.0</Run>
+                <Run Text="{StaticResource AppName}"/> <Run FontSize="12" Foreground="{StaticResource Text}" Text="{StaticResource AppVersion}"/>
             </TextBlock>
             <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="1">
                 Key Bindings
@@ -58,22 +58,22 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Copy clip" Grid.Row="0" Style="{StaticResource SettingLabel}"/>
+                <TextBlock Text="Copy snippet" Grid.Row="0" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Double-click" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <TextBlock Text="Copy selected clip" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
+                <TextBlock Text="Copy selected snippet" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Enter" Grid.Row="1" Grid.Column="1"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
                 <TextBox Text="Ctrl+C" Grid.Row="1" Grid.Column="2"
                          Style="{StaticResource SettingBox}"
                          Padding="5" IsEnabled="False"/>
 
-                <TextBlock Text="Pin selected clip" Grid.Row="2" Style="{StaticResource SettingLabel}"/>
+                <TextBlock Text="Pin selected snippet" Grid.Row="2" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Ctrl+P" Grid.Row="2" Grid.Column="2"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <TextBlock Text="Delete selected clip" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
+                <TextBlock Text="Delete selected snippet" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Delete" Grid.Row="3" Grid.Column="2"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
@@ -88,11 +88,6 @@
                 <TextBlock Text="Bring window to front (global)"
                        Grid.Row="6" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Ctrl+`" Grid.Row="6" Grid.Column="2"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
-
-                <TextBlock Text="Quit"
-                       Grid.Row="7" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Ctrl+Q" Grid.Row="7" Grid.Column="2"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
                 <TextBlock Text="Quit"
@@ -123,8 +118,8 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                    Clip limit<LineBreak/>
-                    <Run Foreground="{StaticResource Text}">Will delete old ones after this limit is reached</Run>
+                    Snippet limit<LineBreak/>
+                    <Run Foreground="{StaticResource Text}">Will delete old snippets after this limit is reached</Run>
                 </TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                          Text="{Binding Settings.ClipLimit, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
