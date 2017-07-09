@@ -13,6 +13,27 @@
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#0A000000"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
 
+    <Style TargetType="{x:Type ToolTip}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="HasDropShadow" Value="{DynamicResource {x:Static SystemParameters.DropShadowKey}}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToolTip}">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="FlatContextMenu" TargetType="ContextMenu">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Background" Value="White"/>
@@ -21,11 +42,6 @@
         <Setter Property="Padding" Value="2"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HasDropShadow" Value="{DynamicResource {x:Static SystemParameters.DropShadowKey}}"/>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect x:Name="Shadow" Direction="290" ShadowDepth="2" BlurRadius="4" Opacity="0.35"/>
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -69,7 +85,7 @@
         <Setter Property="BorderBrush" Value="DarkGray"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0,6"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontFamily" Value="{StaticResource TextFont}"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="{StaticResource TitleText}"/>
         <Setter Property="Cursor" Value="Hand"/>

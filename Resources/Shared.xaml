@@ -9,4 +9,7 @@
     <Color x:Key="AccentColor" R="218" G="112" B="214" A="255"/>
     <SolidColorBrush x:Key="DarkAccent" Color="DarkOrchid"/>
     <Color x:Key="DarkAccentColor" R="153" G="50" B="204" A="255"/>
+
+    <FontFamily x:Key="TextFont">Segoe UI</FontFamily>
+    <FontFamily x:Key="CodeFont">Consolas</FontFamily>
 </ResourceDictionary>
