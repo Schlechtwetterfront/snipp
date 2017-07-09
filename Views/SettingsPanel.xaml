@@ -34,6 +34,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <Label Content="Copy clip" Grid.Row="0" VerticalAlignment="Center"/>
@@ -69,9 +70,15 @@
                          Margin="5" VerticalAlignment="Center"
                          Padding="5" IsEnabled="False"/>
 
-                <Label Content="Quit"
+                <Label Content="Bring window to front (global)"
                        Grid.Row="6" VerticalAlignment="Center"/>
-                <TextBox Text="Ctrl+Q" Grid.Row="6" Grid.Column="2"
+                <TextBox Text="Ctrl+`" Grid.Row="6" Grid.Column="2"
+                         Margin="5" VerticalAlignment="Center"
+                         Padding="5" IsEnabled="False"/>
+
+                <Label Content="Quit"
+                       Grid.Row="7" VerticalAlignment="Center"/>
+                <TextBox Text="Ctrl+Q" Grid.Row="7" Grid.Column="2"
                          Margin="5" VerticalAlignment="Center"
                          Padding="5" IsEnabled="False"/>
             </Grid>
