@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Windows.Input;
 
 namespace clipman.Settings
 {
-    public class Settings
+    public class Settings : INotifyPropertyChanged
     {
         public int ClipLimit;
 
@@ -45,6 +46,13 @@ namespace clipman.Settings
         public KeyGesture Quit
         {
             get { return quit; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
