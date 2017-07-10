@@ -19,7 +19,7 @@
                     <ContextMenu Style="{StaticResource FlatContextMenu}" ItemContainerStyle="{StaticResource FlatMenuItem}">
                         <MenuItem Header="{Binding PinLabel}" IsCheckable="True" IsChecked="{Binding Pinned}"/>
                         <MenuItem Header="_Copy" Command="{Binding CopyCommand}" InputGestureText="Enter"/>
-                        <MenuItem Header="_Delete" Command="{Binding DeleteCommand}" InputGestureText="Delete"/>
+                        <MenuItem Header="_Delete" Command="{Binding DeleteCommand}"/>
                     </ContextMenu>
                 </Setter.Value>
             </Setter>
@@ -99,27 +99,8 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemsSource="{Binding Path=ClipView}"
                  ItemContainerStyle="{StaticResource ClipListItem}" HorizontalContentAlignment="Stretch"
+                 SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
                  >
-            <ListBox.InputBindings>
-                <KeyBinding Key="Return"
-                            Command="{Binding CopyClipCommand}"
-                            CommandParameter="{Binding SelectedItem, ElementName=clipList}"
-                            />
-                <KeyBinding Key="{Binding Settings.CopySelectedClip.Key, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
-                            Modifiers="{Binding Settings.CopySelectedClip.Modifiers, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
-                            Command="{Binding CopyClipCommand}"
-                            CommandParameter="{Binding SelectedItem, ElementName=clipList}"
-                            />
-                <KeyBinding Key="Delete"
-                            Command="{Binding DeleteClipCommand}"
-                            CommandParameter="{Binding SelectedItem, ElementName=clipList}"
-                            />
-                <KeyBinding Key="{Binding Settings.PinSelectedClip.Key, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
-                            Modifiers="{Binding Settings.PinSelectedClip.Modifiers, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
-                            Command="{Binding PinClipCommand}"
-                            CommandParameter="{Binding SelectedItem, ElementName=clipList}"
-                            />
-            </ListBox.InputBindings>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel>

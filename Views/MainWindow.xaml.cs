@@ -100,6 +100,57 @@ namespace clipman
         }
 
         /// <summary>
+        /// Command copying the clip it was used on (Ctrl+C/Enter on selection).
+        /// </summary>
+        private ICommand copyClipCommand;
+        public ICommand CopyClipCommand
+        {
+            get
+            {
+                return copyClipCommand ?? (copyClipCommand = new Commands.Command(param =>
+                {
+                    Utility.Logging.Log("copy");
+                    (param as ViewModels.ClipViewModel)?.Clip.Copy();
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Command pinning the clip it was used on (Ctrl+P on selection).
+        /// </summary>
+        private ICommand pinClipCommand;
+        public ICommand PinClipCommand
+        {
+            get
+            {
+                return pinClipCommand ?? (pinClipCommand = new Commands.Command(param =>
+                {
+                    Utility.Logging.Log("pin " + param?.GetType());
+                    if (param is ViewModels.ClipViewModel)
+                    {
+                        var cvm = (ViewModels.ClipViewModel)param;
+                        cvm.Pinned = !cvm.Pinned;
+                    }
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Command deleting the clip it was used on (Delete).
+        /// </summary>
+        private ICommand deleteClipCommand;
+        public ICommand DeleteClipCommand
+        {
+            get
+            {
+                return deleteClipCommand ?? (deleteClipCommand = new Commands.Command(param =>
+                {
+                    clipViewModel.Clips.Remove(param as ViewModels.ClipViewModel);
+                }));
+            }
+        }
+
+        /// <summary>
         /// Delay after last input until search is started.
         /// </summary>
         DispatcherTimer searchTimer;
@@ -138,7 +189,7 @@ namespace clipman
             settings.PropertyChanged += (sender, args) => { if (args.PropertyName == "ClipLimit") clipViewModel.ClipLimit = settings.ClipLimit; };
 
 #if DEBUG
-            Left = -1400;
+            //Left = -1400;
 #endif
         }
 

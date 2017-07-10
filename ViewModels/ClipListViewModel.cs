@@ -41,55 +41,6 @@ namespace clipman.ViewModels
             }
         }
 
-        /// <summary>
-        /// Command copying the clip it was used on (Ctrl+C/Enter on selection).
-        /// </summary>
-        private ICommand copyClipCommand;
-        public ICommand CopyClipCommand
-        {
-            get
-            {
-                return copyClipCommand ?? (copyClipCommand = new Commands.Command(param =>
-                {
-                    (param as ClipViewModel)?.Clip.Copy();
-                }));
-            }
-        }
-
-        /// <summary>
-        /// Command pinning the clip it was used on (Ctrl+P on selection).
-        /// </summary>
-        private ICommand pinClipCommand;
-        public ICommand PinClipCommand
-        {
-            get
-            {
-                return pinClipCommand ?? (pinClipCommand = new Commands.Command(param =>
-                {
-                    if (param is ClipViewModel)
-                    {
-                        var cvm = (ClipViewModel)param;
-                        cvm.Pinned = !cvm.Pinned;
-                    }
-                }));
-            }
-        }
-
-        /// <summary>
-        /// Command deleting the clip it was used on (Delete).
-        /// </summary>
-        private ICommand deleteClipCommand;
-        public ICommand DeleteClipCommand
-        {
-            get
-            {
-                return deleteClipCommand ?? (deleteClipCommand = new Commands.Command(param =>
-                {
-                    Clips.Remove(param as ClipViewModel);
-                }));
-            }
-        }
-
         private int clipLimit;
         public int ClipLimit
         {
@@ -104,6 +55,13 @@ namespace clipman.ViewModels
                 RaisePropertyChanged("ClipLimit");
                 RaisePropertyChanged("Clips");
             }
+        }
+
+        private object selectedItem = new object();
+        public object SelectedItem
+        {
+            get { return selectedItem; }
+            set { selectedItem = value; RaisePropertyChanged("SelectedItem"); }
         }
 
         public ClipListViewModel()

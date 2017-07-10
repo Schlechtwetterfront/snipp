@@ -35,6 +35,30 @@
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="7" Gesture="Ctrl+8"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="8" Gesture="Ctrl+9"/>
         <KeyBinding Command="{Binding CopyCommand}" CommandParameter="9" Gesture="Ctrl+0"/>
+
+        <KeyBinding Key="Return"
+                    Command="{Binding CopyClipCommand}"
+                    CommandParameter="{Binding DataContext.SelectedItem, ElementName=clipList}"
+                    />
+        <KeyBinding Key="{Binding Settings.CopySelectedClip.Key, Mode=OneWay}"
+                    Modifiers="{Binding Settings.CopySelectedClip.Modifiers, Mode=OneWay}"
+                    Command="{Binding CopyClipCommand}"
+                    CommandParameter="{Binding DataContext.SelectedItem, ElementName=clipList}"
+                    />
+        <KeyBinding Key="Delete"
+                    Command="{Binding DeleteClipCommand}"
+                    CommandParameter="{Binding DataContext.SelectedItem, ElementName=clipList}"
+                    />
+        <KeyBinding Key="{Binding Settings.DeleteSelectedClip.Key, Mode=OneWay}"
+                    Modifiers="{Binding Settings.DeleteSelectedClip.Modifiers, Mode=OneWay}"
+                    Command="{Binding DeleteClipCommand}"
+                    CommandParameter="{Binding DataContext.SelectedItem, ElementName=clipList}"
+                    />
+        <KeyBinding Key="{Binding Settings.PinSelectedClip.Key, Mode=OneWay}"
+                    Modifiers="{Binding Settings.PinSelectedClip.Modifiers, Mode=OneWay}"
+                    Command="{Binding PinClipCommand}"
+                    CommandParameter="{Binding DataContext.SelectedItem, ElementName=clipList}"
+                    />
     </Window.InputBindings>
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
@@ -55,6 +79,9 @@
                  VerticalAlignment="Top"
                  TextChanged="searchBox_Changed"
                  Foreground="{DynamicResource TitleText}" Cursor="IBeam"
+                 KeyDown="SearchBox_KeyDown"
+                 PreviewKeyDown="SearchBox_KeyDown"
+                 
                  >
             <TextBox.Style>
                 <Style TargetType="TextBox">
