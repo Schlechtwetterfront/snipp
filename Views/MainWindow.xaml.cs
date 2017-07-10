@@ -326,5 +326,19 @@ namespace clipman
             searchBox.Focus();
             searchBox.SelectAll();
         }
+
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Down)
+            {
+                clipList.clipList.SelectedIndex++;
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Up)
+            {
+                clipList.clipList.SelectedIndex = Math.Max(0, clipList.clipList.SelectedIndex - 1);
+                e.Handled = true;
+            }
+        }
     }
 }
