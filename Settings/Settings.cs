@@ -35,10 +35,16 @@ namespace clipman.Settings
             get { return clearAndFocusSearchBox; }
         }
 
-        protected KeyGesture copySelectedClip = new KeyGesture(Key.C, ModifierKeys.Control);
+        protected KeyGesture copySelectedClip = new KeyGesture(Key.C, ModifierKeys.Control | ModifierKeys.Shift);
         public KeyGesture CopySelectedClip
         {
             get { return copySelectedClip; }
+        }
+
+        protected KeyGesture deleteSelectedClip = new KeyGesture(Key.D, ModifierKeys.Control);
+        public KeyGesture DeleteSelectedClip
+        {
+            get { return deleteSelectedClip; }
         }
 
         protected KeyGesture pinSelectedClip = new KeyGesture(Key.P, ModifierKeys.Control);

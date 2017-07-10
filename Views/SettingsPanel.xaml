@@ -43,8 +43,8 @@
             <Grid Grid.Row="2" Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="150" />
-                    <ColumnDefinition Width="62" />
-                    <ColumnDefinition Width="62" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="86" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -65,7 +65,7 @@
                 <TextBlock Text="Copy selected snippet" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Enter" Grid.Row="1" Grid.Column="1"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
-                <TextBox Text="Ctrl+C" Grid.Row="1" Grid.Column="2"
+                <TextBox Text="Ctrl+Shift+C" Grid.Row="1" Grid.Column="2"
                          Style="{StaticResource SettingBox}"
                          Padding="5" IsEnabled="False"/>
 
@@ -74,7 +74,7 @@
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
                 <TextBlock Text="Delete selected snippet" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Delete" Grid.Row="3" Grid.Column="2"
+                <TextBox Text="Ctrl+D" Grid.Row="3" Grid.Column="2"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
                 <TextBlock Text="Focus search bar" Grid.Row="4" Style="{StaticResource SettingLabel}"/>
