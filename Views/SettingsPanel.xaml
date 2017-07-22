@@ -130,9 +130,36 @@
                     Snippet limit<LineBreak/>
                     <Run Foreground="{StaticResource Text}">Will delete old snippets after this limit is reached</Run>
                 </TextBlock>
-                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                <TextBox Grid.Row="0" Grid.Column="1"
                          Text="{Binding Source={StaticResource Settings}, Path=Default.ClipLimit}"
                          Style="{StaticResource SettingBox}"/>
+            </Grid>
+
+            <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="5">
+                About
+            </TextBlock>
+            <Grid Grid.Row="6" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="150" />
+                    <!--<ColumnDefinition Width="86" />-->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
+                    Version <Run Text="{StaticResource AppVersion}"/>
+                    -
+                    <Run Foreground="{StaticResource Text}">github.com/Schlechtwetterfront/snipp</Run>
+                </TextBlock>
             </Grid>
         </Grid>
     </Border>
