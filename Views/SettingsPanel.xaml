@@ -33,6 +33,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock FontFamily="Segoe UI Light" FontSize="22" Margin="0,0,0,10">
                 <Run Text="{StaticResource AppName}"/> <Run FontSize="12" Foreground="{StaticResource Text}" Text="{StaticResource AppVersion}"/>
@@ -111,8 +112,7 @@
             <Grid Grid.Row="4" Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="150" />
-                    <ColumnDefinition Width="62" />
-                    <ColumnDefinition Width="62" />
+                    <ColumnDefinition Width="86" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />

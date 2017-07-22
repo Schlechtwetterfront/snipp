@@ -40,7 +40,7 @@
                            Text="#"
                            Foreground="{DynamicResource Text}"
                            FontSize="16"
-                           FontFamily="Segoe UI Light"
+                           FontFamily="Segoe UI Light" VerticalAlignment="Bottom"
                            />
                 <TextBlock DockPanel.Dock="Right"
                            TextAlignment="Right"
@@ -49,7 +49,7 @@
                            Foreground="{DynamicResource Text}"
                            FontSize="16"
                            FontFamily="Segoe UI Light"
-                           Margin="0,0,10,0"
+                           Margin="0,0,10,0" VerticalAlignment="Bottom"
                            />
                 <Button Style="{StaticResource ClearItemsButton}" DockPanel.Dock="Right" Padding="0" Click="OnClearButtonClick" ToolTip="Clear all clips" VerticalAlignment="Bottom" BorderThickness="0"/>
                 <StackPanel.RenderTransform>
@@ -95,7 +95,6 @@
         <ListBox x:Name="clipList"
                  Grid.Row="1"
                  BorderThickness="0"
-                 AlternationCount="{Binding Items.Count, RelativeSource={RelativeSource Self}}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemsSource="{Binding Path=ClipView}"
                  ItemContainerStyle="{StaticResource ClipListItem}" HorizontalContentAlignment="Stretch"
