@@ -43,7 +43,7 @@
             <Grid Grid.Row="2" Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="150" />
-                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="54" />
                     <ColumnDefinition Width="86" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -65,35 +65,44 @@
                 <TextBlock Text="Copy selected snippet" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
                 <TextBox Text="Enter" Grid.Row="1" Grid.Column="1"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
-                <TextBox Text="Ctrl+Shift+C" Grid.Row="1" Grid.Column="2"
+                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.CopyShortcut, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="1" Grid.Column="2"
                          Style="{StaticResource SettingBox}"
-                         Padding="5" IsEnabled="False"/>
+                         Padding="5"/>
 
                 <TextBlock Text="Pin selected snippet" Grid.Row="2" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Ctrl+P" Grid.Row="2" Grid.Column="2"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.PinShortcut, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="2" Grid.Column="2"
+                         Style="{StaticResource SettingBox}"/>
 
                 <TextBlock Text="Delete selected snippet" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Ctrl+D" Grid.Row="3" Grid.Column="2"
+                <TextBox Text="Delete" Grid.Row="3" Grid.Column="1"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.DeleteShortcut, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="3" Grid.Column="2"
+                         Style="{StaticResource SettingBox}"/>
 
                 <TextBlock Text="Focus search bar" Grid.Row="4" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Ctrl+F" Grid.Row="4" Grid.Column="2"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusShortcut, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="4" Grid.Column="2"
+                         Style="{StaticResource SettingBox}"/>
 
                 <TextBlock Text="Focus and clear search bar" Grid.Row="5" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Escape" Grid.Row="5" Grid.Column="2"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.ClearAndFocusShortcut, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="5" Grid.Column="2"
+                         Style="{StaticResource SettingBox}"/>
 
                 <TextBlock Text="Bring window to front (global)"
                        Grid.Row="6" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Ctrl+`" Grid.Row="6" Grid.Column="2"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusWindowShortcut, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="6" Grid.Column="2"
+                         Style="{StaticResource SettingBox}"/>
 
                 <TextBlock Text="Quit"
                        Grid.Row="7" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Ctrl+Q" Grid.Row="7" Grid.Column="2"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.QuitShortcut, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="7" Grid.Column="2"
+                         Style="{StaticResource SettingBox}"/>
             </Grid>
             
             <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="3">
@@ -122,7 +131,7 @@
                     <Run Foreground="{StaticResource Text}">Will delete old snippets after this limit is reached</Run>
                 </TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                         Text="{Binding Settings.ClipLimit, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type clipman:MainWindow}}}"
+                         Text="{Binding Source={StaticResource Settings}, Path=Default.ClipLimit}"
                          Style="{StaticResource SettingBox}"/>
             </Grid>
         </Grid>

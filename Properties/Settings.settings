@@ -1,7 +1,30 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="clipman.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ClipLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="QuitShortcut" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+Q</Value>
+    </Setting>
+    <Setting Name="FocusShortcut" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+F</Value>
+    </Setting>
+    <Setting Name="DeleteShortcut" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+D</Value>
+    </Setting>
+    <Setting Name="PinShortcut" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+P</Value>
+    </Setting>
+    <Setting Name="CopyShortcut" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+Shift+C</Value>
+    </Setting>
+    <Setting Name="ClearAndFocusShortcut" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Esc</Value>
+    </Setting>
+    <Setting Name="FocusWindowShortcut" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+OemTilde</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

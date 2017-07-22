@@ -8,22 +8,114 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace clipman.Properties
-{
-
-
+namespace clipman.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int ClipLimit {
+            get {
+                return ((int)(this["ClipLimit"]));
+            }
+            set {
+                this["ClipLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Q")]
+        public string QuitShortcut {
+            get {
+                return ((string)(this["QuitShortcut"]));
+            }
+            set {
+                this["QuitShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+F")]
+        public string FocusShortcut {
+            get {
+                return ((string)(this["FocusShortcut"]));
+            }
+            set {
+                this["FocusShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+D")]
+        public string DeleteShortcut {
+            get {
+                return ((string)(this["DeleteShortcut"]));
+            }
+            set {
+                this["DeleteShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+P")]
+        public string PinShortcut {
+            get {
+                return ((string)(this["PinShortcut"]));
+            }
+            set {
+                this["PinShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Shift+C")]
+        public string CopyShortcut {
+            get {
+                return ((string)(this["CopyShortcut"]));
+            }
+            set {
+                this["CopyShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Esc")]
+        public string ClearAndFocusShortcut {
+            get {
+                return ((string)(this["ClearAndFocusShortcut"]));
+            }
+            set {
+                this["ClearAndFocusShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+OemTilde")]
+        public string FocusWindowShortcut {
+            get {
+                return ((string)(this["FocusWindowShortcut"]));
+            }
+            set {
+                this["FocusWindowShortcut"] = value;
             }
         }
     }

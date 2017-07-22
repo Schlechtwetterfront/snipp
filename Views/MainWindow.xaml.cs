@@ -171,7 +171,6 @@ namespace clipman
 
             clipViewModel = new ViewModels.ClipListViewModel();
             clipList.DataContext = clipViewModel;
-            clipViewModel.ClipLimit = settings.ClipLimit;
 
             settingsPanelViewModel = new ViewModels.SettingsPanelViewModel(settings);
             settingsPanel.DataContext = settingsPanelViewModel;
@@ -185,12 +184,6 @@ namespace clipman
             InitializeKeybindings();
 
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
-
-            settings.PropertyChanged += (sender, args) => { if (args.PropertyName == "ClipLimit") clipViewModel.ClipLimit = settings.ClipLimit; };
-
-#if DEBUG
-            //Left = -1400;
-#endif
         }
 
         /// <summary>
@@ -203,11 +196,23 @@ namespace clipman
                 (int)settings.FocusWindowHotkey.Modifiers,
                 KeyInterop.VirtualKeyFromKey(settings.FocusWindowHotkey.Key)
             );
+
+            settings.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "FocusWindowHotkey")
+                {
+                    keyboardMonitor.RemoveHotkey(focusHotkeyId);
+                    focusHotkeyId = keyboardMonitor.AddHotkey(
+                        (int)settings.FocusWindowHotkey.Modifiers,
+                        KeyInterop.VirtualKeyFromKey(settings.FocusWindowHotkey.Key)
+                    );
+                }
+            };
         }
 
         #region Callbacks
 
-        void Search(object sender, EventArgs e)
+            void Search(object sender, EventArgs e)
         {
             var timer = sender as DispatcherTimer;
             if (timer == null)
@@ -339,6 +344,11 @@ namespace clipman
                 clipList.clipList.SelectedIndex = Math.Max(0, clipList.clipList.SelectedIndex - 1);
                 e.Handled = true;
             }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
     }
 }

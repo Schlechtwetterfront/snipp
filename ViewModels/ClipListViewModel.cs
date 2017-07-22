@@ -78,14 +78,24 @@ namespace clipman.ViewModels
             ClipView.SortDescriptions.Add(new SortDescription("Clip", ListSortDirection.Descending));
 
             (ClipView as INotifyCollectionChanged).CollectionChanged += ClipViewChanged;
+
+            Properties.Settings.Default.SettingChanging += SettingChanging;
+
+            ClipLimit = (int)Properties.Settings.Default["ClipLimit"];
+        }
+
+        void SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e)
+        {
+            if (e.SettingName == "ClipLimit")
+            {
+                ClipLimit = (int)e.NewValue;
+            }
         }
 
         public void ClipViewChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Utility.Logging.Log("Change fired");
             foreach (var it in ClipView.OfType<ClipViewModel>().Select((el, i) => new { Item = el, Index = i }))
             {
-                Utility.Logging.Log("Item " + it);
                 if (it.Index < 10)
                 {
                     it.Item.IndexInClipView = it.Index;
@@ -101,7 +111,7 @@ namespace clipman.ViewModels
         {
             var viewModel = new ClipViewModel(clip);
             viewModel.PropertyChanged += OnClipViewModelPropChanged;
-            if (Clips.Count >= ClipLimit)
+            if (Clips.Count >= ClipLimit && ClipLimit != 0)
             {
                 // If the limit is reached, throw out the oldest one.
                 Clips.RemoveAt(0);

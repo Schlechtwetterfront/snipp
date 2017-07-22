@@ -75,6 +75,11 @@ namespace clipman.Settings
             return id;
         }
 
+        public void RemoveHotkey(int id)
+        {
+            NativeMethods.UnregisterHotKey(hwndSource.Handle, id);
+        }
+
         /// <summary>
         /// Listen to window events and fire `KeyPressed` when a registered hotkey is pressed.
         /// </summary>
