@@ -80,6 +80,37 @@ namespace clipman.ViewModels
             }
         }
 
+        private int indexInClipView = -1;
+        public int IndexInClipView
+        {
+            get { return indexInClipView; }
+            set
+            {
+                indexInClipView = value;
+                RaisePropertyChanged("IndexInClipView");
+                RaisePropertyChanged("NumberShortcutText");
+            }
+        }
+
+        public String NumberShortcutText
+        {
+            get
+            {
+                if (IndexInClipView >= 0 && IndexInClipView < 9)
+                {
+                    return String.Format("Ctrl+{0}", IndexInClipView + 1);
+                }
+                else if (IndexInClipView == 9)
+                {
+                    return String.Format("Ctrl+0");
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+
         private ICommand deleteCommand;
         public ICommand DeleteCommand
         {

@@ -143,14 +143,15 @@
                                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}"/>
 
                             <Control x:Name="pinStatus" Template="{StaticResource PinIcon}"
+                                     Margin="8,0,0,0"
                                      DockPanel.Dock="Right"
                                      Background="#0F000000"
                                      />
 
                             <TextBlock x:Name="shortcut" 
                                        Foreground="{StaticResource Text}"
+                                       Text="{Binding NumberShortcutText}"
                                        DockPanel.Dock="Right" HorizontalAlignment="Right"
-                                       Visibility="Collapsed"
                                        />
                         </DockPanel>
                     </DockPanel>
@@ -165,77 +166,6 @@
                                     Property="ToolTip"
                                     Value="Pinned"
                                     />
-                        </DataTrigger>
-                        <!--Set number shortcut text-->
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="0">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+1"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="1">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+2"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="2">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+3"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="3">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+4"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="4">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+5"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="5">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+6"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="6">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+7"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="7">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+8"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="8">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+9"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), 
-                                               RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
-                                     Value="9">
-                            <Setter TargetName="shortcut"
-                                    Property="Text"
-                                    Value="Ctrl+0"/>
                         </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>

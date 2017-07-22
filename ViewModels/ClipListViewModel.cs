@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -74,6 +76,25 @@ namespace clipman.ViewModels
             ClipView.LiveSortingProperties.Add("Pinned");
             ClipView.SortDescriptions.Add(new SortDescription("Pinned", ListSortDirection.Descending));
             ClipView.SortDescriptions.Add(new SortDescription("Clip", ListSortDirection.Descending));
+
+            (ClipView as INotifyCollectionChanged).CollectionChanged += ClipViewChanged;
+        }
+
+        public void ClipViewChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            Utility.Logging.Log("Change fired");
+            foreach (var it in ClipView.OfType<ClipViewModel>().Select((el, i) => new { Item = el, Index = i }))
+            {
+                Utility.Logging.Log("Item " + it);
+                if (it.Index < 10)
+                {
+                    it.Item.IndexInClipView = it.Index;
+                }
+                else
+                {
+                    it.Item.IndexInClipView = -1;
+                }
+            }
         }
 
         public void AddClip(Clipboard.Clip clip)
