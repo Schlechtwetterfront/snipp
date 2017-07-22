@@ -15,5 +15,5 @@
     <FontFamily x:Key="CodeFont">Consolas</FontFamily>
 
     <sys:String x:Key="AppName">snipp</sys:String>
-    <sys:String x:Key="AppVersion">0.9.0</sys:String>
+    <sys:String x:Key="AppVersion">0.10.0</sys:String>
 </ResourceDictionary>
