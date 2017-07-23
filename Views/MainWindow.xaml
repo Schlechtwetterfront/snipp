@@ -13,7 +13,45 @@
         FocusManager.FocusedElement="{Binding ElementName=searchBox}" Closing="Window_Closing"
         >
     <Window.Resources>
+        <Storyboard x:Key="BlinkTaskBarOverlay">
+            <DoubleAnimationUsingKeyFrames Duration="0:0:2"
+                                           Storyboard.TargetName="Plus"
+                                           Storyboard.TargetProperty="Opacity">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Duration="0:0:0.666"
+                                           Storyboard.TargetName="Taskbar"
+                                           Storyboard.TargetProperty="ProgressValue">
+                <SplineDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.666" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="Taskbar" ProgressState="Normal">
+            <TaskbarItemInfo.Overlay>
+                <DrawingImage>
+                    <DrawingImage.Drawing>
+                        <DrawingGroup x:Name="Plus" Opacity="0">
+                            <GeometryDrawing Brush="White">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="6,2,4,12"/>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="White">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="2,6,12,4"/>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </TaskbarItemInfo.Overlay>
+        </TaskbarItemInfo>
+    </Window.TaskbarItemInfo>
     <Window.InputBindings>
         <KeyBinding Command="{Binding FocusSearchCommand}"
                     Modifiers="{Binding Settings.FocusSearchBox.Modifiers}"

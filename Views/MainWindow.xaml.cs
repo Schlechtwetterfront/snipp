@@ -212,7 +212,7 @@ namespace clipman
 
         #region Callbacks
 
-            void Search(object sender, EventArgs e)
+        void Search(object sender, EventArgs e)
         {
             var timer = sender as DispatcherTimer;
             if (timer == null)
@@ -238,6 +238,7 @@ namespace clipman
             if (clip != null)
             {
                 clipViewModel.AddClip(clip);
+                (Resources["BlinkTaskBarOverlay"] as Storyboard)?.Begin();
             }
         }
 
