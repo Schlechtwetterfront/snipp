@@ -12,7 +12,7 @@ namespace clipman.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -116,6 +116,30 @@ namespace clipman.Properties {
             }
             set {
                 this["FocusWindowShortcut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FFDA70D6")]
+        public global::System.Windows.Media.SolidColorBrush Accent {
+            get {
+                return ((global::System.Windows.Media.SolidColorBrush)(this["Accent"]));
+            }
+            set {
+                this["Accent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#FF9932CC")]
+        public global::System.Windows.Media.SolidColorBrush DarkAccent {
+            get {
+                return ((global::System.Windows.Media.SolidColorBrush)(this["DarkAccent"]));
+            }
+            set {
+                this["DarkAccent"] = value;
             }
         }
     }

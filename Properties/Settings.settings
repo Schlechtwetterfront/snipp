@@ -26,5 +26,11 @@
     <Setting Name="FocusWindowShortcut" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ctrl+OemTilde</Value>
     </Setting>
+    <Setting Name="Accent" Type="System.Windows.Media.SolidColorBrush" Scope="User">
+      <Value Profile="(Default)">#FFDA70D6</Value>
+    </Setting>
+    <Setting Name="DarkAccent" Type="System.Windows.Media.SolidColorBrush" Scope="User">
+      <Value Profile="(Default)">#FF9932CC</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

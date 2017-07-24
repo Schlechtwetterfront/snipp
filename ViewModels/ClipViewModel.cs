@@ -192,7 +192,7 @@ namespace clipman.ViewModels
             {
                 inlines.Add(new Run(Clip.OneLineContent.Substring(lastEnd, m.Start - lastEnd)));
                 var colored = new Run(Clip.OneLineContent.Substring(m.Start, m.Length));
-                colored.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("Orchid"));
+                colored.Foreground = (SolidColorBrush)Properties.Settings.Default["Accent"];
                 inlines.Add(colored);
                 lastEnd = m.End;
             }

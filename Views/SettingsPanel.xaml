@@ -25,142 +25,171 @@
         </Style>
     </UserControl.Resources>
     <Border Background="White" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
+
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock FontFamily="Segoe UI Light" FontSize="22" Margin="0,0,0,10">
                 <Run Text="{StaticResource AppName}"/> <Run FontSize="12" Foreground="{StaticResource Text}" Text="{StaticResource AppVersion}"/>
             </TextBlock>
-            <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="1">
-                Key Bindings
-            </TextBlock>
-            <Grid Grid.Row="2" Margin="0,0,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MinWidth="150" />
-                    <ColumnDefinition Width="54" />
-                    <ColumnDefinition Width="86" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="1" PanningMode="VerticalOnly" VerticalScrollBarVisibility="Auto">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <TextBlock Text="Copy snippet" Grid.Row="0" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Double-click" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                    <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="1">
+                        Key Bindings
+                    </TextBlock>
+
+                    <Grid Grid.Row="2" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="150" />
+                            <ColumnDefinition Width="54" />
+                            <ColumnDefinition Width="86" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Copy snippet" Grid.Row="0" Style="{StaticResource SettingLabel}"/>
+                        <TextBox Text="Double-click" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                <TextBlock Text="Copy selected snippet" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Enter" Grid.Row="1" Grid.Column="1"
+                        <TextBlock Text="Copy selected snippet" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
+                        <TextBox Text="Enter" Grid.Row="1" Grid.Column="1"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
-                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.CopyShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.CopyShortcut, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="1" Grid.Column="2"
                          Style="{StaticResource SettingBox}"
                          Padding="5"/>
 
-                <TextBlock Text="Pin selected snippet" Grid.Row="2" Style="{StaticResource SettingLabel}"/>
-                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.PinShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="Pin selected snippet" Grid.Row="2" Style="{StaticResource SettingLabel}"/>
+                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.PinShortcut, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="2" Grid.Column="2"
                          Style="{StaticResource SettingBox}"/>
 
-                <TextBlock Text="Delete selected snippet" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
-                <TextBox Text="Delete" Grid.Row="3" Grid.Column="1"
+                        <TextBlock Text="Delete selected snippet" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
+                        <TextBox Text="Delete" Grid.Row="3" Grid.Column="1"
                          Style="{StaticResource SettingBox}" IsEnabled="False"/>
-                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.DeleteShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.DeleteShortcut, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="3" Grid.Column="2"
                          Style="{StaticResource SettingBox}"/>
 
-                <TextBlock Text="Focus search bar" Grid.Row="4" Style="{StaticResource SettingLabel}"/>
-                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="Focus search bar" Grid.Row="4" Style="{StaticResource SettingLabel}"/>
+                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusShortcut, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="4" Grid.Column="2"
                          Style="{StaticResource SettingBox}"/>
 
-                <TextBlock Text="Focus and clear search bar" Grid.Row="5" Style="{StaticResource SettingLabel}"/>
-                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.ClearAndFocusShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="Focus and clear search bar" Grid.Row="5" Style="{StaticResource SettingLabel}"/>
+                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.ClearAndFocusShortcut, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="5" Grid.Column="2"
                          Style="{StaticResource SettingBox}"/>
 
-                <TextBlock Text="Bring window to front (global)"
+                        <TextBlock Text="Bring window to front (global)"
                        Grid.Row="6" Style="{StaticResource SettingLabel}"/>
-                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusWindowShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusWindowShortcut, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="6" Grid.Column="2"
                          Style="{StaticResource SettingBox}"/>
 
-                <TextBlock Text="Quit"
+                        <TextBlock Text="Quit"
                        Grid.Row="7" Style="{StaticResource SettingLabel}"/>
-                <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.QuitShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.QuitShortcut, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Row="7" Grid.Column="2"
                          Style="{StaticResource SettingBox}"/>
-            </Grid>
-            
-            <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="3">
-                Configuration
-            </TextBlock>
-            <Grid Grid.Row="4" Margin="0,0,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MinWidth="150" />
-                    <ColumnDefinition Width="86" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+                    </Grid>
 
-                <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                    Snippet limit<LineBreak/>
+                    <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="3">
+                Configuration
+                    </TextBlock>
+                    <Grid Grid.Row="4" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="150" />
+                            <ColumnDefinition Width="86" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
+                    Snippet Limit<LineBreak/>
                     <Run Foreground="{StaticResource Text}">Will delete old snippets after this limit is reached</Run>
-                </TextBlock>
-                <TextBox Grid.Row="0" Grid.Column="1"
+                        </TextBlock>
+                        <TextBox Grid.Row="0" Grid.Column="1"
                          Text="{Binding Source={StaticResource Settings}, Path=Default.ClipLimit}"
                          Style="{StaticResource SettingBox}"/>
-            </Grid>
 
-            <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="5">
+                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
+                    Accent Color <Run Foreground="{StaticResource Text}">Default: Orchid</Run>
+                    <LineBreak/>
+                    <Run Foreground="{StaticResource Text}">Takes color names (Green, Blue, etc) or #AARRGGBB colors</Run>
+                        </TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding Source={StaticResource Settings}, Path=Default.Accent, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource SettingBox}"/>
+
+                        <TextBlock Grid.Row="2" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
+                    Dark Accent Color <Run Foreground="{StaticResource Text}">Default: DarkOrchid</Run>
+                    <LineBreak/>
+                    <Run Foreground="{StaticResource Text}">Takes color names (Green, Blue, etc) or #AARRGGBB colors</Run>
+                        </TextBlock>
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                         Text="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource SettingBox}"/>
+                    </Grid>
+
+                    <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="5">
                 About
-            </TextBlock>
-            <Grid Grid.Row="6" Margin="0,0,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MinWidth="150" />
-                    <!--<ColumnDefinition Width="86" />-->
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+                    </TextBlock>
+                    <Grid Grid.Row="6" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="150" />
+                            <!--<ColumnDefinition Width="86" />-->
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
+                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
                     Version <Run Text="{StaticResource AppVersion}"/>
                     -
                     <Run Foreground="{StaticResource Text}">github.com/Schlechtwetterfront/snipp</Run>
-                </TextBlock>
-            </Grid>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Border>
 </UserControl>

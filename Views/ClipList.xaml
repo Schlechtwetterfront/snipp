@@ -159,7 +159,7 @@
                                      Value="True">
                             <Setter TargetName="pinStatus"
                                     Property="Background"
-                                    Value="{StaticResource Accent}"
+                                    Value="{Binding Source={StaticResource Settings}, Path=Default.Accent}"
                                     />
                             <Setter TargetName="pinStatus"
                                     Property="ToolTip"

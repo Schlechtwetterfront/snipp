@@ -116,7 +116,7 @@
                             <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Fill" TargetName="GlyphPanel" Value="{StaticResource Accent}"/>
+                            <Setter Property="Fill" TargetName="GlyphPanel" Value="{Binding Source={StaticResource Settings}, Path=Default.Accent}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="{StaticResource Item.SelectedActive.Background}"/>
@@ -168,7 +168,7 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiTrigger.ExitActions>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Accent}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{Binding Source={StaticResource Settings}, Path=Default.Accent}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -176,7 +176,7 @@
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource DarkAccent}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -184,7 +184,7 @@
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource DarkAccent}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>

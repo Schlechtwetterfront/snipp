@@ -269,7 +269,7 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </MultiDataTrigger.ExitActions>
-                            <Setter Property="Background" Value="{StaticResource Accent}"/>
+                            <Setter Property="Background" Value="{Binding Source={StaticResource Settings}, Path=Default.Accent}"/>
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
