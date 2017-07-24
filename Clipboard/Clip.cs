@@ -10,7 +10,7 @@ namespace clipman.Clipboard
 
     public class Clip : INotifyPropertyChanged, IComparable
     {
-        static int TitleCharCount = 45;
+        static int TitleCharCount = 256;
         static char TrimmingCharacter = '\u2026';
 
         String processedContent;

@@ -144,18 +144,18 @@
                          Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Grid.Row="1" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                    Accent Color <Run Foreground="{StaticResource Text}">Default: Orchid</Run>
+                    Accent Color
                     <LineBreak/>
-                    <Run Foreground="{StaticResource Text}">Takes color names (Green, Blue, etc) or #AARRGGBB colors</Run>
+                    <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
                         </TextBlock>
                         <TextBox Grid.Row="1" Grid.Column="1"
                          Text="{Binding Source={StaticResource Settings}, Path=Default.Accent, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Grid.Row="2" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                    Dark Accent Color <Run Foreground="{StaticResource Text}">Default: DarkOrchid</Run>
+                    Dark Accent Color
                     <LineBreak/>
-                    <Run Foreground="{StaticResource Text}">Takes color names (Green, Blue, etc) or #AARRGGBB colors</Run>
+                    <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
                         </TextBlock>
                         <TextBox Grid.Row="2" Grid.Column="1"
                          Text="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent, UpdateSourceTrigger=PropertyChanged}"

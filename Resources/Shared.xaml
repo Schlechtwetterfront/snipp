@@ -8,8 +8,8 @@
 
     <KeyTime x:Key="AnimationTime">0:0:0.1</KeyTime>
     <Duration x:Key="AnimationDuration">0:0:0.1</Duration>
-    <SolidColorBrush x:Key="TitleText" Color="#FF333333"/>
-    <SolidColorBrush x:Key="Text" Color="#FF888888"/>
+    <SolidColorBrush x:Key="TitleText" Color="#FF444444"/>
+    <SolidColorBrush x:Key="Text" Color="#FF999999"/>
     <SolidColorBrush x:Key="Accent" Color="Orchid"/>
     <Color x:Key="AccentColor" R="218" G="112" B="214" A="255"/>
     <SolidColorBrush x:Key="DarkAccent" Color="DarkOrchid"/>
