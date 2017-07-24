@@ -1,7 +1,13 @@
-﻿using System;
+﻿using clipman.Utility;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using static clipman.Clipboard.ClipboardManager;
+using static clipman.Utility.Fuzzy;
 
 namespace clipman.ViewModels
 {
@@ -136,9 +142,64 @@ namespace clipman.ViewModels
             }
         }
 
+        private ObservableCollection<Inline> richTitle = new ObservableCollection<Inline>();
+        public ObservableCollection<Inline> RichTitle
+        {
+            get { return richTitle; }
+            protected set { richTitle = value; RaisePropertyChanged("RichTitle"); }
+        }
+
+        public int SearchScore
+        {
+            get;
+            set;
+        }
+
         public ClipViewModel(Clipboard.Clip clip)
         {
             this.Clip = clip;
+        }
+
+        public bool FuzzyMatches(String searchKey)
+        {
+            var result = Clip.OneLineContent.GetBestMatch(searchKey);
+            if (result == null)
+            {
+                SearchScore = 0;
+                ResetRichTitle();
+                return false;
+            }
+
+            SearchScore = result.Score;
+            UpdateRichTitleFromFuzzy(result);
+            return true;
+        }
+
+        public void ResetRichTitle()
+        {
+            RichTitle.Clear();
+            var inlines = new ObservableCollection<Inline>();
+            inlines.Add(new Run(Clip.Title));
+            RichTitle = inlines;
+        }
+
+        void UpdateRichTitleFromFuzzy(FuzzyResult r)
+        {
+            var inlines = new ObservableCollection<Inline>();
+            int lastEnd = 0;
+            foreach (var m in r.Matches)
+            {
+                inlines.Add(new Run(Clip.OneLineContent.Substring(lastEnd, m.Start - lastEnd)));
+                var colored = new Run(Clip.OneLineContent.Substring(m.Start, m.Length));
+                colored.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("Orchid"));
+                inlines.Add(colored);
+                lastEnd = m.End;
+            }
+            if (lastEnd != Clip.OneLineContent.Length)
+            {
+                inlines.Add(new Run(Clip.OneLineContent.Substring(lastEnd)));
+            }
+            RichTitle = inlines;
         }
 
         public int CompareTo(object other)

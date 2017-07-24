@@ -14,6 +14,10 @@ namespace clipman.Clipboard
         static char TrimmingCharacter = '\u2026';
 
         String processedContent;
+        public String OneLineContent
+        {
+            get { return processedContent; }
+        }
         String content;
         /// <summary>
         /// Actual content of the clip as copied from the clipboard.
@@ -62,30 +66,12 @@ namespace clipman.Clipboard
         {
             get
             {
-                return TitlePrefix;
+                return defaultTitle;
             }
             protected set
             {
-                TitlePrefix = value;
+                defaultTitle = value;
             }
-        }
-
-        public String TitlePrefix
-        {
-            get;
-            set;
-        }
-
-        public String TitleMain
-        {
-            get;
-            set;
-        }
-
-        public String TitleSuffix
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -167,7 +153,7 @@ namespace clipman.Clipboard
         public bool Matches(String searchString)
         {
             Title = defaultTitle;
-            TitleMain = TitleSuffix = "";
+            //TitleMain = TitleSuffix = "";
 
             if (string.IsNullOrWhiteSpace(searchString))
             {
@@ -206,8 +192,8 @@ namespace clipman.Clipboard
             // If the length is equal,
             if (searchLength == contentLength)
             {
-                TitleMain = defaultTitle;
-                TitlePrefix = TitleSuffix = "";
+                //TitleMain = defaultTitle;
+                //TitlePrefix = TitleSuffix = "";
                 return;
             }
 
@@ -264,23 +250,23 @@ namespace clipman.Clipboard
             // Add ... if some of the head of the string is cut off.
             if (start == 0)
             {
-                TitlePrefix = prefix;
+                //TitlePrefix = prefix;
             }
             else
             {
-                TitlePrefix = Clip.TrimmingCharacter + prefix;
+                //TitlePrefix = Clip.TrimmingCharacter + prefix;
             }
 
-            TitleMain = foundString;
+            //TitleMain = foundString;
 
             // Add ... if some of the tail of the string is cut off.
             if (end == contentLength)
             {
-                TitleSuffix = suffix;
+                //TitleSuffix = suffix;
             }
             else
             {
-                TitleSuffix = suffix + Clip.TrimmingCharacter;
+                //TitleSuffix = suffix + Clip.TrimmingCharacter;
             }
         }
 

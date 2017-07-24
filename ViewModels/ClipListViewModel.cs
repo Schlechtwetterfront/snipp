@@ -38,7 +38,19 @@ namespace clipman.ViewModels
             set
             {
                 filterString = value.Trim().ToLower();
+                bool isEmpty = string.IsNullOrEmpty(filterString);
                 RaisePropertyChanged("FilterString");
+                foreach (var c in Clips)
+                {
+                    if (isEmpty)
+                    {
+                        c.ResetRichTitle();
+                    }
+                    else
+                    {
+                        c.FuzzyMatches(filterString);
+                    }
+                }
                 ClipView.Refresh();
             }
         }
@@ -70,10 +82,11 @@ namespace clipman.ViewModels
         {
             Clips = new ObservableCollection<ClipViewModel>();
             ClipView = CollectionViewSource.GetDefaultView(Clips) as ListCollectionView;
-            ClipView.IsLiveFiltering = true;
-            ClipView.Filter = Filter;
+
             ClipView.IsLiveSorting = true;
             ClipView.LiveSortingProperties.Add("Pinned");
+
+            ClipView.SortDescriptions.Add(new SortDescription("SearchScore", ListSortDirection.Descending));
             ClipView.SortDescriptions.Add(new SortDescription("Pinned", ListSortDirection.Descending));
             ClipView.SortDescriptions.Add(new SortDescription("Clip", ListSortDirection.Descending));
 
