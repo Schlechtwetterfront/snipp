@@ -127,7 +127,9 @@ namespace clipman.ViewModels
             if (Clips.Count >= ClipLimit && ClipLimit != 0)
             {
                 // If the limit is reached, throw out the oldest one.
-                Clips.RemoveAt(0);
+                // Make sure it is not pinned.
+                var first = Clips.Where((c) => !c.Pinned).First();
+                Clips.Remove(first);
             }
             Clips.Add(viewModel);
         }
