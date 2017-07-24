@@ -44,6 +44,7 @@ namespace clipman.ViewModels
                 {
                     if (isEmpty)
                     {
+                        c.SearchScore = 0;
                         c.ResetRichTitle();
                     }
                     else
