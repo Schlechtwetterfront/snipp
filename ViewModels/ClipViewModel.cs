@@ -158,6 +158,7 @@ namespace clipman.ViewModels
         public ClipViewModel(Clipboard.Clip clip)
         {
             this.Clip = clip;
+            ResetRichTitle();
         }
 
         public bool FuzzyMatches(String searchKey)
