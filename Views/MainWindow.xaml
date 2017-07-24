@@ -23,10 +23,10 @@
             <DoubleAnimationUsingKeyFrames Duration="0:0:0.666"
                                            Storyboard.TargetName="Taskbar"
                                            Storyboard.TargetProperty="ProgressValue">
-                <SplineDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
-                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
-                <SplineDoubleKeyFrame KeyTime="0:0:0.666" Value="0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                <LinearDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0.666" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
