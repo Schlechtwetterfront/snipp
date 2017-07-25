@@ -114,12 +114,13 @@
                  FontSize="16"
                  FontFamily="Segoe UI Semilight"
                  BorderThickness="1"
-                 BorderBrush="DarkGray"
+                 BorderBrush="{DynamicResource Border}"
                  Margin="10,10,5,5"
                  VerticalAlignment="Top"
                  TextChanged="searchBox_Changed"
                  Foreground="{DynamicResource TitleText}" Cursor="IBeam"
                  KeyDown="SearchBox_KeyDown"
+                 Background="{DynamicResource Background.Active}"
                  PreviewKeyDown="SearchBox_KeyDown"
                  
                  >

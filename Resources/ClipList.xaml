@@ -36,8 +36,8 @@
 
     <Style x:Key="FlatContextMenu" TargetType="ContextMenu">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="Background" Value="{DynamicResource Background}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="2"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -82,12 +82,12 @@
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0,6"/>
         <Setter Property="FontFamily" Value="{StaticResource TextFont}"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="{StaticResource TitleText}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TitleText}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
@@ -108,7 +108,7 @@
                                               />
                             <TextBlock x:Name="InputGestureText" Grid.Column="2" Text="{TemplateBinding InputGestureText}" Uid="TextBlock_10"
                                        Margin="{TemplateBinding Padding}"
-                                       Foreground="{StaticResource Text}"/>
+                                       Foreground="{DynamicResource Text}"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -119,7 +119,7 @@
                             <Setter Property="Fill" TargetName="GlyphPanel" Value="{Binding Source={StaticResource Settings}, Path=Default.Accent}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource Item.SelectedActive.Background}"/>
+                            <Setter Property="Background" Value="{DynamicResource Background.Hover}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -148,26 +148,7 @@
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <MultiTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="{StaticResource AnimationDuration}"
-                                                            To="{StaticResource Item.MouseOver.BackgroundColor}"
-                                                            Storyboard.TargetProperty="Background.Color"
-                                                            Storyboard.TargetName="Fg"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiTrigger.EnterActions>
-                            <MultiTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ColorAnimation Duration="{StaticResource AnimationDuration}"
-                                                            To="Transparent"
-                                                            Storyboard.TargetProperty="Background.Color"
-                                                            Storyboard.TargetName="Fg"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiTrigger.ExitActions>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Background.Hover}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{Binding Source={StaticResource Settings}, Path=Default.Accent}"/>
                         </MultiTrigger>
                         <MultiTrigger>
@@ -175,7 +156,7 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Background.Selected}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent}"/>
                         </MultiTrigger>
                         <MultiTrigger>
@@ -183,12 +164,9 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Background}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Background.Selected}"/>
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent}"/>
                         </MultiTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

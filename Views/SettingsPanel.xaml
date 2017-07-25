@@ -9,25 +9,29 @@
              d:DesignHeight="600" d:DesignWidth="420"
              x:Name="settingsPanel">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="TitleText" Color="Black"/>
-        <SolidColorBrush x:Key="Text" Color="#FF666666"/>
-
         <Style x:Key="SettingLabel" TargetType="{x:Type TextBlock}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="2"/>
             <Setter Property="Padding" Value="5"/>
+            <Setter Property="Foreground" Value="{DynamicResource TitleText}"/>
         </Style>
 
         <Style x:Key="SettingBox" TargetType="{x:Type TextBox}">
             <Setter Property="Margin" Value="2"/>
             <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource Border}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{DynamicResource TitleText}"/>
+            <Setter Property="Background" Value="{DynamicResource Background.Active}"/>
         </Style>
 
         <Style x:Key="SettingComboBox" TargetType="{x:Type ComboBox}">
             <Setter Property="Margin" Value="2"/>
             <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource Border}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{DynamicResource TitleText}"/>
+            <Setter Property="Background" Value="{DynamicResource Background.Active}"/>
         </Style>
     </UserControl.Resources>
     <Border Background="{DynamicResource Background}" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
@@ -174,11 +178,11 @@
                         </TextBlock>
                         <ComboBox Grid.Row="3" Grid.Column="1"
                                   Style="{StaticResource SettingComboBox}"
-                                  SelectedValue="{Binding Source={StaticResource Settings}, Path=Default.Theme}"
-                                  >
-                            <ComboBoxItem Content="Light" />
-                            <ComboBoxItem Content="Dark" />
-                        </ComboBox>
+                                  DisplayMemberPath="Name"
+                                  ItemsSource="{Binding Themes}"
+                                  SelectedItem="{Binding Settings.CurrentTheme}"
+                                  Template="{DynamicResource FlatComboBoxTemplate}"
+                                  />
                     </Grid>
 
                     <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="5">

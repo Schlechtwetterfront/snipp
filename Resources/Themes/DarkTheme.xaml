@@ -1,7 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:clipman.Resources">
+                    xmlns:local="clr-namespace:clipman.Resources.Themes">
 
-    <SolidColorBrush x:Key="Background" Color="#FF333333"/>
+    <SolidColorBrush x:Key="Background" Color="#FF444444"/>
+    <SolidColorBrush x:Key="Background.Active" Color="#FF333333"/>
+    <SolidColorBrush x:Key="Background.Hover" Color="#FF404040"/>
+    <SolidColorBrush x:Key="Background.Selected" Color="#FF393939"/>
+
+    <SolidColorBrush x:Key="Border" Color="#FF5B5D63"/>
+
+    <SolidColorBrush x:Key="TitleText" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="Text" Color="#FF999999"/>
 
 </ResourceDictionary>

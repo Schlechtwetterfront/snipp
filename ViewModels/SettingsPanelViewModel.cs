@@ -1,4 +1,6 @@
-﻿using System;
+﻿using clipman.Settings;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace clipman.ViewModels
@@ -10,6 +12,11 @@ namespace clipman.ViewModels
         {
             get { return settings; }
             private set { settings = value; RaisePropertyChanged("Settings"); }
+        }
+
+        public List<Theme> Themes
+        {
+            get { return Theme.Themes; }
         }
 
         public SettingsPanelViewModel(Settings.Settings settings)

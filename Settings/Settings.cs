@@ -88,6 +88,13 @@ namespace clipman.Settings
             }
         }
 
+        protected Theme currentTheme;
+        public Theme CurrentTheme
+        {
+            get { return currentTheme; }
+            set { currentTheme = value;  RaisePropertyChanged("CurrentTheme"); }
+        }
+
         public Settings()
         {
             Utility.Logging.Log("hi");

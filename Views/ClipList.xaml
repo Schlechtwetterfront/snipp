@@ -106,13 +106,13 @@
                         <local:RichTextBlock Grid.ColumnSpan="4"
                                    FontSize="14"
                                    Margin="0,0,0,8"
-                                   Foreground="{StaticResource TitleText}" DockPanel.Dock="Top"
+                                   Foreground="{DynamicResource TitleText}" DockPanel.Dock="Top"
                                    ToolTipService.ShowDuration="20000"
                                    InlineList="{Binding RichTitle}">
                             <local:RichTextBlock.ToolTip>
                                 <ToolTip>
                                     <TextBlock FontFamily="{StaticResource TextFont}"
-                                               Foreground="{StaticResource Text}"
+                                               Foreground="{DynamicResource Text}"
                                                FontSize="12">
                                         <Run Text="{Binding CreatedString, Mode=OneWay}"
                                              /> -
@@ -121,7 +121,7 @@
                                         <LineBreak/>
                                         <Run Text="{Binding Clip.Content, Mode=OneWay}"
                                              FontFamily="{StaticResource CodeFont}"
-                                             Foreground="{StaticResource TitleText}"
+                                             Foreground="{DynamicResource TitleText}"
                                              FontSize="14"
                                              />
                                     </TextBlock>
@@ -131,7 +131,7 @@
                         <DockPanel Margin="0" LastChildFill="False">
                             <TextBlock x:Name="created"
                                        Text="{Binding CreatedString, Mode=OneWay}"
-                                       Foreground="{StaticResource Text}"
+                                       Foreground="{DynamicResource Text}"
                                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
                                        ToolTip="{Binding Clip.Created}"
                                        />
@@ -144,11 +144,11 @@
                             <Control x:Name="pinStatus" Template="{StaticResource PinIcon}"
                                      Margin="8,0,0,0"
                                      DockPanel.Dock="Right"
-                                     Background="#0F000000"
+                                     Background="{DynamicResource Border}"
                                      />
 
                             <TextBlock x:Name="shortcut" 
-                                       Foreground="{StaticResource Text}"
+                                       Foreground="{DynamicResource Text}"
                                        Text="{Binding NumberShortcutText}"
                                        DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                        />

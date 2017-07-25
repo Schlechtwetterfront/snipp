@@ -1,4 +1,5 @@
-﻿using clipman.Utility;
+﻿using clipman.Settings;
+using clipman.Utility;
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -221,39 +222,42 @@ namespace clipman
 
         void InitializeTheme()
         {
+            var themes = Theme.Themes;
             String themeKey = Properties.Settings.Default["Theme"] as String;
-            SetTheme(themeKey);
+            Utility.Logging.Log(themeKey);
+            Theme theme = themes.Find((t) => t.Name == themeKey);
+
+            if (theme != null)
+            {
+                SetTheme(theme);
+            }
+            else
+            {
+                SetTheme(themes[0]);
+            }
 
             settings.PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName == "Theme")
+                if (e.PropertyName == "CurrentTheme" && settings.CurrentTheme != null)
                 {
-                    SetTheme(Properties.Settings.Default["Theme"] as String);
+                    SetTheme(settings.CurrentTheme);
                 }
             };
         }
 
-        void SetTheme(String themeKey)
+        void SetTheme(Theme theme)
         {
-            Utility.Logging.Log(themeKey);
-            ResourceDictionary dict = null;
-            if (themeKey == "Light")
-            {
-                dict = new ResourceDictionary();
-                dict.Source = new Uri(@"Resources\Themes\LightTheme.xaml", UriKind.Relative);
-            }
-            else if (themeKey == "Dark")
-            {
-                dict = new ResourceDictionary();
-                dict.Source = new Uri(@"Resources\Themes\DarkTheme.xaml", UriKind.Relative);
-            }
+            Console.WriteLine("theme: " + theme);
+            var dict = new ResourceDictionary();
+            dict.Source = new Uri(theme.FilePath, UriKind.Relative);
 
             if (currentTheme != null && dict != null)
             {
                 Application.Current.Resources.MergedDictionaries.Remove(currentTheme);
             }
 
-            if (dict != null) {
+            if (dict != null)
+            {
                 currentTheme = dict;
                 Application.Current.Resources.MergedDictionaries.Add(dict);
             }
