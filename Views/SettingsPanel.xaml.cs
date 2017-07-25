@@ -23,6 +23,8 @@ namespace clipman.Views
         public SettingsPanel()
         {
             InitializeComponent();
+
+            TextOptions.SetTextFormattingMode(this, TextFormattingMode.Display);
         }
     }
 }

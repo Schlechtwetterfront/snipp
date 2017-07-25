@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace clipman.Views
@@ -31,6 +32,8 @@ namespace clipman.Views
         public ClipList()
         {
             InitializeComponent();
+
+            TextOptions.SetTextFormattingMode(this, TextFormattingMode.Display);
         }
 
         private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)

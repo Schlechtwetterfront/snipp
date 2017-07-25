@@ -30,6 +30,8 @@ namespace clipman
             get { return settings; }
         }
 
+        #region Commands
+
         /// <summary>
         /// Copy nth clip by pressing Ctrl+N.
         /// </summary>
@@ -149,6 +151,8 @@ namespace clipman
                 }));
             }
         }
+
+        #endregion
 
         /// <summary>
         /// Delay after last input until search is started.
