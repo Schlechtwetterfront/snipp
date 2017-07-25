@@ -4,16 +4,16 @@
     <ControlTemplate x:Key="SearchBoxStyle" TargetType="{x:Type TextBoxBase}">
         <Border Background="{TemplateBinding Background}" 
                 x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
             <Border.Effect>
-                <DropShadowEffect x:Name="Shadow" Direction="290" ShadowDepth="2" BlurRadius="4" Opacity="0.35"/>
+                <DropShadowEffect x:Name="Shadow" Direction="290" ShadowDepth="2" BlurRadius="4" Opacity="0.2"/>
             </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ScrollViewer x:Name="PART_ContentHost" Margin="12,8"/>
+                <ScrollViewer x:Name="PART_ContentHost" Margin="10,6"/>
                 <Image Source="/clipman;component/Resources/search-icon.png"
                        Width="26" Height="26"
                        Grid.Column="1"
@@ -28,7 +28,7 @@
                             <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
                                                                Storyboard.TargetProperty="(Effect).Opacity"
                                                                Storyboard.TargetName="Bd">
-                                <SplineDoubleKeyFrame KeyTime="{StaticResource AnimationTime}" Value="0.35"/>
+                                <SplineDoubleKeyFrame KeyTime="{StaticResource AnimationTime}" Value="0.2"/>
                             </DoubleAnimationUsingKeyFrames>
                             <DoubleAnimationUsingKeyFrames BeginTime="0:0:0"
                                                                Storyboard.TargetProperty="(Effect).ShadowDepth"
