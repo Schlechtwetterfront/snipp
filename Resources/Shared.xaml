@@ -8,12 +8,19 @@
 
     <KeyTime x:Key="AnimationTime">0:0:0.1</KeyTime>
     <Duration x:Key="AnimationDuration">0:0:0.1</Duration>
+
     <SolidColorBrush x:Key="TitleText" Color="#FF333333"/>
+    <SolidColorBrush x:Key="DarkMode_TitleText" Color="#FFDDDDDD"/>
+
     <SolidColorBrush x:Key="Text" Color="#FFAAAAAA"/>
+    <SolidColorBrush x:Key="DarkMode_Text" Color="#FF999999"/>
+
+    <!--<SolidColorBrush x:Key="Background" Color="#FFF6F6F6"/>-->
+    <SolidColorBrush x:Key="Background.Normal" Color="#FFF6F6F6"/>
+    <SolidColorBrush x:Key="Background.Dark" Color="#FF333333"/>
+
     <SolidColorBrush x:Key="Accent" Color="Orchid"/>
-    <Color x:Key="AccentColor" R="218" G="112" B="214" A="255"/>
     <SolidColorBrush x:Key="DarkAccent" Color="DarkOrchid"/>
-    <Color x:Key="DarkAccentColor" R="153" G="50" B="204" A="255"/>
 
     <FontFamily x:Key="TextFont">Segoe UI</FontFamily>
     <FontFamily x:Key="CodeFont">Consolas</FontFamily>

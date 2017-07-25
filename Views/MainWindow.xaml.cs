@@ -17,6 +17,7 @@ namespace clipman
     /// </summary>
     public partial class MainWindow : Window
     {
+
         const int settingsPanelOffset = 200;
 
         ViewModels.ClipListViewModel clipViewModel;
@@ -164,6 +165,8 @@ namespace clipman
 
         int focusHotkeyId;
 
+        ResourceDictionary currentTheme;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -186,6 +189,8 @@ namespace clipman
             keyboardMonitor.KeyPressed += OnHotkeyPressed;
 
             InitializeKeybindings();
+
+            InitializeTheme();
 
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
         }
@@ -212,6 +217,46 @@ namespace clipman
                     );
                 }
             };
+        }
+
+        void InitializeTheme()
+        {
+            String themeKey = Properties.Settings.Default["Theme"] as String;
+            SetTheme(themeKey);
+
+            settings.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "Theme")
+                {
+                    SetTheme(Properties.Settings.Default["Theme"] as String);
+                }
+            };
+        }
+
+        void SetTheme(String themeKey)
+        {
+            Utility.Logging.Log(themeKey);
+            ResourceDictionary dict = null;
+            if (themeKey == "Light")
+            {
+                dict = new ResourceDictionary();
+                dict.Source = new Uri(@"Resources\Themes\LightTheme.xaml", UriKind.Relative);
+            }
+            else if (themeKey == "Dark")
+            {
+                dict = new ResourceDictionary();
+                dict.Source = new Uri(@"Resources\Themes\DarkTheme.xaml", UriKind.Relative);
+            }
+
+            if (currentTheme != null && dict != null)
+            {
+                Application.Current.Resources.MergedDictionaries.Remove(currentTheme);
+            }
+
+            if (dict != null) {
+                currentTheme = dict;
+                Application.Current.Resources.MergedDictionaries.Add(dict);
+            }
         }
 
         #region Callbacks

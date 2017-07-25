@@ -10,7 +10,9 @@
         mc:Ignorable="d"
         Title="{StaticResource AppName}" Height="600" Width="420"
         Icon="..\Resources\icon.png"
-        FocusManager.FocusedElement="{Binding ElementName=searchBox}" Closing="Window_Closing"
+        FocusManager.FocusedElement="{Binding ElementName=searchBox}"
+        Closing="Window_Closing"
+        Background="{DynamicResource Background}"
         >
     <Window.Resources>
         <Storyboard x:Key="BlinkTaskBarOverlay">

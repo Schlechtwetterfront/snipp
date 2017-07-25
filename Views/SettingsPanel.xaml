@@ -23,8 +23,14 @@
             <Setter Property="Padding" Value="5"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+
+        <Style x:Key="SettingComboBox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
     </UserControl.Resources>
-    <Border Background="White" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
+    <Border Background="{DynamicResource Background}" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
 
         <Grid Margin="10">
             <Grid.RowDefinitions>
@@ -70,53 +76,53 @@
 
                         <TextBlock Text="Copy snippet" Grid.Row="0" Style="{StaticResource SettingLabel}"/>
                         <TextBox Text="Double-click" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                                 Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
                         <TextBlock Text="Copy selected snippet" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
                         <TextBox Text="Enter" Grid.Row="1" Grid.Column="1"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                                 Style="{StaticResource SettingBox}" IsEnabled="False"/>
                         <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.CopyShortcut, UpdateSourceTrigger=PropertyChanged}"
-                         Grid.Row="1" Grid.Column="2"
-                         Style="{StaticResource SettingBox}"
-                         Padding="5"/>
+                                               Grid.Row="1" Grid.Column="2"
+                                               Style="{StaticResource SettingBox}"
+                                               Padding="5"/>
 
                         <TextBlock Text="Pin selected snippet" Grid.Row="2" Style="{StaticResource SettingLabel}"/>
                         <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.PinShortcut, UpdateSourceTrigger=PropertyChanged}"
-                         Grid.Row="2" Grid.Column="2"
-                         Style="{StaticResource SettingBox}"/>
+                                               Grid.Row="2" Grid.Column="2"
+                                               Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Text="Delete selected snippet" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
                         <TextBox Text="Delete" Grid.Row="3" Grid.Column="1"
-                         Style="{StaticResource SettingBox}" IsEnabled="False"/>
+                                 Style="{StaticResource SettingBox}" IsEnabled="False"/>
                         <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.DeleteShortcut, UpdateSourceTrigger=PropertyChanged}"
-                         Grid.Row="3" Grid.Column="2"
-                         Style="{StaticResource SettingBox}"/>
+                                               Grid.Row="3" Grid.Column="2"
+                                               Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Text="Focus search bar" Grid.Row="4" Style="{StaticResource SettingLabel}"/>
                         <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusShortcut, UpdateSourceTrigger=PropertyChanged}"
-                         Grid.Row="4" Grid.Column="2"
-                         Style="{StaticResource SettingBox}"/>
+                                               Grid.Row="4" Grid.Column="2"
+                                               Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Text="Focus and clear search bar" Grid.Row="5" Style="{StaticResource SettingLabel}"/>
                         <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.ClearAndFocusShortcut, UpdateSourceTrigger=PropertyChanged}"
-                         Grid.Row="5" Grid.Column="2"
-                         Style="{StaticResource SettingBox}"/>
+                                               Grid.Row="5" Grid.Column="2"
+                                               Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Text="Bring window to front (global)"
-                       Grid.Row="6" Style="{StaticResource SettingLabel}"/>
+                                   Grid.Row="6" Style="{StaticResource SettingLabel}"/>
                         <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusWindowShortcut, UpdateSourceTrigger=PropertyChanged}"
-                         Grid.Row="6" Grid.Column="2"
-                         Style="{StaticResource SettingBox}"/>
+                                               Grid.Row="6" Grid.Column="2"
+                                               Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Text="Quit"
-                       Grid.Row="7" Style="{StaticResource SettingLabel}"/>
+                                   Grid.Row="7" Style="{StaticResource SettingLabel}"/>
                         <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.QuitShortcut, UpdateSourceTrigger=PropertyChanged}"
-                         Grid.Row="7" Grid.Column="2"
-                         Style="{StaticResource SettingBox}"/>
+                                               Grid.Row="7" Grid.Column="2"
+                                               Style="{StaticResource SettingBox}"/>
                     </Grid>
 
                     <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="3">
-                Configuration
+                        Configuration
                     </TextBlock>
                     <Grid Grid.Row="4" Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
@@ -136,34 +142,47 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                    Snippet Limit<LineBreak/>
-                    <Run Foreground="{StaticResource Text}">Will delete old snippets after this limit is reached</Run>
+                            Snippet Limit<LineBreak/>
+                            <Run Foreground="{StaticResource Text}">Will delete old snippets after this limit is reached</Run>
                         </TextBlock>
                         <TextBox Grid.Row="0" Grid.Column="1"
-                         Text="{Binding Source={StaticResource Settings}, Path=Default.ClipLimit}"
-                         Style="{StaticResource SettingBox}"/>
+                                 Text="{Binding Source={StaticResource Settings}, Path=Default.ClipLimit}"
+                                 Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Grid.Row="1" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                    Accent Color
-                    <LineBreak/>
-                    <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
+                            Accent Color
+                            <LineBreak/>
+                            <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
                         </TextBlock>
                         <TextBox Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Source={StaticResource Settings}, Path=Default.Accent, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource SettingBox}"/>
+                                 Text="{Binding Source={StaticResource Settings}, Path=Default.Accent, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Grid.Row="2" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                    Dark Accent Color
-                    <LineBreak/>
-                    <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
+                            Dark Accent Color
+                            <LineBreak/>
+                            <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
                         </TextBlock>
                         <TextBox Grid.Row="2" Grid.Column="1"
-                         Text="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource SettingBox}"/>
+                                 Text="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource SettingBox}"/>
+
+                        <TextBlock Grid.Row="3" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
+                            Theme
+                            <LineBreak/>
+                            <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
+                        </TextBlock>
+                        <ComboBox Grid.Row="3" Grid.Column="1"
+                                  Style="{StaticResource SettingComboBox}"
+                                  SelectedValue="{Binding Source={StaticResource Settings}, Path=Default.Theme}"
+                                  >
+                            <ComboBoxItem Content="Light" />
+                            <ComboBoxItem Content="Dark" />
+                        </ComboBox>
                     </Grid>
 
                     <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="5">
-                About
+                        About
                     </TextBlock>
                     <Grid Grid.Row="6" Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
@@ -183,9 +202,9 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                    Version <Run Text="{StaticResource AppVersion}"/>
-                    -
-                    <Run Foreground="{StaticResource Text}">github.com/Schlechtwetterfront/snipp</Run>
+                            Version <Run Text="{StaticResource AppVersion}"/>
+                            -
+                            <Run Foreground="{StaticResource Text}">github.com/Schlechtwetterfront/snipp</Run>
                         </TextBlock>
                     </Grid>
                 </Grid>

@@ -98,7 +98,7 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemsSource="{Binding Path=ClipView}"
                  ItemContainerStyle="{StaticResource ClipListItem}" HorizontalContentAlignment="Stretch"
-                 SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
+                 SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" Background="{x:Null}"
                  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
