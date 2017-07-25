@@ -33,6 +33,103 @@
             <Setter Property="Foreground" Value="{DynamicResource TitleText}"/>
             <Setter Property="Background" Value="{DynamicResource Background.Active}"/>
         </Style>
+
+        <Style x:Key="Heading" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="Foreground" Value="{DynamicResource TitleText}"/>
+        </Style>
+        
+        <ControlTemplate x:Key="FlatComboBoxTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup" AllowsTransparency="True" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
+                    <Themes:SystemDropShadowChrome x:Name="shadow" Color="Transparent" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                        <Border x:Name="DropDownBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="DropDownScrollViewer">
+                                <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                        <Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=DropDownBorder}" Height="{Binding ActualHeight, ElementName=DropDownBorder}" Width="{Binding ActualWidth, ElementName=DropDownBorder}"/>
+                                    </Canvas>
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Themes:SystemDropShadowChrome>
+                </Popup>
+                <ToggleButton x:Name="toggleButton" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="IsTabStop" Value="False"/>
+                            <Setter Property="Focusable" Value="False"/>
+                            <Setter Property="ClickMode" Value="Press"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                        <Border x:Name="templateRoot"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                SnapsToDevicePixels="True"
+                                                Background="{TemplateBinding Background}">
+                                            <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Right" Margin="0" SnapsToDevicePixels="True" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
+                                                <Path x:Name="Arrow" Data="F1M0,0L2.667,2.66665 5.3334,0 5.3334,-1.78168 2.6667,0.88501 0,-1.78168 0,0z" Fill="#FF606060" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Fill" TargetName="Arrow" Value="Black"/>
+                                            </Trigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ComboBox}}}" Value="false"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF7EB4EA"/>
+                                            </MultiDataTrigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Fill" TargetName="Arrow" Value="Black"/>
+                                            </Trigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsPressed, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="BorderBrush" TargetName="templateRoot" Value="#FF569DE5"/>
+                                            </MultiDataTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="True">
+                    <Setter Property="Margin" TargetName="shadow" Value="0,0,5,5"/>
+                    <Setter Property="Color" TargetName="shadow" Value="#71000000"/>
+                </Trigger>
+                <Trigger Property="HasItems" Value="False">
+                    <Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="True"/>
+                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                </MultiTrigger>
+                <Trigger Property="CanContentScroll" SourceName="DropDownScrollViewer" Value="False">
+                    <Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                    <Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </UserControl.Resources>
     <Border Background="{DynamicResource Background}" BorderBrush="DarkGray" RenderTransformOrigin="1,0">
 
@@ -41,9 +138,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock FontFamily="Segoe UI Light" FontSize="22" Margin="0,0,0,10">
-                <Run Text="{StaticResource AppName}"/> <Run FontSize="12" Foreground="{StaticResource Text}" Text="{StaticResource AppVersion}"/>
-            </TextBlock>
+            <TextBlock FontFamily="Segoe UI Light" FontSize="22" Margin="0,0,0,10" Foreground="{DynamicResource TitleText}"><Run Text="{StaticResource AppName}"/><Run Text=" "/><Run FontSize="12" Foreground="{DynamicResource Text}" Text="{StaticResource AppVersion}"/></TextBlock>
             <ScrollViewer Grid.Row="1" PanningMode="VerticalOnly" VerticalScrollBarVisibility="Auto">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -56,9 +151,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="1">
-                        Key Bindings
-                    </TextBlock>
+                    <TextBlock Style="{StaticResource Heading}" Grid.Row="1"><Run Text="Key Bindings"/></TextBlock>
 
                     <Grid Grid.Row="2" Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
@@ -78,56 +171,54 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Copy snippet" Grid.Row="0" Style="{StaticResource SettingLabel}"/>
+                        <TextBlock Text="Copy snippet" Grid.Row="0" Style="{DynamicResource SettingLabel}"/>
                         <TextBox Text="Double-click" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                                  Style="{StaticResource SettingBox}" IsEnabled="False"/>
 
-                        <TextBlock Text="Copy selected snippet" Grid.Row="1" Style="{StaticResource SettingLabel}"/>
+                        <TextBlock Text="Copy selected snippet" Grid.Row="1" Style="{DynamicResource SettingLabel}"/>
                         <TextBox Text="Enter" Grid.Row="1" Grid.Column="1"
                                  Style="{StaticResource SettingBox}" IsEnabled="False"/>
-                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.CopyShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <local:KeyGestureInput Text="{Binding Default.CopyShortcut, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                                Grid.Row="1" Grid.Column="2"
                                                Style="{StaticResource SettingBox}"
                                                Padding="5"/>
 
-                        <TextBlock Text="Pin selected snippet" Grid.Row="2" Style="{StaticResource SettingLabel}"/>
-                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.PinShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="Pin selected snippet" Grid.Row="2" Style="{DynamicResource SettingLabel}"/>
+                        <local:KeyGestureInput Text="{Binding Default.PinShortcut, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                                Grid.Row="2" Grid.Column="2"
                                                Style="{StaticResource SettingBox}"/>
 
-                        <TextBlock Text="Delete selected snippet" Grid.Row="3" Style="{StaticResource SettingLabel}"/>
+                        <TextBlock Text="Delete selected snippet" Grid.Row="3" Style="{DynamicResource SettingLabel}"/>
                         <TextBox Text="Delete" Grid.Row="3" Grid.Column="1"
                                  Style="{StaticResource SettingBox}" IsEnabled="False"/>
-                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.DeleteShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <local:KeyGestureInput Text="{Binding Default.DeleteShortcut, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                                Grid.Row="3" Grid.Column="2"
                                                Style="{StaticResource SettingBox}"/>
 
-                        <TextBlock Text="Focus search bar" Grid.Row="4" Style="{StaticResource SettingLabel}"/>
-                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="Focus search bar" Grid.Row="4" Style="{DynamicResource SettingLabel}"/>
+                        <local:KeyGestureInput Text="{Binding Default.FocusShortcut, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                                Grid.Row="4" Grid.Column="2"
                                                Style="{StaticResource SettingBox}"/>
 
-                        <TextBlock Text="Focus and clear search bar" Grid.Row="5" Style="{StaticResource SettingLabel}"/>
-                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.ClearAndFocusShortcut, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="Focus and clear search bar" Grid.Row="5" Style="{DynamicResource SettingLabel}"/>
+                        <local:KeyGestureInput Text="{Binding Default.ClearAndFocusShortcut, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                                Grid.Row="5" Grid.Column="2"
                                                Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Text="Bring window to front (global)"
-                                   Grid.Row="6" Style="{StaticResource SettingLabel}"/>
-                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.FocusWindowShortcut, UpdateSourceTrigger=PropertyChanged}"
+                                   Grid.Row="6" Style="{DynamicResource SettingLabel}"/>
+                        <local:KeyGestureInput Text="{Binding Default.FocusWindowShortcut, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                                Grid.Row="6" Grid.Column="2"
                                                Style="{StaticResource SettingBox}"/>
 
                         <TextBlock Text="Quit"
-                                   Grid.Row="7" Style="{StaticResource SettingLabel}"/>
-                        <local:KeyGestureInput Text="{Binding Source={StaticResource Settings}, Path=Default.QuitShortcut, UpdateSourceTrigger=PropertyChanged}"
+                                   Grid.Row="7" Style="{DynamicResource SettingLabel}"/>
+                        <local:KeyGestureInput Text="{Binding Default.QuitShortcut, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                                Grid.Row="7" Grid.Column="2"
                                                Style="{StaticResource SettingBox}"/>
                     </Grid>
 
-                    <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="3">
-                        Configuration
-                    </TextBlock>
+                    <TextBlock Style="{StaticResource Heading}" Grid.Row="3"><Run Text="Configuration"/></TextBlock>
                     <Grid Grid.Row="4" Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition MinWidth="150" />
@@ -145,36 +236,23 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                            Snippet Limit<LineBreak/>
-                            <Run Foreground="{StaticResource Text}">Will delete old snippets after this limit is reached</Run>
-                        </TextBlock>
+                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{DynamicResource SettingLabel}"><Run Text="Snippet Limit"/><LineBreak/><Run Foreground="{DynamicResource Text}" Text="Will delete old snippets after this limit is reached"/></TextBlock>
                         <TextBox Grid.Row="0" Grid.Column="1"
-                                 Text="{Binding Source={StaticResource Settings}, Path=Default.ClipLimit}"
+                                 Text="{Binding Default.ClipLimit, Source={StaticResource Settings}}"
                                  Style="{StaticResource SettingBox}"/>
 
-                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                            Accent Color
-                            <LineBreak/>
-                            <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
-                        </TextBlock>
+                        <TextBlock Grid.Row="1" TextWrapping="Wrap" Style="{DynamicResource SettingLabel}"><Run Text="Accent Color"/><LineBreak/><Run Foreground="{DynamicResource Text}" Text="Color names (Green, Blue, etc) or #AARRGGBB colors"/></TextBlock>
                         <TextBox Grid.Row="1" Grid.Column="1"
-                                 Text="{Binding Source={StaticResource Settings}, Path=Default.Accent, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Default.Accent, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource SettingBox}"/>
 
-                        <TextBlock Grid.Row="2" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                            Dark Accent Color
-                            <LineBreak/>
-                            <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
-                        </TextBlock>
+                        <TextBlock Grid.Row="2" TextWrapping="Wrap" Style="{DynamicResource SettingLabel}"><Run Text="Dark Accent Color"/><LineBreak/><Run Foreground="{DynamicResource Text}" Text="Color names (Green, Blue, etc) or #AARRGGBB colors"/></TextBlock>
                         <TextBox Grid.Row="2" Grid.Column="1"
-                                 Text="{Binding Source={StaticResource Settings}, Path=Default.DarkAccent, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Default.DarkAccent, Source={StaticResource Settings}, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource SettingBox}"/>
 
-                        <TextBlock Grid.Row="3" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                            Theme
-                            <LineBreak/>
-                            <Run Foreground="{StaticResource Text}">Color names (Green, Blue, etc) or #AARRGGBB colors</Run>
+                        <TextBlock Grid.Row="3" TextWrapping="Wrap" Style="{DynamicResource SettingLabel}">
+                            <Run Text="Theme"/>
                         </TextBlock>
                         <ComboBox Grid.Row="3" Grid.Column="1"
                                   Style="{StaticResource SettingComboBox}"
@@ -185,9 +263,7 @@
                                   />
                     </Grid>
 
-                    <TextBlock FontFamily="Segoe UI Light" FontSize="16" Margin="0,0,0,5" Grid.Row="5">
-                        About
-                    </TextBlock>
+                    <TextBlock Style="{StaticResource Heading}" Grid.Row="5"><Run Text="About"/></TextBlock>
                     <Grid Grid.Row="6" Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition MinWidth="150" />
@@ -205,11 +281,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource SettingLabel}">
-                            Version <Run Text="{StaticResource AppVersion}"/>
-                            -
-                            <Run Foreground="{StaticResource Text}">github.com/Schlechtwetterfront/snipp</Run>
-                        </TextBlock>
+                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{DynamicResource SettingLabel}"><Run Text="Version "/><Run Text="{StaticResource AppVersion}"/><Run Text=" - "/><Run Foreground="{DynamicResource Text}" Text="github.com/Schlechtwetterfront/snipp"/></TextBlock>
                     </Grid>
                 </Grid>
             </ScrollViewer>
