@@ -111,7 +111,7 @@
         </Grid.ColumnDefinitions>
         <TextBox Template="{StaticResource SearchBoxStyle}"
                  x:Name="searchBox"
-                 FontSize="16"
+                 FontSize="14"
                  FontFamily="Segoe UI Semilight"
                  BorderThickness="1"
                  BorderBrush="{DynamicResource Border}"
@@ -122,7 +122,6 @@
                  KeyDown="SearchBox_KeyDown"
                  Background="{DynamicResource Background.Active}"
                  PreviewKeyDown="SearchBox_KeyDown"
-                 
                  >
             <TextBox.Style>
                 <Style TargetType="TextBox">
