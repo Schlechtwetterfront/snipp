@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Text.RegularExpressions;
 
 namespace clipman.ViewModels
 {
@@ -37,7 +38,7 @@ namespace clipman.ViewModels
             get { return filterString; }
             set
             {
-                filterString = value.Trim().ToLower();
+                filterString = Regex.Replace(value.Trim().ToLower(), @"\s+", "");
                 bool isEmpty = string.IsNullOrEmpty(filterString);
                 RaisePropertyChanged("FilterString");
                 foreach (var c in Clips)
