@@ -110,10 +110,10 @@
                                    ToolTipService.ShowDuration="20000"
                                    InlineList="{Binding RichTitle}">
                             <local:RichTextBlock.ToolTip>
-                                <ToolTip>
+                                <ToolTip Placement="Relative" MaxWidth="1000">
                                     <TextBlock FontFamily="{StaticResource TextFont}"
                                                Foreground="{DynamicResource Text}"
-                                               FontSize="12">
+                                               FontSize="12" TextWrapping="Wrap">
                                         <Run Text="{Binding CreatedString, Mode=OneWay}"
                                              /> -
                                         <Run Text="{Binding Clip.Content.Length, Mode=OneWay}"
