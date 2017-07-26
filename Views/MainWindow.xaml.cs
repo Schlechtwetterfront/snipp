@@ -224,15 +224,18 @@ namespace clipman
         {
             var themes = Theme.Themes;
             String themeKey = Properties.Settings.Default["Theme"] as String;
-            Utility.Logging.Log(themeKey);
-            Theme theme = themes.Find((t) => t.Name == themeKey);
+
+            Theme theme = themes.Find(t => t.Name == themeKey);
 
             if (theme != null)
             {
+                settings.CurrentTheme = theme;
                 SetTheme(theme);
             }
             else
             {
+                Properties.Settings.Default["Theme"] = themes[0].Name;
+                settings.CurrentTheme = themes[0];
                 SetTheme(themes[0]);
             }
 
@@ -241,13 +244,13 @@ namespace clipman
                 if (e.PropertyName == "CurrentTheme" && settings.CurrentTheme != null)
                 {
                     SetTheme(settings.CurrentTheme);
+                    Properties.Settings.Default["Theme"] = settings.CurrentTheme.Name;
                 }
             };
         }
 
         void SetTheme(Theme theme)
         {
-            Console.WriteLine("theme: " + theme);
             var dict = new ResourceDictionary();
             dict.Source = new Uri(theme.FilePath, UriKind.Relative);
 
