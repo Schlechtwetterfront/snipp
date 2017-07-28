@@ -7,7 +7,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using static clipman.Clipboard.ClipboardManager;
-using static clipman.Utility.Fuzzy;
 
 namespace clipman.ViewModels
 {
@@ -161,19 +160,26 @@ namespace clipman.ViewModels
             ResetRichTitle();
         }
 
-        public bool FuzzyMatches(String searchKey)
+        public Match FuzzyMatches(String searchKey)
         {
-            var result = Clip.OneLineContent.GetBestMatch(searchKey);
-            if (result == null)
+            var s = new FuzzySearch(searchKey, Clip.SearchContent);
+            var result = s.FindBestMatch();
+            UpdateFromFuzzy(result);
+            return result;
+        }
+
+        public void UpdateFromFuzzy(Match m)
+        {
+            if (m == null)
             {
                 SearchScore = 0;
                 ResetRichTitle();
-                return false;
             }
-
-            SearchScore = result.Score;
-            UpdateRichTitleFromFuzzy(result);
-            return true;
+            else
+            {
+                SearchScore = m.Score;
+                UpdateRichTitleFromFuzzy(m);
+            }
         }
 
         public void ResetRichTitle()

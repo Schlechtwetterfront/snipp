@@ -64,6 +64,7 @@
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\Themes.cs" />
     <Compile Include="Utility\Extensions.cs" />
+    <Compile Include="Utility\Fuzzy.cs" />
     <Compile Include="ViewModels\ClipListViewModel.cs" />
     <Compile Include="ViewModels\ClipViewModel.cs" />
     <Compile Include="ViewModels\MockClipList.cs" />
