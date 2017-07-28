@@ -190,21 +190,21 @@ namespace clipman.ViewModels
             RichTitle = inlines;
         }
 
-        void UpdateRichTitleFromFuzzy(FuzzyResult r)
+        void UpdateRichTitleFromFuzzy(Match match)
         {
             var inlines = new ObservableCollection<Inline>();
             int lastEnd = 0;
-            foreach (var m in r.Matches)
+            foreach (var m in match.GetContinuousMatches())
             {
-                inlines.Add(new Run(Clip.OneLineContent.Substring(lastEnd, m.Start - lastEnd)));
-                var colored = new Run(Clip.OneLineContent.Substring(m.Start, m.Length));
+                inlines.Add(new Run(Clip.Title.Substring(lastEnd, m.Start - lastEnd)));
+                var colored = new Run(Clip.Title.Substring(m.Start, m.Length));
                 colored.Foreground = (SolidColorBrush)Properties.Settings.Default["Accent"];
                 inlines.Add(colored);
-                lastEnd = m.End;
+                lastEnd = m.Start + m.Length;
             }
-            if (lastEnd != Clip.OneLineContent.Length)
+            if (lastEnd != Clip.Title.Length)
             {
-                inlines.Add(new Run(Clip.OneLineContent.Substring(lastEnd)));
+                inlines.Add(new Run(Clip.Title.Substring(lastEnd)));
             }
             RichTitle = inlines;
         }

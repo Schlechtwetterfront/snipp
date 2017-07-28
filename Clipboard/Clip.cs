@@ -14,7 +14,7 @@ namespace clipman.Clipboard
         static char TrimmingCharacter = '\u2026';
 
         String processedContent;
-        public String OneLineContent
+        public String Title
         {
             get { return processedContent; }
         }
@@ -33,17 +33,6 @@ namespace clipman.Clipboard
 
                 SearchContent = processedContent.ToLower();
 
-                defaultTitle = processedContent.Substring(
-                    0,
-                    Math.Min(Clip.TitleCharCount, processedContent.Length)
-                );
-
-                if (defaultTitle.Length < processedContent.Length)
-                {
-                    defaultTitle += Clip.TrimmingCharacter;
-                }
-                Title = defaultTitle;
-
                 RaisePropertyChanged("Content");
                 RaisePropertyChanged("Title");
             }
@@ -56,22 +45,6 @@ namespace clipman.Clipboard
         {
             get;
             set;
-        }
-
-        protected String defaultTitle;
-        /// <summary>
-        /// Shortened content without line breaks.
-        /// </summary>
-        public String Title
-        {
-            get
-            {
-                return defaultTitle;
-            }
-            protected set
-            {
-                defaultTitle = value;
-            }
         }
 
         /// <summary>
@@ -152,9 +125,6 @@ namespace clipman.Clipboard
         /// <returns>True if a match is likely</returns>
         public bool Matches(String searchString)
         {
-            Title = defaultTitle;
-            //TitleMain = TitleSuffix = "";
-
             if (string.IsNullOrWhiteSpace(searchString))
             {
                 return true;
