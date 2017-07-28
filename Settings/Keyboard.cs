@@ -105,10 +105,16 @@ namespace clipman.Settings
             return IntPtr.Zero;
         }
 
+        public void Dispose(bool cleanupManaged)
+        {
+            Dispose();
+        }
+
         public void Dispose()
         {
             if (!disposed)
             {
+                hwndSource.Dispose();
                 foreach (var id in hotkeyIds) {
                     NativeMethods.UnregisterHotKey(hwndSource.Handle, id);
                 }
