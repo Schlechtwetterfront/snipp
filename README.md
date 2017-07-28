@@ -16,7 +16,9 @@ A small, intuitive clipboard manager targeted towards developers, written in C# 
 
 ### Screenshots
 
-![snipp screenshot](.screenshots/screenshot-0.10.0.png)
+![snipp screenshot](.screenshots/screenshot-0.12.0.png)
+
+[Dark Theme](.screenshots/screenshot-dark-0.12.0.png)
 
 ### Download & Installation
 
