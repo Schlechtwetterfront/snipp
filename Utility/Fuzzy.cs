@@ -139,7 +139,9 @@ namespace clipman.Utility
 
     public class FuzzySearch
     {
-        private Stack<int> indexStack = new Stack<int>();
+        private Stack<int> indices = new Stack<int>();
+        private Stack<int> scores = new Stack<int>();
+        private Stack<int> consecutiveMatchCounts = new Stack<int>();
 
         private Match bestMatch = new Match();
 
@@ -177,12 +179,54 @@ namespace clipman.Utility
 
         protected void MatchChar(int patternIndex, int offset)
         {
-            indexStack.Push(offset);
+            indices.Push(offset);
+
+            int distance = 0;
+            if (indices.Count > 1)
+            {
+                distance = offset - indices.ElementAt(1);
+            }
+
+            int newScore = 0;
+
+            if (distance == 0)
+            {
+                consecutiveMatchCounts.Push(0);
+            }
+            else if (distance == 1)
+            {
+                // Consecutive match.
+                var consecutiveCount = consecutiveMatchCounts.ElementAt(0) + 1;
+                var consecutiveScore = consecutiveCount * scoreConfig.ConsecutiveMatchBonus;
+                consecutiveMatchCounts.Push(consecutiveCount);
+
+                newScore = scores.ElementAt(0) + consecutiveScore;
+            }
+            else
+            {
+                consecutiveMatchCounts.Push(0);
+
+                newScore = scores.ElementAt(0) - ((distance - 1) * scoreConfig.DistancePenalty);
+            }
+
+            scores.Push(newScore);
+
+            int maxScore = FuzzySearch.CalculateMaxScore(
+                pattern.Length - (indices.Count - 1),
+                consecutiveMatchCounts.ElementAt(0),
+                scoreConfig
+            );
+
+            if (newScore + maxScore < bestMatch.Score)
+            {
+                PopAll();
+                return;
+            }
 
             if (patternIndex >= pattern.Length)
             {
                 ScoreCurrent();
-                indexStack.Pop();
+                PopAll();
                 return;
             }
             char patternChar = pattern[patternIndex];
@@ -191,8 +235,7 @@ namespace clipman.Utility
 
             if (occurences == null || occurences.Count == 0)
             {
-                ScoreCurrent();
-                indexStack.Pop();
+                PopAll();
                 return;
             }
 
@@ -201,15 +244,22 @@ namespace clipman.Utility
                 MatchChar(patternIndex + 1, o);
             }
 
-            indexStack.Pop();
+            PopAll();
+        }
+
+        protected void PopAll()
+        {
+            indices.Pop();
+            consecutiveMatchCounts.Pop();
+            scores.Pop();
         }
 
         protected void ScoreCurrent()
         {
-            var currentScore = scoreConfig.Score(indexStack);
+            var currentScore = scoreConfig.Score(indices);
             if (currentScore > bestMatch.Score)
             {
-                var newBestMatch = new Match(currentScore, new List<int>(indexStack.Reverse()));
+                var newBestMatch = new Match(currentScore, new List<int>(indices.Reverse()));
                 bestMatch = newBestMatch;
             }
         }
@@ -243,6 +293,22 @@ namespace clipman.Utility
             }
 
             return map;
+        }
+
+        private static int CalculateMaxScore(int count, ScoreConfig config)
+        {
+            return FuzzySearch.CalculateMaxScore(count, 0, config);
+        }
+
+        private static int CalculateMaxScore(int count, int startConsecutiveCount, ScoreConfig config)
+        {
+            int numForTri = count - 1 + startConsecutiveCount;
+
+            int triangular = numForTri * (numForTri + 1) / 2;
+
+            int maxConsecutiveScore = triangular * config.ConsecutiveMatchBonus;
+
+            return maxConsecutiveScore;
         }
     }
 }
