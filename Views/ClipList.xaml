@@ -104,8 +104,8 @@
                 <DataTemplate>
                     <DockPanel>
                         <local:RichTextBlock Grid.ColumnSpan="4"
-                                   FontSize="14"
-                                   Margin="0,0,0,8"
+                                   FontSize="12"
+                                   Margin="0,0,0,6"
                                    Foreground="{DynamicResource TitleText}" DockPanel.Dock="Top"
                                    ToolTipService.ShowDuration="20000"
                                    InlineList="{Binding RichTitle}">
@@ -113,7 +113,7 @@
                                 <ToolTip Placement="Relative" MaxWidth="1000">
                                     <TextBlock FontFamily="{StaticResource TextFont}"
                                                Foreground="{DynamicResource Text}"
-                                               FontSize="12" TextWrapping="Wrap">
+                                               FontSize="10" TextWrapping="Wrap">
                                         <Run Text="{Binding CreatedString, Mode=OneWay}"
                                              /> -
                                         <Run Text="{Binding Clip.Content.Length, Mode=OneWay}"
@@ -122,7 +122,7 @@
                                         <Run Text="{Binding Clip.Content, Mode=OneWay}"
                                              FontFamily="{StaticResource CodeFont}"
                                              Foreground="{DynamicResource TitleText}"
-                                             FontSize="14"
+                                             FontSize="12"
                                              />
                                     </TextBlock>
                                 </ToolTip>
@@ -144,7 +144,7 @@
                             <Control x:Name="pinStatus" Template="{StaticResource PinIcon}"
                                      Margin="8,0,0,0"
                                      DockPanel.Dock="Right"
-                                     Background="{DynamicResource Border}"
+                                     Background="{DynamicResource Text}"
                                      />
 
                             <TextBlock x:Name="shortcut" 
