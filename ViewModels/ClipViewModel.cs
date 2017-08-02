@@ -1,12 +1,10 @@
 ﻿using clipman.Utility;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using static clipman.Clipboard.ClipboardManager;
 
 namespace clipman.ViewModels
 {
@@ -40,9 +38,31 @@ namespace clipman.ViewModels
                     {
                         createdDateString = clip.Created.ToString("d");
                     }
+
+                    processedContent = System.Text.RegularExpressions.Regex.Replace(value.Content, @"[\s]+", " ").Trim();
+
+                    SearchContent = processedContent.ToLower();
+
+                    RaisePropertyChanged("Title");
+                    RaisePropertyChanged("SearchContent");
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Lower-case content where all whitespace is replaced with a single space.
+        /// </summary>
+        public String SearchContent
+        {
+            get;
+            protected set;
+        }
+
+        String processedContent;
+        public String Title
+        {
+            get { return processedContent; }
         }
 
         private String createdDateString;
@@ -164,9 +184,9 @@ namespace clipman.ViewModels
 
         public void Match(String searchKey)
         {
-            if (Clip.SearchContent.Length > ClipViewModel.MaxSearchContentLength)
+            if (SearchContent.Length > ClipViewModel.MaxSearchContentLength)
             {
-                var index = Clip.SearchContent.IndexOf(searchKey);
+                var index = SearchContent.IndexOf(searchKey);
                 if (index >= 0)
                 {
                     UpdateRichtTitleFromSingle(index, searchKey.Length);
@@ -181,7 +201,7 @@ namespace clipman.ViewModels
 
         public Match FuzzyMatch(String searchKey)
         {
-            var s = new FuzzySearch(searchKey, Clip.SearchContent);
+            var s = new FuzzySearch(searchKey, SearchContent);
             var result = s.FindBestMatch();
             UpdateFromFuzzy(result);
             return result;
@@ -205,7 +225,7 @@ namespace clipman.ViewModels
         {
             RichTitle.Clear();
             var inlines = new ObservableCollection<Inline>();
-            inlines.Add(new Run(Clip.Title));
+            inlines.Add(new Run(Title));
             RichTitle = inlines;
         }
 
@@ -213,13 +233,13 @@ namespace clipman.ViewModels
         {
             var inlines = new ObservableCollection<Inline>();
 
-            inlines.Add(new Run(Clip.Title.Substring(0, start)));
+            inlines.Add(new Run(Title.Substring(0, start)));
 
-            var colored = new Run(Clip.Title.Substring(start, length));
+            var colored = new Run(Title.Substring(start, length));
             colored.Foreground = (SolidColorBrush)Properties.Settings.Default["Accent"];
             inlines.Add(colored);
 
-            inlines.Add(new Run(Clip.Title.Substring(start + length)));
+            inlines.Add(new Run(Title.Substring(start + length)));
 
             RichTitle = inlines;
         }
@@ -230,15 +250,15 @@ namespace clipman.ViewModels
             int lastEnd = 0;
             foreach (var m in match.GetContinuousMatches())
             {
-                inlines.Add(new Run(Clip.Title.Substring(lastEnd, m.Start - lastEnd)));
-                var colored = new Run(Clip.Title.Substring(m.Start, m.Length));
+                inlines.Add(new Run(Title.Substring(lastEnd, m.Start - lastEnd)));
+                var colored = new Run(Title.Substring(m.Start, m.Length));
                 colored.Foreground = (SolidColorBrush)Properties.Settings.Default["Accent"];
                 inlines.Add(colored);
                 lastEnd = m.Start + m.Length;
             }
-            if (lastEnd != Clip.Title.Length)
+            if (lastEnd != Title.Length)
             {
-                inlines.Add(new Run(Clip.Title.Substring(lastEnd)));
+                inlines.Add(new Run(Title.Substring(lastEnd)));
             }
             RichTitle = inlines;
         }

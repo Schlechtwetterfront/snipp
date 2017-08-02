@@ -10,11 +10,6 @@ namespace clipman.Clipboard
 
     public class Clip : INotifyPropertyChanged, IComparable
     {
-        String processedContent;
-        public String Title
-        {
-            get { return processedContent; }
-        }
         String content;
         /// <summary>
         /// Actual content of the clip as copied from the clipboard.
@@ -26,12 +21,7 @@ namespace clipman.Clipboard
             {
                 content = value;
 
-                processedContent = Regex.Replace(value, @"[\s]+", " ").Trim();
-
-                SearchContent = processedContent.ToLower();
-
                 RaisePropertyChanged("Content");
-                RaisePropertyChanged("Title");
             }
         }
 
@@ -42,15 +32,6 @@ namespace clipman.Clipboard
         {
             get;
             set;
-        }
-
-        /// <summary>
-        /// Lower-case content where all whitespace is replaced with a single space.
-        /// </summary>
-        public String SearchContent
-        {
-            get;
-            protected set;
         }
 
         public Clip()

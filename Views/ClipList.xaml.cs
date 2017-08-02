@@ -19,7 +19,7 @@ namespace clipman.Views
                 {
                     if (param is ListBoxItem) {
                         var item = param as ListBoxItem;
-                        Utility.Logging.Log(((ViewModels.ClipViewModel)item.DataContext).Clip.Title);
+                        Utility.Logging.Log(((ViewModels.ClipViewModel)item.DataContext).Title);
                         Utility.Logging.Log(((ViewModels.ClipViewModel)item.DataContext).Pinned.ToString());
                         item.IsSelected = true;
                         item.ContextMenu.PlacementTarget = item;
