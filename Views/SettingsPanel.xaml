@@ -282,7 +282,17 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{DynamicResource SettingLabel}"><Run Text="Version "/><Run Text="{StaticResource AppVersion}"/><Run Text=" - "/><Run Foreground="{DynamicResource Text}" Text="github.com/Schlechtwetterfront/snipp"/></TextBlock>
+                        <TextBlock Grid.Row="0"
+                                   TextWrapping="Wrap"
+                                   Style="{DynamicResource SettingLabel}">
+                            <Run Text="Version "/><Run Text="{StaticResource AppVersion}"/>
+                            <Run Text="-"/>
+                            <Hyperlink Foreground="{DynamicResource Text}"
+                                       NavigateUri="https://github.com/Schlechtwetterfront/snipp"
+                                       RequestNavigate="Hyperlink_RequestNavigate">
+                                github.com/Schlechtwetterfront/snipp
+                            </Hyperlink>
+                        </TextBlock>
                     </Grid>
                 </Grid>
             </ScrollViewer>
