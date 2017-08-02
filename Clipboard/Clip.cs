@@ -10,9 +10,6 @@ namespace clipman.Clipboard
 
     public class Clip : INotifyPropertyChanged, IComparable
     {
-        static int TitleCharCount = 256;
-        static char TrimmingCharacter = '\u2026';
-
         String processedContent;
         public String Title
         {
@@ -115,128 +112,6 @@ namespace clipman.Clipboard
             {
                 Utility.Logging.Log("Failed to set clipboard: " + e.Message);
                 return false;
-            }
-        }
-
-        /// <summary>
-        /// Checks if this clip matches a search string in any way.
-        /// </summary>
-        /// <param name="searchString">The search string</param>
-        /// <returns>True if a match is likely</returns>
-        public bool Matches(String searchString)
-        {
-            if (string.IsNullOrWhiteSpace(searchString))
-            {
-                return true;
-            }
-
-            if (SearchContent.Contains(searchString))
-            {
-                ProcessSearchString(searchString);
-                return true;
-            }
-
-            if (Created.ToShortDateString().Contains(searchString))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// If a match in the main content was found adjust the clip title to
-        /// highlight the search string.
-        /// </summary>
-        /// <param name="searchString">The matched search string</param>
-        protected void ProcessSearchString(String searchString)
-        {
-            int start, end, index, searchLength, contentLength, limit;
-            String prefix, foundString, suffix;
-
-            // Start of the found string.
-            index = SearchContent.IndexOf(searchString);
-            searchLength = searchString.Length;
-            contentLength = SearchContent.Length;
-
-            // If the length is equal,
-            if (searchLength == contentLength)
-            {
-                //TitleMain = defaultTitle;
-                //TitlePrefix = TitleSuffix = "";
-                return;
-            }
-
-            // Limit the string to ensure that it fully displays at our default
-            // window width.
-            limit = Math.Min(contentLength, Clip.TitleCharCount);
-
-            int suffixStart = index + searchLength;
-
-            // Left over space after the search string is cut out.
-            int spaceLeft = limit - searchLength;
-            // Calculate (even) space for prefix and suffix. Also account for
-            // odd space and just give the prefix one more in that case.
-            int spaceForPrefix = (int)Math.Ceiling(spaceLeft * 0.5);
-            int spaceForSuffix = (int)Math.Floor(spaceLeft * 0.5);
-
-            int suffixLength = contentLength - suffixStart;
-            int prefixLength = index;
-            // Suffix is smaller than what was reserved for it, so give more
-            // space to prefix.
-            if (suffixLength < spaceForSuffix)
-            {
-                // Add left over space from suffix to prefix, unless it already has enough space.
-                prefixLength = Math.Min(prefixLength, spaceForPrefix + spaceForSuffix - suffixLength);
-                start = Math.Max(index - prefixLength, 0);
-                end = contentLength;
-            }
-            // Prefix is smaller than what was reserved for it, so give more
-            // space to prefix.
-            else if (prefixLength < spaceForPrefix)
-            {
-                start = 0;
-                // Add left over space from prefix to suffix, unless it already has enough space.
-                suffixLength = Math.Min(suffixLength, spaceForSuffix + spaceForPrefix - prefixLength);
-                end = Math.Min(suffixStart + suffixLength, limit);
-            }
-            else
-            {
-                // Both parts fill their reserved space. Any excess will be cut
-                // off to ensure that the whole string is displayable.
-                prefixLength = spaceForPrefix;
-                suffixLength = spaceForSuffix;
-                start = index - spaceForPrefix;
-                end = suffixStart + spaceForSuffix;
-            }
-
-            // Cut content into prefix, main and suffix.
-            prefix = processedContent.Substring(start, prefixLength);
-            foundString = processedContent.Substring(index, searchLength);
-            suffix = processedContent.Substring(
-                suffixStart, suffixLength
-            );
-
-            // Add ... if some of the head of the string is cut off.
-            if (start == 0)
-            {
-                //TitlePrefix = prefix;
-            }
-            else
-            {
-                //TitlePrefix = Clip.TrimmingCharacter + prefix;
-            }
-
-            //TitleMain = foundString;
-
-            // Add ... if some of the tail of the string is cut off.
-            if (end == contentLength)
-            {
-                //TitleSuffix = suffix;
-            }
-            else
-            {
-                //TitleSuffix = suffix + Clip.TrimmingCharacter;
             }
         }
 

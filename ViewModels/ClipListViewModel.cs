@@ -145,21 +145,6 @@ namespace clipman.ViewModels
             }
         }
 
-        /// <summary>
-        /// Method used to filter the clips by search box input.
-        /// </summary>
-        /// <param name="item">`ClipViewModel`</param>
-        /// <returns>True if `Clip` matches the search string or the search string is empty.</returns>
-        public bool Filter(object item)
-        {
-            Clipboard.Clip clip = (item as ClipViewModel).Clip;
-            if (clip != null)
-            {
-                return clip.Matches(FilterString);
-            }
-            return true;
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(string property)
