@@ -12,6 +12,8 @@ namespace clipman.ViewModels
 {
     public class ClipViewModel : IComparable, INotifyPropertyChanged
     {
+        public static int MaxSearchContentLength = 1000;
+
         protected Clipboard.Clip clip;
         /// <summary>
         /// The `Clip` this ViewModel is wrapped around.
@@ -160,7 +162,24 @@ namespace clipman.ViewModels
             ResetRichTitle();
         }
 
-        public Match FuzzyMatches(String searchKey)
+        public void Match(String searchKey)
+        {
+            if (Clip.SearchContent.Length > ClipViewModel.MaxSearchContentLength)
+            {
+                var index = Clip.SearchContent.IndexOf(searchKey);
+                if (index >= 0)
+                {
+                    UpdateRichtTitleFromSingle(index, searchKey.Length);
+                    SearchScore = FuzzySearch.CalculateMaxScore(searchKey.Length, new ScoreConfig());
+                }
+            }
+            else
+            {
+                FuzzyMatch(searchKey);
+            }
+        }
+
+        public Match FuzzyMatch(String searchKey)
         {
             var s = new FuzzySearch(searchKey, Clip.SearchContent);
             var result = s.FindBestMatch();
@@ -187,6 +206,21 @@ namespace clipman.ViewModels
             RichTitle.Clear();
             var inlines = new ObservableCollection<Inline>();
             inlines.Add(new Run(Clip.Title));
+            RichTitle = inlines;
+        }
+
+        void UpdateRichtTitleFromSingle(int start, int length)
+        {
+            var inlines = new ObservableCollection<Inline>();
+
+            inlines.Add(new Run(Clip.Title.Substring(0, start)));
+
+            var colored = new Run(Clip.Title.Substring(start, length));
+            colored.Foreground = (SolidColorBrush)Properties.Settings.Default["Accent"];
+            inlines.Add(colored);
+
+            inlines.Add(new Run(Clip.Title.Substring(start + length)));
+
             RichTitle = inlines;
         }
 

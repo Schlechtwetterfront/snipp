@@ -50,7 +50,7 @@ namespace clipman.ViewModels
                     }
                     else
                     {
-                        c.FuzzyMatches(filterString);
+                        c.Match(filterString);
                     }
                 }
                 ClipView.Refresh();

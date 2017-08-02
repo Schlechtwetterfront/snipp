@@ -295,12 +295,12 @@ namespace clipman.Utility
             return map;
         }
 
-        private static int CalculateMaxScore(int count, ScoreConfig config)
+        public static int CalculateMaxScore(int count, ScoreConfig config)
         {
             return FuzzySearch.CalculateMaxScore(count, 0, config);
         }
 
-        private static int CalculateMaxScore(int count, int startConsecutiveCount, ScoreConfig config)
+        public static int CalculateMaxScore(int count, int startConsecutiveCount, ScoreConfig config)
         {
             int numForTri = count - 1 + startConsecutiveCount;
 
