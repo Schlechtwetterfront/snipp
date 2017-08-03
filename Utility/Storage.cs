@@ -9,20 +9,12 @@ namespace clipman.Utility
     {
         static String SnippetFileName = "snippets.json";
 
-        public static String GetSnippetFilePath()
-        {
-            return Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "snipp\\snippets.json"
-            );
-        }
-
         public static void SaveSnippets(IEnumerable<Clipboard.Clip> clips)
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(clips);
 
             IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
-            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(SnippetFileName, FileMode.OpenOrCreate, isoStore))
+            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(SnippetFileName, FileMode.Create, isoStore))
             {
                 using (StreamWriter writer = new StreamWriter(isoStream))
                 {
@@ -43,7 +35,6 @@ namespace clipman.Utility
                     using (StreamReader reader = new StreamReader(isoStream))
                     {
                         var clipString = reader.ReadToEnd();
-                        Console.WriteLine("Clips " + clipString);
                         if (!string.IsNullOrWhiteSpace(clipString))
                         {
                             clips = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Clipboard.Clip>>(clipString);
@@ -54,6 +45,10 @@ namespace clipman.Utility
             catch (FileNotFoundException)
             {
                 Utility.Logging.Log("snippets.json not found");
+            }
+            catch (Newtonsoft.Json.JsonReaderException)
+            {
+                Utility.Logging.Log("snippets.json found but has invalid json format");
             }
 
             return clips;
