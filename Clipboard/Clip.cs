@@ -34,6 +34,8 @@ namespace clipman.Clipboard
             set;
         }
 
+        public bool Pinned { get; set; } = false;
+
         public Clip()
         {
         }
