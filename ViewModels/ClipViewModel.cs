@@ -94,7 +94,7 @@ namespace clipman.ViewModels
         /// </summary>
         public bool Pinned
         {
-            get { return Clip.Pinned; }
+            get { return Clip != null ? Clip.Pinned : false; }
             set { Clip.Pinned = value; RaisePropertyChanged("Pinned"); RaisePropertyChanged("PinLabel"); }
         }
 
