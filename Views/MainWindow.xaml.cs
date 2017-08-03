@@ -3,6 +3,7 @@ using clipman.Utility;
 using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -177,7 +178,17 @@ namespace clipman
 
             DataContext = this;
 
+            // Initialize clip list view model.
             clipViewModel = new ViewModels.ClipListViewModel();
+
+            // Insert saved snippets from last time.
+            var clips = Utility.Storage.RetrieveClips();
+            clips.Sort();
+            foreach (var clip in clips)
+            {
+                clipViewModel.AddClip(clip);
+            }
+
             clipList.DataContext = clipViewModel;
 
             settingsPanelViewModel = new ViewModels.SettingsPanelViewModel(settings);
@@ -194,6 +205,8 @@ namespace clipman
             InitializeTheme();
 
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
+
+            Left = -1500;
         }
 
         /// <summary>
@@ -406,6 +419,7 @@ namespace clipman
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             Properties.Settings.Default.Save();
+            Utility.Storage.SaveSnippets(clipViewModel.Clips.Select(vm => vm.Clip));
         }
     }
 }
