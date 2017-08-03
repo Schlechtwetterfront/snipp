@@ -89,7 +89,6 @@ namespace clipman.ViewModels
             }
         }
 
-        private bool pinned = false;
         /// <summary>
         /// If this `ClipViewModel`/`Clip` is pinned.
         /// </summary>
