@@ -205,8 +205,6 @@ namespace clipman
             InitializeTheme();
 
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
-
-            Left = -1500;
         }
 
         /// <summary>
