@@ -204,7 +204,21 @@ namespace clipman
 
             InitializeTheme();
 
+            InitializeWindow();
+
             Language = XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
+        }
+
+        /// <summary>
+        /// Seet window position and dimensions.
+        /// </summary>
+        void InitializeWindow()
+        {
+            Console.WriteLine(String.Format("{0} {1} {2} {3}", Properties.Settings.Default.WindowPositionX, Properties.Settings.Default.WindowPositionY, Properties.Settings.Default.WindowWidth, Properties.Settings.Default.WindowHeight));
+            Left = Properties.Settings.Default.WindowPositionX;
+            Top = Properties.Settings.Default.WindowPositionY;
+            Width = Properties.Settings.Default.WindowWidth;
+            Height = Properties.Settings.Default.WindowHeight;
         }
 
         /// <summary>
@@ -416,7 +430,14 @@ namespace clipman
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            Console.WriteLine(String.Format("{0} {1} {2} {3}", Left, Top, Width, Height));
+            Properties.Settings.Default.WindowPositionX = Left;
+            Properties.Settings.Default.WindowPositionY = Top;
+            Properties.Settings.Default.WindowWidth = Width;
+            Properties.Settings.Default.WindowHeight = Height;
+
             Properties.Settings.Default.Save();
+
             Utility.Storage.SaveSnippets(clipViewModel.Clips.Select(vm => vm.Clip));
         }
     }
