@@ -125,7 +125,7 @@ namespace clipman.ViewModels
             }
         }
 
-        public void AddClip(Clipboard.Clip clip)
+        public bool AddClip(Clipboard.Clip clip)
         {
             var viewModel = new ClipViewModel(clip);
             viewModel.PropertyChanged += OnClipViewModelPropChanged;
@@ -136,7 +136,10 @@ namespace clipman.ViewModels
                 var first = Clips.Where((c) => !c.Pinned).First();
                 Clips.Remove(first);
             }
+
             Clips.Add(viewModel);
+
+            return true;
         }
 
         private void OnClipViewModelPropChanged(object sender, PropertyChangedEventArgs e)

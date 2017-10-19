@@ -181,21 +181,23 @@ namespace clipman
             // Initialize clip list view model.
             clipViewModel = new ViewModels.ClipListViewModel();
 
+            clipboardManager = new Clipboard.ClipboardManager();
+            clipboardManager.ClipCaptured += OnClipCaptured;
+            clipboardManager.ClipCopied += OnClipCopied;
+
             // Insert saved snippets from last time.
             var clips = Utility.Storage.RetrieveClips();
             clips.Sort();
             foreach (var clip in clips)
             {
                 clipViewModel.AddClip(clip);
+                clipboardManager.Subscribe(clip);
             }
 
             clipList.DataContext = clipViewModel;
 
             settingsPanelViewModel = new ViewModels.SettingsPanelViewModel(settings);
             settingsPanel.DataContext = settingsPanelViewModel;
-
-            clipboardManager = new Clipboard.ClipboardManager();
-            clipboardManager.ClipCaptured += OnClipCaptured;
 
             keyboardMonitor = new Settings.KeyboardMonitor();
             keyboardMonitor.KeyPressed += OnHotkeyPressed;
@@ -318,9 +320,16 @@ namespace clipman
 
             if (clip != null)
             {
-                clipViewModel.AddClip(clip);
-                (Resources["BlinkTaskBarOverlay"] as Storyboard)?.Begin();
+                if (clipViewModel.AddClip(clip))
+                {
+                    (Resources["BlinkTaskBarOverlay"] as Storyboard)?.Begin();
+                }
             }
+        }
+
+        private void OnClipCopied(object sender, Clipboard.ClipboardManager.ClipEventArgs e)
+        {
+            (Resources["StatusBarFlash"] as Storyboard)?.Begin();
         }
 
         private void searchBox_Changed(object sender, TextChangedEventArgs e)

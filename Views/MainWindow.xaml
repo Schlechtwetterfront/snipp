@@ -15,6 +15,19 @@
         Background="{DynamicResource Background}"
         >
     <Window.Resources>
+        <Storyboard x:Key="StatusBarFlash">
+            <DoubleAnimation Storyboard.TargetName="statusBar"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.4"/>
+            <DoubleAnimation Storyboard.TargetName="statusBar"
+                             Storyboard.TargetProperty="Opacity"
+                             BeginTime="0:0:0.4"
+                             From="1" To="0" Duration="0:0:0.1"/>
+            <!--<DoubleAnimation Storyboard.TargetName="MovingStop"
+                             Storyboard.TargetProperty="Offset"
+                             From="0" To="1" Duration="0:0:0.33"/>-->
+        </Storyboard>
+        
         <Storyboard x:Key="BlinkTaskBarOverlay">
             <DoubleAnimationUsingKeyFrames Duration="0:0:2"
                                            Storyboard.TargetName="Plus"
@@ -104,6 +117,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -143,6 +157,21 @@
         </Button>
         <views:ClipList x:Name="clipList" Grid.Row="1"
                         d:DataContext="{d:DesignInstance Type=viewmodels:MockClipList, IsDesignTimeCreatable=True}" Grid.ColumnSpan="2"/>
+        <Border Grid.Row="2" Grid.ColumnSpan="2"
+                Padding="6"
+                Opacity="0"
+                x:Name="statusBar"
+                Background="{DynamicResource Accent}"
+                >
+            <!--<Border.Background>
+                <RadialGradientBrush GradientOrigin=".5,1" Center=".5,1" RadiusY="1" RadiusX="1">
+                    <GradientStop Color="Transparent" Offset="1"/>
+                    <GradientStop Color="LightGray" Offset="0.5"/>
+                    --><!--<GradientStop Color="LightGray" Offset="0"/>--><!--
+                </RadialGradientBrush>
+            </Border.Background>-->
+            <TextBlock Text="COPIED" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+        </Border>
         <views:SettingsPanel x:Name="settingsPanel" Grid.ColumnSpan="2" Loaded="OnSettingsPanelLoad" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.25" Margin="0" Opacity="0" Visibility="Collapsed">
             <views:SettingsPanel.RenderTransform>
                 <ScaleTransform ScaleX="0.6" ScaleY="0.6"/>

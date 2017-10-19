@@ -82,6 +82,11 @@ namespace clipman.Clipboard
             ClipCopied?.Invoke(this, e);
         }
 
+        public void Subscribe(Clip clip)
+        {
+            clip.Copied += OnCopyClip;
+        }
+
         public Clip CaptureClipboard()
         {
             return Clip.Capture();

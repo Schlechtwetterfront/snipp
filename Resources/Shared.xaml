@@ -34,6 +34,7 @@
         <Setter Property="HasDropShadow" Value="{DynamicResource {x:Static SystemParameters.DropShadowKey}}"/>
         <Setter Property="Background" Value="{DynamicResource Background.Active}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Border}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TitleText}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="8"/>
         <Setter Property="Template">
