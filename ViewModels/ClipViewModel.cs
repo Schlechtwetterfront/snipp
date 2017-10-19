@@ -215,7 +215,16 @@ namespace clipman.ViewModels
             if (hexMatch.Success)
             {
                 var group = hexMatch.Groups[1];
-                return (Color)ColorConverter.ConvertFromString("#" + group.Value);
+                
+                // Fails for colors codes of length 5 and 7.
+                try
+                {
+                    return (Color)ColorConverter.ConvertFromString("#" + group.Value);
+                }
+                catch (FormatException)
+                {
+                    return new Color();
+                }
             }
 
             var rgbaMatch = Regex.Match(Clip.Content, @"rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)", RegexOptions.IgnoreCase);
