@@ -2,6 +2,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -45,6 +47,14 @@ namespace clipman.ViewModels
 
                     RaisePropertyChanged("Title");
                     RaisePropertyChanged("SearchContent");
+
+                    if (HasColorContent)
+                    {
+                        SolidColorBrush brush = new SolidColorBrush();
+                        brush.Color = GetColor();
+                        contentColor = brush;
+                        RaisePropertyChanged("ContentColor");
+                    }
                 }
 
             }
@@ -137,6 +147,23 @@ namespace clipman.ViewModels
             }
         }
 
+        public bool HasColorContent
+        {
+            get
+            {
+                return Regex.IsMatch(Clip.Content, @"#([0-9A-F]{3,6})", RegexOptions.IgnoreCase) || Regex.IsMatch(Clip.Content, @"rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)", RegexOptions.IgnoreCase);
+            }
+        }
+
+        private SolidColorBrush contentColor = null;
+        public SolidColorBrush ContentColor
+        {
+            get
+            {
+                return contentColor;
+            }
+        }
+
         private ICommand deleteCommand;
         public ICommand DeleteCommand
         {
@@ -181,6 +208,31 @@ namespace clipman.ViewModels
             ResetRichTitle();
         }
 
+        public Color GetColor()
+        {
+            var hexMatch = Regex.Match(Clip.Content, @"#([0-9A-F]{3,8})", RegexOptions.IgnoreCase);
+
+            if (hexMatch.Success)
+            {
+                var group = hexMatch.Groups[1];
+                return (Color)ColorConverter.ConvertFromString("#" + group.Value);
+            }
+
+            var rgbaMatch = Regex.Match(Clip.Content, @"rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)", RegexOptions.IgnoreCase);
+
+            if (rgbaMatch.Success)
+            {
+                byte r = Byte.Parse(rgbaMatch.Groups[1].Value);
+                byte g = Byte.Parse(rgbaMatch.Groups[2].Value);
+                byte b = Byte.Parse(rgbaMatch.Groups[3].Value);
+                byte a = (byte)(255 / Double.Parse(rgbaMatch.Groups[4].Value, NumberStyles.Any, CultureInfo.InvariantCulture));
+
+                return Color.FromArgb(a, r, g, b);
+            }
+
+            return new Color();
+        }
+
         public void Match(String searchKey)
         {
             if (SearchContent.Length > ClipViewModel.MaxSearchContentLength)
@@ -198,7 +250,7 @@ namespace clipman.ViewModels
             }
         }
 
-        public Match FuzzyMatch(String searchKey)
+        public Utility.Match FuzzyMatch(String searchKey)
         {
             var s = new FuzzySearch(searchKey, SearchContent);
             var result = s.FindBestMatch();
@@ -206,7 +258,7 @@ namespace clipman.ViewModels
             return result;
         }
 
-        public void UpdateFromFuzzy(Match m)
+        public void UpdateFromFuzzy(Utility.Match m)
         {
             if (m == null)
             {
@@ -243,7 +295,7 @@ namespace clipman.ViewModels
             RichTitle = inlines;
         }
 
-        void UpdateRichTitleFromFuzzy(Match match)
+        void UpdateRichTitleFromFuzzy(Utility.Match match)
         {
             var inlines = new ObservableCollection<Inline>();
             int lastEnd = 0;

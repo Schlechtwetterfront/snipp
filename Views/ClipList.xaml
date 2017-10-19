@@ -145,6 +145,7 @@
                                      Margin="8,0,0,0"
                                      DockPanel.Dock="Right"
                                      Background="{DynamicResource Text}"
+                                     ToolTip="Pin status"
                                      />
 
                             <TextBlock x:Name="shortcut" 
@@ -152,6 +153,28 @@
                                        Text="{Binding NumberShortcutText}"
                                        DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                        />
+
+                            <Rectangle x:Name="colorPanel"
+                                       Width="14"
+                                       Fill="{Binding ContentColor}"
+                                       DockPanel.Dock="Right" HorizontalAlignment="Right"
+                                       Margin="0,0,8,0"
+                                       RadiusX="3" RadiusY="3"
+                                       ToolTip="Color code found in this snippet"
+                                       >
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="3" Opacity="0.2" Direction="300" ShadowDepth="1"/>
+                                </Rectangle.Effect>
+                                <Rectangle.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <Trigger Property="Rectangle.IsMouseOver" Value="True">
+                                                <Setter Property="Rectangle.Width" Value="100"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
                         </DockPanel>
                     </DockPanel>
                     <DataTemplate.Triggers>
@@ -164,6 +187,13 @@
                             <Setter TargetName="pinStatus"
                                     Property="ToolTip"
                                     Value="Pinned"
+                                    />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding HasColorContent}"
+                                     Value="False">
+                            <Setter TargetName="colorPanel"
+                                    Property="Visibility"
+                                    Value="Hidden"
                                     />
                         </DataTrigger>
                     </DataTemplate.Triggers>
