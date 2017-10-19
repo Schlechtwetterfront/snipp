@@ -216,7 +216,15 @@ namespace clipman
         /// </summary>
         void InitializeWindow()
         {
-            Console.WriteLine(String.Format("{0} {1} {2} {3}", Properties.Settings.Default.WindowPositionX, Properties.Settings.Default.WindowPositionY, Properties.Settings.Default.WindowWidth, Properties.Settings.Default.WindowHeight));
+            if (SystemParameters.VirtualScreenLeft > Properties.Settings.Default.WindowPositionX
+                || SystemParameters.VirtualScreenLeft + SystemParameters.VirtualScreenWidth < Properties.Settings.Default.WindowPositionX
+                || SystemParameters.VirtualScreenTop > Properties.Settings.Default.WindowPositionY
+                || SystemParameters.VirtualScreenTop + SystemParameters.VirtualScreenHeight < Properties.Settings.Default.WindowPositionY)
+            {
+                // Coordinates don't fit on this screen, don't apply.
+                return;
+            }
+
             Left = Properties.Settings.Default.WindowPositionX;
             Top = Properties.Settings.Default.WindowPositionY;
             Width = Properties.Settings.Default.WindowWidth;
@@ -439,7 +447,6 @@ namespace clipman
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            Console.WriteLine(String.Format("{0} {1} {2} {3}", Left, Top, Width, Height));
             Properties.Settings.Default.WindowPositionX = Left;
             Properties.Settings.Default.WindowPositionY = Top;
             Properties.Settings.Default.WindowWidth = Width;
