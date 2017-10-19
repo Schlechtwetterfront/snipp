@@ -127,8 +127,21 @@ namespace clipman.ViewModels
 
         public bool AddClip(Clipboard.Clip clip)
         {
+            // Check if a clip with the same content exists in the last clips.
+            var equalClips = Clips.Take(10).Where(vm => vm.Clip.Content == clip.Content);
+
+            if (equalClips.Count() > 0)
+            {
+                // If a clip with the same content already exists, just update the creation time.
+                // TODO: Possibly refresh list view to push clip to top.
+                equalClips.First().Clip.Created = DateTime.Now;
+                return false;
+            }
+
             var viewModel = new ClipViewModel(clip);
+
             viewModel.PropertyChanged += OnClipViewModelPropChanged;
+
             if (Clips.Count >= ClipLimit && ClipLimit > 0)
             {
                 // If the limit is reached, throw out the oldest one.
