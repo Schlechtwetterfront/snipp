@@ -27,7 +27,7 @@
     <FontFamily x:Key="CodeFont">Consolas</FontFamily>
 
     <sys:String x:Key="AppName">snipp</sys:String>
-    <sys:String x:Key="AppVersion">0.15.0</sys:String>
+    <sys:String x:Key="AppVersion">1.0.0</sys:String>
 
     <Style TargetType="{x:Type ToolTip}">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
