@@ -151,7 +151,7 @@ namespace clipman.ViewModels
         {
             get
             {
-                return Regex.IsMatch(Clip.Content, @"#([0-9A-F]{3,6})", RegexOptions.IgnoreCase) || Regex.IsMatch(Clip.Content, @"rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)", RegexOptions.IgnoreCase);
+                return Regex.IsMatch(Clip.Content, @"#([0-9A-F]{3,8})", RegexOptions.IgnoreCase) || Regex.IsMatch(Clip.Content, @"rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)", RegexOptions.IgnoreCase);
             }
         }
 
@@ -163,6 +163,8 @@ namespace clipman.ViewModels
                 return contentColor;
             }
         }
+
+        public String ColorToolTip => String.Format("#{0:X2}{1:X2}{2:X2} - RGBA: {0}, {1}, {2}, {3}", ContentColor.Color.R, ContentColor.Color.G, ContentColor.Color.B, 255d / ContentColor.Color.A);
 
         private ICommand deleteCommand;
         public ICommand DeleteCommand

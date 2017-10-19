@@ -160,7 +160,7 @@
                                        DockPanel.Dock="Right" HorizontalAlignment="Right"
                                        Margin="0,0,8,0"
                                        RadiusX="3" RadiusY="3"
-                                       ToolTip="Color code found in this snippet"
+                                       ToolTip="{Binding ColorToolTip}"
                                        >
                                 <Rectangle.Effect>
                                     <DropShadowEffect BlurRadius="3" Opacity="0.2" Direction="300" ShadowDepth="1"/>
