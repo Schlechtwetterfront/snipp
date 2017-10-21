@@ -164,7 +164,11 @@ namespace clipman.ViewModels
             }
         }
 
-        public String ColorToolTip => String.Format("#{0:X2}{1:X2}{2:X2} - RGBA: {0}, {1}, {2}, {3}", ContentColor.Color.R, ContentColor.Color.G, ContentColor.Color.B, 255d / ContentColor.Color.A);
+        public String ColorToolTip => String.Format(
+            "#{0:X2}{1:X2}{2:X2} - RGBA: {0}, {1}, {2}, {3}",
+            ContentColor.Color.R, ContentColor.Color.G, ContentColor.Color.B,
+            (ContentColor.Color.A / 255d).ToString("G3", CultureInfo.InvariantCulture)
+        );
 
         private ICommand deleteCommand;
         public ICommand DeleteCommand
