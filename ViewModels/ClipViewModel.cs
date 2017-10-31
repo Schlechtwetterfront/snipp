@@ -151,7 +151,8 @@ namespace clipman.ViewModels
         {
             get
             {
-                return Regex.IsMatch(Clip.Content, @"#([0-9A-F]{3,8})", RegexOptions.IgnoreCase) || Regex.IsMatch(Clip.Content, @"rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)", RegexOptions.IgnoreCase);
+                // Matches #xxx, #xxxx, #xxxxxx, #xxxxxxxx, rgba(x, x, x, x.x), rgb(x, x, x).
+                return Regex.IsMatch(Clip.Content, @"#([0-9A-F]{3,8})", RegexOptions.IgnoreCase) || Regex.IsMatch(Clip.Content, @"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+))?\s*\)", RegexOptions.IgnoreCase);
             }
         }
 
@@ -165,7 +166,7 @@ namespace clipman.ViewModels
         }
 
         public String ColorToolTip => String.Format(
-            "#{0:X2}{1:X2}{2:X2} - RGBA: {0}, {1}, {2}, {3}",
+            "#{0:X2}{1:X2}{2:X2} - rgba({0}, {1}, {2}, {3})",
             ContentColor.Color.R, ContentColor.Color.G, ContentColor.Color.B,
             (ContentColor.Color.A / 255d).ToString("G3", CultureInfo.InvariantCulture)
         );
@@ -243,6 +244,17 @@ namespace clipman.ViewModels
                 byte a = (byte)(255 / Double.Parse(rgbaMatch.Groups[4].Value, NumberStyles.Any, CultureInfo.InvariantCulture));
 
                 return Color.FromArgb(a, r, g, b);
+            }
+
+            var rgbMatch = Regex.Match(Clip.Content, @"rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)", RegexOptions.IgnoreCase);
+
+            if (rgbMatch.Success)
+            {
+                byte r = Byte.Parse(rgbMatch.Groups[1].Value);
+                byte g = Byte.Parse(rgbMatch.Groups[2].Value);
+                byte b = Byte.Parse(rgbMatch.Groups[3].Value);
+
+                return Color.FromArgb(255, r, g, b);
             }
 
             return new Color();
