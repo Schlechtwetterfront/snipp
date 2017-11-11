@@ -150,7 +150,21 @@ namespace clipman
             {
                 return deleteClipCommand ?? (deleteClipCommand = new Commands.Command(param =>
                 {
-                    clipViewModel.Clips.Remove(param as ViewModels.ClipViewModel);
+                    // Try to select the item that will be in the same position after the deletion.
+                    // Allows user to basically delete all items below some point.
+                    var viewModel = param as ViewModels.ClipViewModel;
+                    var index = clipList.clipList.SelectedIndex;
+
+                    clipViewModel.Clips.Remove(viewModel);
+
+                    if (clipViewModel.Clips.Count > index)
+                    {
+                        clipList.clipList.SelectedIndex = index;
+                    }
+                    else
+                    {
+                        clipList.clipList.SelectedIndex = clipViewModel.Clips.Count - 1;
+                    }
                 }));
             }
         }
