@@ -152,7 +152,12 @@ namespace clipman.ViewModels
             get
             {
                 // Matches #xxx, #xxxx, #xxxxxx, #xxxxxxxx, rgba(x, x, x, x.x), rgb(x, x, x).
-                return Regex.IsMatch(Clip.Content, @"#([0-9A-F]{3,8})", RegexOptions.IgnoreCase) || Regex.IsMatch(Clip.Content, @"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+))?\s*\)", RegexOptions.IgnoreCase);
+                // If the string has 3-8 characters (without surrounding whitespace) and only has hex characters
+                // it will also be interpreted as a color. Many editors only don't select the # on a double-click
+                // or Shift+Ctrl+Arrow press.
+                return Regex.IsMatch(Clip.Content, @"#([0-9A-F]{3,8})", RegexOptions.IgnoreCase)
+                    || Regex.IsMatch(Clip.Content, @"^\s*([0-9A-F]{3,8})\s*$", RegexOptions.IgnoreCase)
+                    || Regex.IsMatch(Clip.Content, @"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+))?\s*\)", RegexOptions.IgnoreCase);
             }
         }
 
@@ -223,6 +228,23 @@ namespace clipman.ViewModels
             {
                 var group = hexMatch.Groups[1];
                 
+                // Fails for colors codes of length 5 and 7.
+                try
+                {
+                    return (Color)ColorConverter.ConvertFromString("#" + group.Value);
+                }
+                catch (FormatException)
+                {
+                    return new Color();
+                }
+            }
+
+            var secondaryHexMatch = Regex.Match(Clip.Content, @"^\s*([0-9A-F]{3,8})\s*$", RegexOptions.IgnoreCase);
+
+            if (secondaryHexMatch.Success)
+            {
+                var group = secondaryHexMatch.Groups[1];
+
                 // Fails for colors codes of length 5 and 7.
                 try
                 {
