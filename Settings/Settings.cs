@@ -97,7 +97,6 @@ namespace clipman.Settings
 
         public Settings()
         {
-            Utility.Logging.Log("hi");
             foreach (SettingsProperty prop in Properties.Settings.Default.Properties)
             {
                 UpdateSetting(prop.Name);
@@ -108,7 +107,6 @@ namespace clipman.Settings
 
         private void UpdateSetting(String name)
         {
-            Utility.Logging.Log("UpdateSetting " + name);
             var converter = new KeyGestureConverter();
             switch (name)
             {
